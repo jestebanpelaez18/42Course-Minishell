@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 09:37:14 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/06/01 19:45:18 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/06/07 22:08:15 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ static void handler(int signal)
 {
     if (signal == SIGINT)
     {
-        ft_putstr_fd("", STDOUT_FILENO);
+        ft_putendl_fd("", STDOUT_FILENO);
         rl_on_new_line();
-        rl_replace_line("",0);
+        rl_replace_line("",1);
         rl_redisplay();
     }
 }
