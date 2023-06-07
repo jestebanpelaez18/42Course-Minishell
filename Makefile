@@ -6,7 +6,7 @@
 #    By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/28 10:44:41 by jpelaez-          #+#    #+#              #
-#    Updated: 2023/06/07 16:30:53 by junheeki         ###   ########.fr        #
+#    Updated: 2023/06/07 16:34:54 by junheeki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ $(NAME):  $(OBJECT)
 
 %.o: %.c
 	$(CC) $(FLAGS) $(O_FLAGS) -c $< -o $@
+
 
 clean:
 	make -C $(LIBFT_DIR) fclean
