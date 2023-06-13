@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_exit.c                                       :+:      :+:    :+:   */
+/*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 12:03:02 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/06/10 12:00:55 by jpelaez-         ###   ########.fr       */
+/*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
+/*   Updated: 2023/06/13 18:26:33 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	error_msg(char *msg)
+int create_tok(t_data *data)
 {
-	ft_putendl_fd(msg, 2);
-	exit(EXIT_FAILURE);
+    
 }
