@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:43:17 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/06/11 13:51:31 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:55:43 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static int	closed_quotes(char *str)
 	{
 		if (str[i] == '\'' || str[i] == '\"')
 		{
-			quot = str[i];
-			while (!str[i] && str[i] != quot)
+			quot = str[i++];
+			while (str[i] != '\0' && str[i] != quot)
 				i++;
 		}
 		if (str[i] == '\0')
@@ -55,24 +55,30 @@ static int	close_pipe(char *str)
 {
 	int	i;
 
+	i = 0;
 	while (str[i] != '\0')
 		i++;
 	if (str[i - 1] == '|')
 		return (0);
 	return (1);
 }
-int	check_line(t_data *data)
-{
-	char *temp_line;
 
-	if (!white_space(data->line_read))
+int	check_line(t_data *data, char *line)
+{
+	char	*temp_line;
+
+	if (!white_space(line))
 		return (0);
-	temp_line = ft_strtrim(data->line_read, " \t\n");
+	temp_line = ft_strtrim(line, " \t\n");
 	if (!temp_line)
 		return (0);
 	if (!closed_quotes(temp_line))
 		return (0);
 	if (!close_pipe(temp_line))
 		return (0);
+	free(data->line_read);
+	data->line_read = temp_line;
+	free(temp_line);
+	printf("%s\n", data->line_read);
 	return (1);
 }

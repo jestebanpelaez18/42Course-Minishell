@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/06/10 12:32:02 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:30:52 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_data
 	char	**env;
 	int		exit_status;
 	char	*line_read;
+	char	**tokens;
 
 }			t_data;
 
@@ -39,5 +40,8 @@ void		start_signal(void);
 char		**envdup(char **env);
 
 /*Lexer Utils*/
-int			check_line(t_data *data);
+int			check_line(t_data *data, char *line);
+
+/*Tokenization*/
+void		create_tok(t_data *data);
 #endif
