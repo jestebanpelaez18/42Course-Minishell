@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/06/14 17:57:04 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:05:42 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(int argc, char **argv, char **env)
 			create_tok(&data);
 			// do parsing, execute...
 		}
-		free(&data.line_read);
+		// free(&data.line_read);
 	}
 	return (0);
 }

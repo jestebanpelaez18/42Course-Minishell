@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/06/14 17:37:07 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/06/15 18:37:34 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,20 @@ static int	count_tokens(char *line, char *del)
 	int	len;
 
 	i = 0;
-	len = 0;
+	len = 1;
 	while (line[i] != '\0')
 	{
 		j = 0;
-		while (del[j] != '\0')
+		while (del[j] != '\0' && del[i] != line[j])
 		{
-			if (line[i] != del[j])
+			if (line[i] == del[j])
+			{
 				len++;
+			}
 			j++;
 		}
 		i++;
 	}
-	printf(" esto es %d\n", len);
 	return (len);
 }
 
