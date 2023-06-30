@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/06/15 17:03:04 by junheeki         ###   ########.fr       */
+/*   Updated: 2023/06/30 12:36:24 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_data
 	int		exit_status;
 	char	*line_read;
 	char	**tokens;
+	char	*token;
 
 }			t_data;
 
@@ -43,5 +44,7 @@ char		**envdup(char **env);
 int			check_line(t_data *data, char *line);
 
 /*Tokenization*/
-void		create_tok(t_data *data);
+void		tokenization(t_data *data);
+int			count_tokens(char *line, char *del);
+int 		check_delimiter(char c, char *delimiter);
 #endif

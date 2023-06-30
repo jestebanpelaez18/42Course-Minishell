@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:43:17 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/06/14 17:55:43 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/06/30 10:56:54 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int	check_line(t_data *data, char *line)
 		return (0);
 	free(data->line_read);
 	data->line_read = temp_line;
-	free(temp_line);
 	printf("%s\n", data->line_read);
 	return (1);
 }

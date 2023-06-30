@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/06/15 17:05:42 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/06/30 11:04:25 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char **argv, char **env)
 		get_line(&data);
 		if (check_line(&data, data.line_read) == 1)
 		{
-			create_tok(&data);
+			tokinezation(&data);
 			// do parsing, execute...
 		}
 		// free(&data.line_read);
