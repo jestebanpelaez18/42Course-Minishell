@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/06/30 11:04:25 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/05 16:48:06 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	get_line(t_data *data)
 {
 	data->line_read = readline("jjminishell> ");
 	if (!data->line_read)
-		error_msg("Error, line read");
+		exit(0);
 	if (data->line_read || *data->line_read)
 		add_history(data->line_read);
 }
@@ -48,7 +48,7 @@ int	main(int argc, char **argv, char **env)
 		get_line(&data);
 		if (check_line(&data, data.line_read) == 1)
 		{
-			tokinezation(&data);
+			// tokenization(&data);
 			// do parsing, execute...
 		}
 		// free(&data.line_read);

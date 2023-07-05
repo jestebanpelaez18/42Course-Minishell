@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:43:17 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/06/30 10:56:54 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/05 15:57:26 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ static int	closed_quotes(char *str)
 				i++;
 		}
 		if (str[i] == '\0')
+		{
+			error_msg_noexit("unclosed quotes");
 			return (0);
+		}
 		i++;
 	}
 	return (1);
@@ -59,7 +62,20 @@ static int	close_pipe(char *str)
 	while (str[i] != '\0')
 		i++;
 	if (str[i - 1] == '|')
+	{
+		error_msg_noexit("unclosed pipe");
 		return (0);
+	}
+	return (1);
+}
+
+static int	correct_input(char *line)
+{
+	if (line[0] == '|')
+	{
+		error_msg_noexit("zsh: parse error near '|' ");
+		return (0);
+	}
 	return (1);
 }
 
@@ -71,6 +87,8 @@ int	check_line(t_data *data, char *line)
 		return (0);
 	temp_line = ft_strtrim(line, " \t\n");
 	if (!temp_line)
+		return (0);
+	if (!correct_input(temp_line))
 		return (0);
 	if (!closed_quotes(temp_line))
 		return (0);

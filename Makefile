@@ -6,7 +6,7 @@
 #    By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/28 10:44:41 by jpelaez-          #+#    #+#              #
-#    Updated: 2023/06/30 12:24:05 by jpelaez-         ###   ########.fr        #
+#    Updated: 2023/07/05 16:51:35 by jpelaez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 
 SRC = main.c error_exit.c env.c\
 signals.c\
-tokenization.c check_input.c tokenization_utils1.c\
+check_input.c tokenization.c tokenization_utils1.c\
 
 OBJECT = $(SRC:.c=.o)
 
