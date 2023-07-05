@@ -6,33 +6,41 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/06/30 12:47:20 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/03 17:12:13 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void split_tok(t_data *data, char *line, char *delimiter)
+static char *create_tok(char *line, int start, int end)
+{
+	
+}
+
+static void split_tok(t_data *data, char *line)
 {
 	int i;
-	char *temp_line;
+	int j;
+	int start;
+	int end;
 
 	i = 0;
+	j = 0;
 	while(line[i])
 	{
-		while(!check_delimiter(line[i], delimiter))
+		start = i;
+		while(!check_delimiter(line[i]," \f\n\r\t\v"))
 			i++;
+		end = i;
 		// do more stuff
-		
-	}
 }
 void	tokenization(t_data *data)
 {
-	char	*delimiter;
+	// char	*delimiter;
 	int		len;
 	int		i;
 
-	delimiter = " \f\n\r\t\v";
+	// delimiter = "\"$\'&<>=| \f\n\r\t\v(){}/";
 	len = count_tokens(data->line_read, delimiter);
 	data->tokens = (char **)malloc(sizeof(char *) * (len + 1));
 	if(!data->tokens)

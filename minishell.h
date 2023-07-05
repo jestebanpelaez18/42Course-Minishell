@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/06/30 12:36:24 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/03 15:40:18 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+
 typedef struct s_data
 {
 	char	**env;
 	int		exit_status;
 	char	*line_read;
 	char	**tokens;
-	char	*token;
-
+	
 }			t_data;
 
 void		error_msg(char *msg);
