@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/05 16:51:13 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/06 21:10:00 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,19 @@ static void	split_tok(t_data *data, char *line)
 	}
 }
 
+int check_token_type(char *line)
+{
+	
+}
 void	tokenization(t_data *data)
 {
-	int	len;
 	int	i;
-	char	*delimiter;
 	
-	delimiter = "\"$\'&<>=| \f\n\r\t\v(){}/";
-	len = count_tokens(data->line_read, delimiter);
-	data->tokens = (char **)malloc(sizeof(char *) * (len + 1));
-	if (!data->tokens)
-		error_msg("allocation error");
-	split_tok(data, data->line_read, delimiter);
+	i = 0;
+	while(data->line_read[i])
+	{
+		i += is_white_space(data->line_read , i);
+		if(check_token_type(data->line_read[i]))
+			
+	}
 }

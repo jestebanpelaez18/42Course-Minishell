@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/05 15:39:06 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:56:29 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ int					check_line(t_data *data, char *line);
 /*Tokenization*/
 void				tokenization(t_data *data);
 int					count_tokens(char *line, char *del);
-int					check_delimiter(char c, char *delimiter);
+int 				is_whitespace(char *line, int i);
+
 #endif

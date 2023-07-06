@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/05 16:48:06 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/06 16:20:16 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@ void	init_data(t_data *data, char **env)
 	data->env = envdup(env);
 	data->exit_status = 0;
 }
-
 void	get_line(t_data *data)
 {
 	data->line_read = readline("jjminishell> ");
 	if (!data->line_read)
-		exit(0);
+		error_msg("exit");
 	if (data->line_read || *data->line_read)
 		add_history(data->line_read);
 }

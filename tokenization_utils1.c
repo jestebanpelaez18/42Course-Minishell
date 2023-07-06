@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:22:27 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/05 15:58:44 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/06 18:08:43 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,28 @@ int	count_tokens(char *line, char *del)
 	return (len);
 }
 
-int	check_delimiter(char c, char *delimiter)
+static int	check_delimiter(char c, char *delimiter)
 {
 	int j;
 
 	j = 0;
-	if (ft_strlen(delimiter) == 0)
-		return (0);
-	while (delimiter[j] != c && delimiter[j] != '\0')
+	while (delimiter[j] != '\0')
 	{
 		if (delimiter[j] == c)
 			return (1);
 		j++;
 	}
 	return (0);
+}
+
+int is_whitespace(char *line, int i)
+{
+	char *delimiter;
+	int j;
+
+	j = i;
+	delimiter = " \f\n\r\t\v";
+	while(!check_delimiter(line[j],delimiter))
+		j++;
+	return(j);
 }
