@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/06 17:56:29 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/06 21:16:12 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 typedef struct s_token
 {
-	char			*toke;
+	char			*token;
 	struct s_token	*next;
 	struct s_token	*prev;
 }					t_token;
@@ -34,7 +34,7 @@ typedef struct s_data
 	int				exit_status;
 	char			*line_read;
 	char			**tokens;
-
+	t_token			*struc_tok;
 }					t_data;
 
 /*Input checker*/

@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/06 21:10:00 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/06 21:25:37 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	tokenization(t_data *data)
 	{
 		i += is_white_space(data->line_read , i);
 		if(check_token_type(data->line_read[i]))
-			
+			i+= tok_redirection();
+		else
+			i+= tok_word();	
 	}
 }
