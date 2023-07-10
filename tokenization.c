@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/06 21:25:37 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:09:13 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,6 @@
 
 static char	*create_tok(char *line, int start, int end)
 {
-}
-
-static void	split_tok(t_data *data, char *line)
-{
-	int	i;
-	int	j;
-	int	start;
-	int	end;
-
-	i = 0;
-	j = 0;
-	while (line[i])
-	{
-		start = i;
-		while (!check_delimiter(line[i], " \f\n\r\t\v"))
-			i++;
-		end = i;
-		// do more stuff
-	}
 }
 
 int check_token_type(char *line)
@@ -48,8 +29,8 @@ void	tokenization(t_data *data)
 	{
 		i += is_white_space(data->line_read , i);
 		if(check_token_type(data->line_read[i]))
-			i+= tok_redirection();
+			i+= tok_redirections(data->line_read, i, &data->struc_tok);
 		else
-			i+= tok_word();	
+			i+= tok_word(data->line_read, i, &data->struc_tok);			
 	}
 }
