@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/10 20:17:49 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/10 20:19:11 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,12 @@ int create_node(char *sub_line, t_token **tokens)
 }
 int tok_redirections(char *line, int i, t_token **tokens)
 {
-	
+	int j;
+
+	j = 0;
+	if(!create_node(ft_substr(line,i,j),tokens))
+		error_msg("allocation error");
+	return(j);
 }
 int tok_word(char *line, int i, t_token **tokens)
 {
