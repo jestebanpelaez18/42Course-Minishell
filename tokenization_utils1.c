@@ -6,36 +6,50 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:22:27 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/10 14:45:50 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/10 20:14:25 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	count_tokens(char *line, char *del)
+// int	count_tokens(char *line, char *del)
+// {
+// 	int	i;
+// 	int	j;
+// 	int	len;
+
+// 	i = 0;
+// 	len = 1;
+// 	while (line[i] != '\0')
+// 	{
+// 		j = 0;
+// 		while (del[j] != '\0' && del[i] != line[j])
+// 		{
+// 			if (line[i] == del[j])
+// 			{
+// 				len++;
+// 			}
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (len);
+// }
+
+int tok_closed_quotes(char *str, int i, char quote)
 {
-	int	i;
-	int	j;
-	int	len;
+	int j;
 
-	i = 0;
-	len = 1;
-	while (line[i] != '\0')
+	j = 0;
+	if(str[i+j] == quote)
 	{
-		j = 0;
-		while (del[j] != '\0' && del[i] != line[j])
-		{
-			if (line[i] == del[j])
-			{
-				len++;
-			}
-			j++;
-		}
-		i++;
+		j++;
+		while (str[i + j] != '\0' && str[i + j] != quot)
+				j++;
+		j++;
 	}
-	return (len);
+	return(j);
 }
-
 static int	check_delimiter(char c, char *delimiter)
 {
 	int j;

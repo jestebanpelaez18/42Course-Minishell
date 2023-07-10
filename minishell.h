@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/10 16:24:40 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/10 20:15:17 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,12 @@ void				tokenization(t_data *data);
 int					count_tokens(char *line, char *del);
 int 				is_whitespace(char *line, int i);
 int					check_token_type(char c);
+int 				tok_closed_quotes(char *str, int i, char quote);
 
 /*Linked list utils*/
 
 void		ft_lstadd_back(t_token **lst, t_token *new);
 t_token		*ft_lstlast(t_token *lst);
 t_token		*ft_lstnew(char *token);
+
 #endif
