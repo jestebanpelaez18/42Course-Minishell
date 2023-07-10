@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/06 21:16:12 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/10 16:24:40 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 typedef struct s_token
 {
-	char			*token;
+	char			*tokens;
 	struct s_token	*next;
 	struct s_token	*prev;
 }					t_token;
@@ -55,5 +55,11 @@ int					check_line(t_data *data, char *line);
 void				tokenization(t_data *data);
 int					count_tokens(char *line, char *del);
 int 				is_whitespace(char *line, int i);
+int					check_token_type(char c);
 
+/*Linked list utils*/
+
+void		ft_lstadd_back(t_token **lst, t_token *new);
+t_token		*ft_lstlast(t_token *lst);
+t_token		*ft_lstnew(char *token);
 #endif

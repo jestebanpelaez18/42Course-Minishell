@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:22:27 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/06 18:08:43 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:45:50 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,11 @@ int is_whitespace(char *line, int i)
 	while(!check_delimiter(line[j],delimiter))
 		j++;
 	return(j);
+}
+
+int check_token_type(char c)
+{
+	if(c == "|" || c == ">" || c == "<")
+		return(1);
+	return(0);
 }

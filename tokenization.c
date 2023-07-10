@@ -6,19 +6,28 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/10 13:09:13 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/10 16:00:46 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*create_tok(char *line, int start, int end)
-{
-}
-
-int check_token_type(char *line)
+int tok_redirections(char *line, int i, t_token **tokens)
 {
 	
+}
+int tok_word(char *line, int i, t_token **tokens)
+{
+	int j;
+
+	j = 0;
+	while(line[i+j] != '\0' && !check_token_type(line[i+j]))
+	{
+		if(is_white_space(line[i + j]))
+			break;
+		j++;
+	}
+	return(j);
 }
 void	tokenization(t_data *data)
 {
