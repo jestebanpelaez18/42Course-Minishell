@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:22:27 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/11 16:59:35 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/11 19:17:13 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ int tok_closed_quotes(char *str, int i, char quote)
 	if(str[i+j] == quote)
 	{
 		j++;
-		while (str[i + j] != '\0' && str[i + j] != quot)
+		while (str[i + j] != '\0' && str[i + j] != quote)
 				j++;
 		j++;
 	}
 	return(j);
 }
-static int	check_delimiter(char c, char *delimiter)
+int	check_delimiter(char c, char *delimiter)
 {
 	int j;
 
@@ -56,16 +56,16 @@ int is_whitespace(char *line, int i)
 	char *delimiter;
 	int j;
 
-	j = i;
+	j = 0;
 	delimiter = " \f\n\r\t\v";
-	while(!check_delimiter(line[j],delimiter))
+	while(check_delimiter(line[i + j],delimiter))
 		j++;
 	return(j);
 }
 
 int check_token_type(char c)
 {
-	if(c == "|" || c == ">" || c == "<")
+	if(c == '|' || c == '>' || c == '<')
 		return(1);
 	return(0);
 }

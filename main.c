@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/06 16:20:16 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/11 18:52:26 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int argc, char **argv, char **env)
 		get_line(&data);
 		if (check_line(&data, data.line_read) == 1)
 		{
-			// tokenization(&data);
+			tokenization(&data);
 			// do parsing, execute...
 		}
 		// free(&data.line_read);

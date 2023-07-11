@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/11 16:59:25 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/11 18:48:34 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int 				is_whitespace(char *line, int i);
 int					check_token_type(char c);
 int 				tok_closed_quotes(char *str, int i, char quote);
 int					operator_type(char operator);
+int					check_delimiter(char c, char *delimiter);
 t_operator 			handle_single_op(char operator);
 
 /*Linked list utils*/
@@ -77,5 +78,7 @@ t_operator 			handle_single_op(char operator);
 void		ft_lstadd_back(t_token **lst, t_token *new);
 t_token		*ft_lstlast(t_token *lst);
 t_token		*ft_lstnew(char *token, int type);
+
+void printList(t_token *node);
 
 #endif

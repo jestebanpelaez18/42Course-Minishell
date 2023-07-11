@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/11 16:59:42 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/11 19:17:28 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int create_node(char *sub_line, t_token **tokens, t_operator operator)
 int tok_operator(char *line, int i, t_token **tokens)
 {
 	char operator;
-	t_operator single_operator;
 
 	operator = operator_type(line[i]);
 	if(operator == '>' && line[i + 1] == '>')
@@ -59,7 +58,7 @@ int tok_word(char *line, int i, t_token **tokens)
 	{
 		j += tok_closed_quotes(line, i, '\'');
 		j += tok_closed_quotes(line, i, '\"');
-		if(is_white_space(line[i + j]))
+		if(check_delimiter(line[i+j]," \f\n\r\t\v"))
 			break;
 		j++;
 	}
@@ -75,10 +74,11 @@ void	tokenization(t_data *data)
 	i = 0;
 	while(data->line_read[i])
 	{
-		i += is_white_space(data->line_read , i);
+		i += is_whitespace(data->line_read , i);
 		if(check_token_type(data->line_read[i]))
-			i+= tok_redirections(data->line_read, i, &data->struc_tok);
+			i+= tok_operator(data->line_read, i, &data->struc_tok);
 		else
 			i+= tok_word(data->line_read, i, &data->struc_tok);			
 	}
+	printList(data->struc_tok);
 }
