@@ -6,35 +6,22 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:22:27 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/10 20:14:25 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/11 16:59:35 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// int	count_tokens(char *line, char *del)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	len;
-
-// 	i = 0;
-// 	len = 1;
-// 	while (line[i] != '\0')
-// 	{
-// 		j = 0;
-// 		while (del[j] != '\0' && del[i] != line[j])
-// 		{
-// 			if (line[i] == del[j])
-// 			{
-// 				len++;
-// 			}
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	return (len);
-// }
+int operator_type(char operator)
+{
+	if(operator == '>')
+		return(62);
+	else if (operator == '<')
+		return(60);
+	else
+		return(124);
+	return(0);
+}
 
 int tok_closed_quotes(char *str, int i, char quote)
 {
