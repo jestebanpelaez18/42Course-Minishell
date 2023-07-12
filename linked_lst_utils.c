@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:02:33 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/11 16:16:04 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/12 10:24:32 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_token	*ft_lstnew(char *token, int type)
 	if (node == NULL)
 		return (NULL);
 	node->tokens = token;
-    node->operator = type;
+    node->type = type;
 	node->next = NULL;
     node->prev = NULL;
 	return (node);

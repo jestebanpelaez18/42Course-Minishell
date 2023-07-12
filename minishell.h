@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/11 18:48:34 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/12 10:42:41 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,17 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 
-
-typedef enum s_operator
-{
-	WORD,
-	PIPE,
-	LEFT_R,
-	RIGH_R,
-	HEREDOC,
-	APPEND,	
-} 			t_operator;
+# define WORD		0
+# define PIPE		1
+# define LEFT_R		2
+# define RIGH_R		3
+# define HEREDOC	4
+# define APPEND     5
 
 typedef struct s_token
 {
 	char			*tokens;
-	t_operator		operator;
+	int				type;
 	struct s_token	*next;
 	struct s_token	*prev;
 }					t_token;
@@ -71,7 +67,6 @@ int					check_token_type(char c);
 int 				tok_closed_quotes(char *str, int i, char quote);
 int					operator_type(char operator);
 int					check_delimiter(char c, char *delimiter);
-t_operator 			handle_single_op(char operator);
 
 /*Linked list utils*/
 

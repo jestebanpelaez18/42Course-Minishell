@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:22:27 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/11 19:17:13 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/12 10:42:16 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int operator_type(char operator)
 {
 	if(operator == '>')
-		return(62);
+		return(RIGH_R);
 	else if (operator == '<')
-		return(60);
+		return(LEFT_R);
 	else
-		return(124);
+		return(PIPE);
 	return(0);
 }
 
@@ -68,4 +68,26 @@ int check_token_type(char c)
 	if(c == '|' || c == '>' || c == '<')
 		return(1);
 	return(0);
+}
+
+void printList(t_token *node)
+{
+    t_token *temp;
+
+	temp = node;
+	printf("NULL");
+    while (node != NULL)
+    {
+        printf("%s -> ", node->tokens);
+        node = node->next;
+    }
+    printf("NULL \n\n");
+	printf("NULL ->");
+	temp = temp->next;
+    while (temp != NULL)
+    {
+        printf("%d -> ", temp->type);
+        temp = temp->next;
+    }
+    printf("NULL \n");
 }

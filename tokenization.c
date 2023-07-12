@@ -6,13 +6,13 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/11 19:17:28 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/12 10:37:25 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int create_node(char *sub_line, t_token **tokens, t_operator operator)
+int create_node(char *sub_line, t_token **tokens, int operator)
 {
 	t_token *node;
 
@@ -28,21 +28,21 @@ int tok_operator(char *line, int i, t_token **tokens)
 	char operator;
 
 	operator = operator_type(line[i]);
-	if(operator == '>' && line[i + 1] == '>')
+	if(operator == RIGH_R && operator_type(line[i + 1]) == RIGH_R)
 	{
 		if(!create_node(NULL, tokens, APPEND))
 			error_msg("allocation error");
 		return(2);
 	}
-	else if(operator == '<' && line[i + 1] == '<')
+	else if(operator == LEFT_R && operator_type(line[i + 1]) == LEFT_R)
 	{
 		if(!create_node(NULL, tokens, HEREDOC))
 			error_msg("allocation error");
 		return(2);
 	}
-	else if (!handle_single_op(operator))
+	else if (operator)
 	{
-		if(!create_node(NULL, tokens, handle_single_op(operator)))
+		if(!create_node(NULL, tokens, operator))
 			error_msg("allocation error");
 		return(1);
 	}
