@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/12 10:42:41 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/12 11:08:25 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,10 @@ int					check_token_type(char c);
 int 				tok_closed_quotes(char *str, int i, char quote);
 int					operator_type(char operator);
 int					check_delimiter(char c, char *delimiter);
+
+/*Parser*/
+
+void 	parser(t_data *data);
 
 /*Linked list utils*/
 
