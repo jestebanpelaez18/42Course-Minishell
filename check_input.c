@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:43:17 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/11 18:51:57 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/13 18:38:36 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	close_pipe(char *str)
 		i++;
 	if (str[i - 1] == '|')
 	{
-		error_msg_noexit("unclosed pipe");
+		error_msg_noexit("zsh: parse error, unclosed pipe");
 		return (0);
 	}
 	return (1);
@@ -71,10 +71,22 @@ static int	close_pipe(char *str)
 
 static int	correct_input(char *line)
 {
+	int	i;
+
+	i = 0;
 	if (line[0] == '|')
 	{
 		error_msg_noexit("zsh: parse error near '|' ");
 		return (0);
+	}
+	while (line[i] != '\0')
+	{
+		i++;
+		if (line[i] == '|' && line[i + 1] == '|')
+		{
+			error_msg_noexit("zsh: parse error near '|' ");
+			return (0);
+		}
 	}
 	return (1);
 }
@@ -93,6 +105,8 @@ int	check_line(t_data *data, char *line)
 	if (!closed_quotes(temp_line))
 		return (0);
 	if (!close_pipe(temp_line))
+		return (0);
+	if (!syntax_redirection(temp_line))
 		return (0);
 	free(data->line_read);
 	data->line_read = temp_line;

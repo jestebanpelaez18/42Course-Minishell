@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/12 11:07:23 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/13 18:44:08 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	init_data(t_data *data, char **env)
 {
 	data->env = envdup(env);
 	data->exit_status = 0;
+	data->pipex = 0;
 }
+
 void	get_line(t_data *data)
 {
 	data->line_read = readline("jjminishell> ");

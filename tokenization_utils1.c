@@ -6,40 +6,40 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:22:27 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/12 10:42:16 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/13 15:24:45 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int operator_type(char operator)
+int	operator_type(char operator)
 {
-	if(operator == '>')
-		return(RIGH_R);
-	else if (operator == '<')
-		return(LEFT_R);
+	if (operator== '>')
+		return (RIGH_R);
+	else if (operator== '<')
+		return (LEFT_R);
 	else
-		return(PIPE);
-	return(0);
+		return (PIPE);
+	return (0);
 }
 
-int tok_closed_quotes(char *str, int i, char quote)
+int	tok_closed_quotes(char *str, int i, char quote)
 {
-	int j;
+	int	j;
 
 	j = 0;
-	if(str[i+j] == quote)
+	if (str[i + j] == quote)
 	{
 		j++;
 		while (str[i + j] != '\0' && str[i + j] != quote)
-				j++;
+			j++;
 		j++;
 	}
-	return(j);
+	return (j);
 }
 int	check_delimiter(char c, char *delimiter)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (delimiter[j] != '\0')
@@ -51,43 +51,43 @@ int	check_delimiter(char c, char *delimiter)
 	return (0);
 }
 
-int is_whitespace(char *line, int i)
+int	is_whitespace(char *line, int i)
 {
-	char *delimiter;
-	int j;
+	char	*delimiter;
+	int		j;
 
 	j = 0;
 	delimiter = " \f\n\r\t\v";
-	while(check_delimiter(line[i + j],delimiter))
+	while (check_delimiter(line[i + j], delimiter))
 		j++;
-	return(j);
+	return (j);
 }
 
-int check_token_type(char c)
+int	check_token_type(char c)
 {
-	if(c == '|' || c == '>' || c == '<')
-		return(1);
-	return(0);
+	if (c == '|' || c == '>' || c == '<')
+		return (1);
+	return (0);
 }
 
-void printList(t_token *node)
+void	printList(t_token *node)
 {
-    t_token *temp;
+	t_token *temp;
 
 	temp = node;
 	printf("NULL");
-    while (node != NULL)
-    {
-        printf("%s -> ", node->tokens);
-        node = node->next;
-    }
-    printf("NULL \n\n");
+	while (node != NULL)
+	{
+		printf("%s -> ", node->tokens);
+		node = node->next;
+	}
+	printf("NULL \n\n");
 	printf("NULL ->");
 	temp = temp->next;
-    while (temp != NULL)
-    {
-        printf("%d -> ", temp->type);
-        temp = temp->next;
-    }
-    printf("NULL \n");
+	while (temp != NULL)
+	{
+		printf("%d -> ", temp->type);
+		temp = temp->next;
+	}
+	printf("NULL \n");
 }
