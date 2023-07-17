@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   linked_lst_utils.c                                 :+:      :+:    :+:   */
+/*   linked_lst_utils2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/10 16:02:33 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/17 19:13:30 by jpelaez-         ###   ########.fr       */
+/*   Created: 2023/07/17 18:39:22 by jpelaez-          #+#    #+#             */
+/*   Updated: 2023/07/17 18:45:38 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*ft_lstnew(char *token, int type)
+t_cmd	*cmd_new(char **token)
 {
-	t_token	*node;
+	t_cmd	*node;
 
-	node = (t_token *)malloc(sizeof(t_token));
+	node = (t_cmd *)malloc(sizeof(t_cmd));
 	if (node == NULL)
 		return (NULL);
-	node->tokens = token;
-	node->type = type;
+	node->commands = token;
 	node->next = NULL;
 	node->prev = NULL;
 	return (node);
 }
 
-t_token	*ft_lstlast(t_token *lst)
+t_cmd	*cmd_last(t_cmd *lst)
 {
-	t_token	*current;
+	t_cmd	*current;
 
 	current = lst;
 	while (current->next != NULL)
@@ -36,10 +35,10 @@ t_token	*ft_lstlast(t_token *lst)
 	return (current);
 }
 
-void	ft_lstadd_back(t_token **lst, t_token *new)
+void	cmd_add_back(t_cmd **lst, t_cmd *new)
 {
-	t_token	*last;
-	t_token	*bottom;
+	t_cmd	*last;
+	t_cmd	*bottom;
 
 	last = *lst;
 	if (*lst == NULL)
@@ -47,9 +46,18 @@ void	ft_lstadd_back(t_token **lst, t_token *new)
 		*lst = new;
 		return ;
 	}
-	bottom = ft_lstlast(last);
+	bottom = cmd_last(last);
 	bottom->next = new;
 	new->prev = bottom;
 }
 
-// t_cmd *ft_newcmd()
+int	create_cmd_node(char **sub_line, t_cmd **commands)
+{
+	t_cmd	*node;
+
+	node = cmd_new(sub_line);
+	if (!node)
+		return (0);
+	cmd_add_back(commands, node);
+	return (1);
+}

@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/17 15:58:34 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/17 18:50:21 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ typedef struct s_token
 typedef struct s_cmd
 {
 	char			**commands;
-
 	t_token			*tok_struct;
+	struct s_cmd	*next;
+	struct s_cmd	*prev;
 }					t_cmd;
 
 typedef struct s_data
@@ -89,6 +90,10 @@ int					count_commands(t_token *node);
 void				ft_lstadd_back(t_token **lst, t_token *new);
 t_token				*ft_lstlast(t_token *lst);
 t_token				*ft_lstnew(char *token, int type);
+t_cmd				*cmd_new(char **token);
+t_cmd				*cmd_last(t_cmd *lst);
+void				cmd_add_back(t_cmd **lst, t_cmd *new);
+int					create_cmd_node(char **sub_line, t_cmd **commands);
 
 void				printList(t_token *node);
 
