@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/13 19:03:39 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/17 16:23:34 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,10 @@ int	tok_word(char *line, int i, t_token **tokens)
 void	tokenization(t_data *data)
 {
 	int	i;
+	int j;
 
 	i = 0;
+	j = 0;
 	while (data->line_read[i])
 	{
 		i += is_whitespace(data->line_read, i);

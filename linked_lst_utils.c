@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:02:33 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/12 10:24:32 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/17 15:54:17 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,3 +51,5 @@ void	ft_lstadd_back(t_token **lst, t_token *new)
 	bottom->next = new;
     new->prev = bottom;
 }
+
+// t_cmd *ft_newcmd()

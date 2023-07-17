@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/13 19:07:39 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/17 15:58:34 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_token
 typedef struct s_cmd
 {
 	char			**commands;
+
 	t_token			*tok_struct;
 }					t_cmd;
 
@@ -81,6 +82,7 @@ int					check_delimiter(char c, char *delimiter);
 
 void				parser(t_data *data);
 void				set_number_of_pipes(t_data *data, t_token *tokens);
+int					count_commands(t_token *node);
 
 /*Linked list utils*/
 

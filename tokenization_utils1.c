@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:22:27 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/13 15:24:45 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/17 16:22:18 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,24 +70,41 @@ int	check_token_type(char c)
 	return (0);
 }
 
+
+/*we have to delete this at the end*/
+
 void	printList(t_token *node)
 {
 	t_token *temp;
 
 	temp = node;
-	printf("NULL");
+	printf("NULL -> ");
 	while (node != NULL)
 	{
 		printf("%s -> ", node->tokens);
 		node = node->next;
 	}
 	printf("NULL \n\n");
-	printf("NULL ->");
-	temp = temp->next;
+	printf("NULL -> ");
 	while (temp != NULL)
 	{
 		printf("%d -> ", temp->type);
 		temp = temp->next;
 	}
 	printf("NULL \n");
+}
+
+int	count_commands(t_token *node)
+{
+	int	i;
+	t_token *temp;
+
+	i = 0;
+	temp = node;
+	while (temp != NULL && temp->type == 0)
+	{
+		i++;
+		temp = temp->next;
+	}
+	return (i);
 }
