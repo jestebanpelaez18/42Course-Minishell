@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:46:51 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/17 16:23:47 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/18 17:30:35 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,12 @@ int	count_commands(t_token *node)
 
 	i = 0;
 	temp = node;
-	while (temp != NULL && temp->type == 0)
+	while (temp && temp->type == 0)
 	{
 		i++;
+		printf("%i\n", i);
 		temp = temp->next;
 	}
 	return (i);
 }
+
