@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:07:32 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/19 18:35:31 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/20 11:50:54 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 void	printcmd(t_cmd *node)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	while (node->commands[i])
 	{
 		printf("%s-> ", node->commands[i]);
