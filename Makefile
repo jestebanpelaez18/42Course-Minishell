@@ -1,12 +1,13 @@
 NAME = minishell
 
+LIB_DIR = libft
 SRC_DIR = ./src
-VPATH = src:inc
+VPATH = src:libft
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 OBJ_DIR = obj
 
-INCLUDES = -Iinc
+INCLUDES = -Ilibft -Iinc
 CFLAGS = -Wall -Wextra -Werror -MMD -g
 
 SRC = main.c error_exit.c env.c\
@@ -16,16 +17,13 @@ check_input2.c parsing_utils1.c linked_lst_utils2.c\
 
 DEP = $(OBJ:.o=.d)
 
-LIBFT_DIR = ./libft
-LIBFT = $(LIBFT_DIR)/libft.a
-
 ##
 
 all: $(NAME)
 
 $(NAME):  $(OBJ)
-		make -C $(LIBFT_DIR)
-		cc $(CFLAGS) $(OBJ) -o $(NAME)
+		make -C $(LIB_DIR)
+		cc $(CFLAGS) $(OBJ) -o $(NAME) -L$(LIB_DIR) -lft
 
 $(OBJ_DIR)/%.o: %.c
 	mkdir -p $(OBJ_DIR)
