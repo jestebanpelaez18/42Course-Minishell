@@ -8,7 +8,15 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 OBJ_DIR = obj
 
 INCLUDES = -Ilibft -Iinc
-CFLAGS = -Wall -Wextra -Werror -MMD -g
+
+FLAGS = -Wall -Wextra -Werror -MMD -g
+
+#MAC_OS
+C_FLAGS = -lreadline -L ${HOME}/.brew/opt/readline/lib
+O_FLAGS = -I ${HOME}/.brew/opt/readline/include
+
+#LINUX
+
 
 SRC = main.c error_exit.c env.c\
 signals.c linked_lst_utils.c parser.c\
@@ -23,11 +31,11 @@ all: $(NAME)
 
 $(NAME):  $(OBJ)
 		make -C $(LIB_DIR)
-		cc $(CFLAGS) $(OBJ) -o $(NAME) -L$(LIB_DIR) -lft
+		cc $(FLAGS) $(CFLAGS) $(OBJ) -o $(NAME) -L$(LIB_DIR) -lft
 
 $(OBJ_DIR)/%.o: %.c
 	mkdir -p $(OBJ_DIR)
-	cc $(CFLAGS) $(INCLUDES) -c $< -o $@
+	cc $(FLAGS) $(INCLUDES) $(O_FLAGS) -c $< -o $@
 
 -include $(DEP)
 
