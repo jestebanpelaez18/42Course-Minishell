@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:07:32 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/20 11:50:54 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/07/20 12:31:00 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	fill_commands(t_data *data, t_cmd **cmds)
 	t_token	*node;
 	t_cmd	*cmd;
 
-	node = data->tokens;
+	node = data->tokens; //incompatible pointer types
 	while (node != NULL)
 	{
 		cmd = initiate_cmd(node);
