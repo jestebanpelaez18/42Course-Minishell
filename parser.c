@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:07:32 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/19 18:35:31 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:30:40 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	printcmd(t_cmd *node)
 
 	i = 0;
 	j = 0;
-	while (node->commands[i])
+	while (node->commands[i] != NULL)
 	{
 		printf("%s-> ", node->commands[i]);
 		i++;
 	}
-	printf("NULL \n\n");
+	printf("NULLO \n\n");
 }
 
 t_cmd	*initiate_cmd(t_token *node)
@@ -43,8 +43,9 @@ t_cmd	*initiate_cmd(t_token *node)
 	i = 0;
 	while (len != 0)
 	{
-		cmd[i] = ft_strdup(node->tokens);
-		node = node->next;
+		cmd[i] = ft_strdup(tok_temp->tokens);
+		deleteNode(&node, tok_temp->tokens);
+		tok_temp = node;
 		i++;
 		len--;
 	}
@@ -53,22 +54,23 @@ t_cmd	*initiate_cmd(t_token *node)
 	return (temp);
 }
 
-int	fill_commands(t_data *data, t_cmd **cmds)
-{
-	t_token	*node;
-	t_cmd	*cmd;
+// int	fill_commands(t_data *data, t_cmd **cmds)
+// {
+// 	t_token	*node;
+// 	t_cmd	*cmd;
 
-	node = data->tokens;
-	while (node != NULL)
-	{
-		cmd = initiate_cmd(node);
-		if (!cmd)
-			return (0);
-		cmd_add_back(cmds, cmd);
-		node = node->next;
-	}
-	return (1);
-}
+// 	node = data->struc_tok;
+// 	while (node->next != NULL)
+// 	{
+// 		node = node->next;
+// 		cmd = initiate_cmd(node);
+// 		if (!cmd)
+// 			return (0);
+// 		printf("%s\n", "hello");
+// 		cmd_add_back(cmds, cmd);
+// 	}
+// 	return (1);
+// }
 
 t_cmd	*start_firts_cmd(t_data *data)
 {
@@ -91,9 +93,11 @@ void	parser(t_data *data)
 	if (!data->struc_cmd)
 		error_msg("allocation error");
 	// delete the nodes in the token for next iterations
-	if (!fill_commands(data, &data->struc_cmd))
-		error_msg("allocation error");
-	// printcmd(data->struc_cmd);
+	// if (!fill_commands(data, &data->struc_cmd))
+	// 	error_msg("allocation error");
+	printcmd(data->struc_cmd);
+	printf("%s\n", "helsinki");
+	printList(data->struc_tok);
 }
 
 /*Have to check the error when y copy the firts command,
