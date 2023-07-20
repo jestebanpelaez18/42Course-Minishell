@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:07:32 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/20 12:31:00 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/07/20 12:36:17 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_cmd	*initiate_cmd(t_token *node)
 	return (temp);
 }
 
-int	fill_commands(t_data *data, t_cmd **cmds)
+/* int	fill_commands(t_data *data, t_cmd **cmds)
 {
 	t_token	*node;
 	t_cmd	*cmd;
@@ -66,7 +66,7 @@ int	fill_commands(t_data *data, t_cmd **cmds)
 		node = node->next;
 	}
 	return (1);
-}
+} */
 
 t_cmd	*start_firts_cmd(t_data *data)
 {
@@ -89,8 +89,8 @@ void	parser(t_data *data)
 	if (!data->struc_cmd)
 		error_msg("allocation error");
 	// delete the nodes in the token for next iterations
-	if (!fill_commands(data, &data->struc_cmd))
-		error_msg("allocation error");
+/* 	if (!fill_commands(data, &data->struc_cmd))
+		error_msg("allocation error"); */
 	// printcmd(data->struc_cmd);
 }
 
