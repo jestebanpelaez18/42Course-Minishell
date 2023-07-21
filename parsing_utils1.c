@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:46:51 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/20 15:15:58 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:23:17 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	set_number_of_pipes(t_data *data, t_token *tokens)
 			data->pipex++;
 		node = node->next;
 	}
-	printf("%d \n", data->pipex);
 }
 
 int	count_commands(t_token *node)
@@ -35,7 +34,8 @@ int	count_commands(t_token *node)
 	temp = node;
 	while (temp && temp->type != PIPE)
 	{
-		i++;
+		if(temp->type == WORD)
+			i++;
 		printf("%i\n", i);
 		temp = temp->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:39:22 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/20 17:34:31 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:35:27 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,10 @@ void	deleteNode(t_token **struck_tok, char *str)
 		}
 		free(temp);
 		temp = NULL;
-		printf("%s\n","perra");
-		
+		printList(*struck_tok);
+		printf("%s\n","perra");	
 		return ;
 	}
-	printf("%s\n","perraza");
 	while (temp != NULL && temp->tokens != str)
 	{
 		prev = temp;
