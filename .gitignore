@@ -52,6 +52,6 @@ Mkfile.old
 dkms.conf
 
 #own stuff
-philo
+minishell
 .DS_Store
 .vscode/
