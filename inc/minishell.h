@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/18 18:52:41 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/20 12:31:39 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -92,7 +92,7 @@ t_token				*ft_lstlast(t_token *lst);
 t_token				*ft_lstnew(char *token, int type);
 t_cmd				*cmd_new(char **token);
 // t_cmd				*cmd_last(t_cmd *lst);
-// void				cmd_add_back(t_cmd **lst, t_cmd *new);
+void				cmd_add_back(t_cmd **lst, t_cmd *new);
 int					create_cmd_node(char **sub_line, t_cmd **commands);
 
 void				printList(t_token *node);

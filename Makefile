@@ -1,50 +1,52 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/05/28 10:44:41 by jpelaez-          #+#    #+#              #
-#    Updated: 2023/07/18 17:21:47 by jpelaez-         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = minishell
 
-SRC = main.c error_exit.c env.c\
-signals.c linked_lst_utils.c parser.c\
-check_input.c tokenization.c tokenization_utils1.c\
-check_input2.c parsing_utils1.c linked_lst_utils2.c\
+LIB_DIR = libft
+SRC_DIR = ./src
+VPATH = src:libft
 
-OBJECT = $(SRC:.c=.o)
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+OBJ_DIR = obj
 
-LIBFT_DIR = ./libft
-LIBFT = $(LIBFT_DIR)/libft.a
+INCLUDES = -Ilibft -Iinc
 
-HEADER = minishell.h
+FLAGS = -Wall -Wextra -Werror -MMD -g
 
-FLAGS = -Wall -Wextra -Werror
-C_FLAGS = -lreadline -L ${HOME}/.brew/opt/readline/lib
-O_FLAGS = -I ${HOME}/.brew/opt/readline/include
-CC = CC
+# MAC_OS
+O_FLAGS = -lreadline -L${HOME}/.brew/opt/readline/lib
+C_FLAGS = -I${HOME}/.brew/opt/readline/include
+
+# LINUX
+# Uncomment these lines if you are building for Linux instead of macOS
+#O_FLAGS = -lreadline
+#C_FLAGS =
+
+SRC = main.c error_exit.c env.c \
+signals.c linked_lst_utils.c parser.c \
+check_input.c tokenization.c tokenization_utils1.c \
+check_input2.c parsing_utils1.c linked_lst_utils2.c
+
+DEP = $(OBJ:.o=.d)
+
+##
 
 all: $(NAME)
 
-$(NAME):  $(OBJECT)
-		make -C $(LIBFT_DIR)
-		$(CC) $(FLAGS) $(C_FLAGS) $(OBJECT) $(LIBFT) -o $(NAME)
+$(NAME): $(OBJ)
+	make -C $(LIB_DIR)
+	cc $(FLAGS) $(C_FLAGS) $(OBJ) -o $(NAME) -L$(LIB_DIR) -lft $(O_FLAGS)
 
-%.o: %.c
-	$(CC) $(FLAGS) $(O_FLAGS) -c $< -o $@
+$(OBJ_DIR)/%.o: %.c
+	mkdir -p $(OBJ_DIR)
+	cc $(FLAGS) $(INCLUDES) $(C_FLAGS) -c $< -o $@
 
+-include $(DEP)
 
 clean:
-	make -C $(LIBFT_DIR) fclean
-	rm -f $(OBJECT)
+	make -C $(LIB_DIR) fclean
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	   rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
