@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:46:51 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/21 18:23:17 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:44:06 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,23 @@ int	count_commands(t_token *node)
 	{
 		if(temp->type == WORD)
 			i++;
-		printf("%i\n", i);
 		temp = temp->next;
 	}
 	return (i);
+}
+
+t_token *next_elem(t_token *args)
+{
+	t_token	*next_elem;
+
+	next_elem = args;
+	while (next_elem)
+	{
+		if (!next_elem->next)
+			return(NULL);
+		next_elem = next_elem->next;
+		if (next_elem->prev && next_elem->prev->type == PIPE)
+			break ;
+	}
+	return(next_elem);
 }

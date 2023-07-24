@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:22:27 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/21 17:26:52 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/23 21:20:10 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,14 @@ void	printList(t_token *node)
 	t_token *temp;
 
 	temp = node;
-	printf("NULL -> ");
-	while (node != NULL)
+	while (node)
 	{
 		printf("%s -> ", node->tokens);
 		node = node->next;
 	}
 	printf("NULL \n\n");
-	printf("NULL -> ");
-	while (temp != NULL)
+	temp = temp->next;
+	while (temp)
 	{
 		printf("%d -> ", temp->type);
 		temp = temp->next;

@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/20 16:22:39 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:05:40 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@ typedef struct s_data
 	t_token			*struc_tok;
 }					t_data;
 
-/*Error msg*/
+/*Error msg and free*/
 void				error_msg(char *msg);
 void				error_msg_noexit(char *msg);
+void				free_argt(char **argument);
 
 /*Signal functions*/
 void				signal_in_exec(void);
@@ -97,5 +98,7 @@ void				cmd_add_back(t_cmd **lst, t_cmd *new);
 int					create_cmd_node(char **sub_line, t_cmd **commands);
 
 void				printList(t_token *node);
+void				printcmd(t_cmd *node);
+t_token 			*next_elem(t_token *args);
 
 #endif

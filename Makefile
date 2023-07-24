@@ -6,7 +6,7 @@
 #    By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/28 10:44:41 by jpelaez-          #+#    #+#              #
-#    Updated: 2023/07/18 17:21:47 by jpelaez-         ###   ########.fr        #
+#    Updated: 2023/07/23 20:45:52 by jpelaez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 HEADER = minishell.h
 
 FLAGS = -Wall -Wextra -Werror
-C_FLAGS = -lreadline -L ${HOME}/.brew/opt/readline/lib
-O_FLAGS = -I ${HOME}/.brew/opt/readline/include
+C_FLAGS = -lreadline -L /opt/homebrew/opt/readline/lib
+O_FLAGS = -I /opt/homebrew/opt/readline/include
 CC = CC
 
 all: $(NAME)
