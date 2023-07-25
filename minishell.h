@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/24 16:05:40 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:45:13 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void				parser(t_data *data);
 void				set_number_of_pipes(t_data *data, t_token *tokens);
 int					count_commands(t_token *node);
 void				deleteNode(t_token **struck_tok, char *str);
-
+void 				parse_redirection(t_token *node);
 /*Linked list utils*/
 
 void				ft_lstadd_back(t_token **lst, t_token *new);
@@ -96,9 +96,10 @@ t_cmd				*cmd_new(char **token);
 t_cmd				*cmd_last(t_cmd *lst);
 void				cmd_add_back(t_cmd **lst, t_cmd *new);
 int					create_cmd_node(char **sub_line, t_cmd **commands);
+t_token 			*next_elem(t_token *args);
 
 void				printList(t_token *node);
 void				printcmd(t_cmd *node);
-t_token 			*next_elem(t_token *args);
+
 
 #endif

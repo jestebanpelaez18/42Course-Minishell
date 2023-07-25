@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:07:32 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/24 18:38:51 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:48:11 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_cmd	*initiate_cmd(t_token *node)
 	int		len;
 	int		i;
 
+	// parse_redirection(node);
 	len = count_commands(node);
 	cmd = (char **)malloc(sizeof(char *) * (len + 1));
 	if (!cmd)
