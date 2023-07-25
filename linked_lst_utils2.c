@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:39:22 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/24 16:08:11 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/25 18:12:20 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,3 +50,4 @@ void	cmd_add_back(t_cmd **lst, t_cmd *new)
 	bottom->next = new;
 	new->prev = bottom;
 }
+

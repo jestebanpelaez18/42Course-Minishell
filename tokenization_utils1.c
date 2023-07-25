@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:22:27 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/23 21:20:10 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/25 18:34:55 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	tok_closed_quotes(char *str, int i, char quote)
 	}
 	return (j);
 }
+
 int	check_delimiter(char c, char *delimiter)
 {
 	int	j;

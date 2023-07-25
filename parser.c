@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:07:32 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/24 19:48:11 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/25 20:07:48 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	printcmd(t_cmd *node)
 	int	i;
 
 	i = 0;
-	while(node)
+	while (node)
 	{
 		while (node->commands[i] != NULL)
 		{
@@ -38,16 +38,15 @@ t_cmd	*initiate_cmd(t_token *node)
 	int		len;
 	int		i;
 
-	// parse_redirection(node);
 	len = count_commands(node);
 	cmd = (char **)malloc(sizeof(char *) * (len + 1));
 	if (!cmd)
 		error_msg("allocation error");
 	i = 0;
 	tok_temp = node;
-	while (tok_temp && tok_temp->type != PIPE)
+	while ((tok_temp && tok_temp->type != PIPE))
 	{
-		if(tok_temp->tokens)
+		if (tok_temp->tokens)
 		{
 			cmd[i] = ft_strdup(tok_temp->tokens);
 			i++;
@@ -68,7 +67,7 @@ void	fill_commands(t_token *data, t_cmd **cmds)
 	while (node)
 	{
 		node = next_elem(node);
-		if(!node)
+		if (!node)
 			break ;
 		cmd = initiate_cmd(node);
 		if (!cmd)
@@ -96,5 +95,6 @@ void	parser(t_data *data)
 	if (!data->struc_cmd)
 		error_msg("allocation error");
 	fill_commands(data->struc_tok, &data->struc_cmd);
-	// printcmd(data->struc_cmd);
+	printcmd(data->struc_cmd);
+	// parse_redirection(node);
 }
