@@ -6,21 +6,12 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:40:15 by nvan-den          #+#    #+#             */
-/*   Updated: 2023/07/25 14:07:22 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/07/25 14:10:25 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	nb_argv(char **argv)
-{
-	int		size;
-
-	size = 0;
-	while (argv[size])
-		size++;
-	return (size);
-}
 void	n_function(char **argv)
 {
 	int	i;
@@ -40,7 +31,7 @@ int	ft_echo(char **argv)
 	int		i;
 
 	i = 1;  
-	if (nb_argv(argv) > 1)// check "-n" new line option in echo
+	if (ft_strlen(argv) > 1)// check "-n" new line option in echo
 		n_function(argv);
 	else
 		write(1, "\n", 1);
