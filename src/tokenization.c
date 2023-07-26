@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/20 12:36:35 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/07/26 15:41:22 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,5 @@ void	tokenization(t_data *data)
 		else
 			i += tok_word(data->line_read, i, &data->struc_tok);
 	}
-	printList(data->struc_tok);
+	// printList(data->struc_tok);
 }
