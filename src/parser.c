@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:07:32 by jpelaez-          #+#    #+#             */
+<<<<<<< HEAD:src/parser.c
 /*   Updated: 2023/07/25 20:07:48 by jpelaez-         ###   ########.fr       */
+=======
+/*   Updated: 2023/07/20 12:36:17 by nvan-den         ###   ########.fr       */
+>>>>>>> main:src/parser.c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +21,11 @@ void	printcmd(t_cmd *node)
 	int	i;
 
 	i = 0;
+<<<<<<< HEAD:src/parser.c
 	while (node)
+=======
+	while (node->commands[i])
+>>>>>>> main:src/parser.c
 	{
 		while (node->commands[i] != NULL)
 		{
@@ -58,13 +66,22 @@ t_cmd	*initiate_cmd(t_token *node)
 	return (temp);
 }
 
+<<<<<<< HEAD:src/parser.c
 void	fill_commands(t_token *data, t_cmd **cmds)
+=======
+/* int	fill_commands(t_data *data, t_cmd **cmds)
+>>>>>>> main:src/parser.c
 {
 	t_token	*node;
 	t_cmd	*cmd;
 
+<<<<<<< HEAD:src/parser.c
 	node = data;
 	while (node)
+=======
+	node = data->tokens; //incompatible pointer types
+	while (node != NULL)
+>>>>>>> main:src/parser.c
 	{
 		node = next_elem(node);
 		if (!node)
@@ -74,7 +91,12 @@ void	fill_commands(t_token *data, t_cmd **cmds)
 			error_msg("allocation error");
 		cmd_add_back(cmds, cmd);
 	}
+<<<<<<< HEAD:src/parser.c
 }
+=======
+	return (1);
+} */
+>>>>>>> main:src/parser.c
 
 t_cmd	*start_firts_cmd(t_token *data)
 {
@@ -94,7 +116,14 @@ void	parser(t_data *data)
 	data->struc_cmd = start_firts_cmd(data->struc_tok);
 	if (!data->struc_cmd)
 		error_msg("allocation error");
+<<<<<<< HEAD:src/parser.c
 	fill_commands(data->struc_tok, &data->struc_cmd);
 	printcmd(data->struc_cmd);
 	// parse_redirection(node);
+=======
+	// delete the nodes in the token for next iterations
+/* 	if (!fill_commands(data, &data->struc_cmd))
+		error_msg("allocation error"); */
+	// printcmd(data->struc_cmd);
+>>>>>>> main:src/parser.c
 }

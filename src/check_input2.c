@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:20:07 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/21 17:01:15 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/26 15:41:12 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	unclosed_redirec(char *line)
 		return (0);
 	}
 	if ((line[i - 1] == '>' && line[i - 2] == '>') || (line[i - 1] == '<'
-			&& line[i - 2] == '<'))
+			&& line[i - 2] == '<')) //it never gets here, see former if statement - nick
 	{
 		error_msg_noexit("zsh: parse error near '\'n''");
 		return (0);
