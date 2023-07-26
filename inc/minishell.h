@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/25 19:48:25 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/26 15:16:42 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_data
 	char				*line_read;
 	char				**tokens;
 	t_token				*struc_tok;
+	t_redirec			*struc_redic;
 }						t_data;
 
 /*Error msg and free*/
