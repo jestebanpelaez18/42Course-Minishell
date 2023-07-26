@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:43:17 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/13 18:38:36 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/21 16:03:31 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	white_space(char *input)
 	{
 		if (input[i] != ' ' || input[i] != '\t' || input[i] != '\v'
 			|| input[i] != '\f' || input[i] != '\n' || input[i] != '\r')
-			return (1);
+			return (1);//returns true if NOT whitespace?? -Nick
 		i++;
 	}
 	return (0);
@@ -41,7 +41,7 @@ static int	closed_quotes(char *str)
 		if (str[i] == '\'' || str[i] == '\"')
 		{
 			quot = str[i++];
-			while (str[i] != '\0' && str[i] != quot)
+			while (str[i] != '\0' && str[i] != quot)//why while loop, only able to run once -Nick
 				i++;
 		}
 		if (str[i] == '\0')
