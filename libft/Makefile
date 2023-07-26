@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+         #
+#    By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/01 16:54:41 by jpelaez-          #+#    #+#              #
-#    Updated: 2022/11/15 13:24:17 by jpelaez-         ###   ########.fr        #
+#    Updated: 2023/07/20 12:44:47 by nvan-den         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c\
 SRCB =	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c\
 ft_lstlast.c ft_lstadd_back.c\
 
-HEADER = -c -I libft.h 
+HEADER = -c -Ilibft
 
 FLAGS = -Wall -Wextra -Werror
 
