@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/26 16:34:51 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:56:58 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "../libft/libft.h"
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "../libft/libft.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 
@@ -40,6 +40,7 @@ typedef struct s_token
 {
 	char				*tokens;
 	int					type;
+	int					index;
 	struct s_token		*next;
 	struct s_token		*prev;
 }						t_token;
@@ -62,6 +63,7 @@ typedef struct s_data
 	char				*line_read;
 	char				**tokens;
 	t_token				*struc_tok;
+	t_redirec			*redirections;
 }						t_data;
 
 /*Error msg and free*/
@@ -94,15 +96,14 @@ int						check_delimiter(char c, char *delimiter);
 void					parser(t_data *data);
 void					set_number_of_pipes(t_data *data, t_token *tokens);
 int						count_commands(t_token *node);
-void					deleteNode(t_token **struck_tok, char *str);
-void					parse_redirection(t_token *node);
-t_token					*check_redirection(t_token *node);
+void					parse_redirection(t_token *node, t_redirec **redirec);
+void					check_redirection(t_token **node);
 
 /*Linked list utils*/
 
 void					ft_lstadd_back(t_token **lst, t_token *new);
 t_token					*ft_lstlast(t_token *lst);
-t_token					*ft_lstnew(char *token, int type);
+t_token					*ft_lstnew(char *token, int type, int index);
 t_cmd					*cmd_new(char **token);
 t_cmd					*cmd_last(t_cmd *lst);
 void					cmd_add_back(t_cmd **lst, t_cmd *new);
@@ -111,6 +112,8 @@ t_token					*next_elem(t_token *args);
 t_redirec				*redirec_lstnew(char *token, int type);
 t_redirec				*redirec_lstlast(t_redirec *lst);
 void					redirec_lstadd_back(t_redirec **lst, t_redirec *new);
+void					deleteNode2(t_token **struck_tok, int index);
+void					deleteNode(t_token **struck_tok, t_token *del);
 
 void					printList(t_token *node);
 void					printcmd(t_cmd *node);

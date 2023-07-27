@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:07:32 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/26 16:33:31 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/07/27 18:07:54 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_cmd	*initiate_cmd(t_token *node)
 	return (temp);
 }
 
-void	fill_commands(t_token *data, t_cmd **cmds)
+void	fill_commands(t_token *data, t_cmd **cmds, t_redirec *redirections)
 {
 	t_token	*node;
 	t_cmd	*cmd;
@@ -67,6 +67,7 @@ void	fill_commands(t_token *data, t_cmd **cmds)
 	while (node)
 	{
 		node = next_elem(node);
+		parse_redirection(node, &redirections);
 		if (!node)
 			break ;
 		cmd = initiate_cmd(node);
@@ -76,10 +77,11 @@ void	fill_commands(t_token *data, t_cmd **cmds)
 	}
 }
 
-t_cmd	*start_firts_cmd(t_token *data)
+t_cmd	*start_firts_cmd(t_token *data, t_redirec **redirec)
 {
 	t_cmd	*cmd;
-
+	
+	(void)redirec;
 	cmd = NULL;
 	cmd = initiate_cmd(data);
 	if (!cmd)
@@ -90,11 +92,13 @@ t_cmd	*start_firts_cmd(t_token *data)
 void	parser(t_data *data)
 {
 	set_number_of_pipes(data, data->struc_tok);
+	parse_redirection(data->struc_tok, &data->redirections);
+	// printList(data->struc_tok);
 	data->struc_cmd = NULL;
-	data->struc_cmd = start_firts_cmd(data->struc_tok);
+	data->struc_cmd = start_firts_cmd(data->struc_tok, &data->redirections);
 	if (!data->struc_cmd)
 		error_msg("allocation error");
-	fill_commands(data->struc_tok, &data->struc_cmd);
+	fill_commands(data->struc_tok, &data->struc_cmd, data->redirections);
 	printcmd(data->struc_cmd);
 	// parse_redirection(node);
 }

@@ -6,13 +6,13 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:02:33 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/17 19:13:30 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:47:42 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*ft_lstnew(char *token, int type)
+t_token	*ft_lstnew(char *token, int type, int index)
 {
 	t_token	*node;
 
@@ -21,6 +21,7 @@ t_token	*ft_lstnew(char *token, int type)
 		return (NULL);
 	node->tokens = token;
 	node->type = type;
+	node->index = index;
 	node->next = NULL;
 	node->prev = NULL;
 	return (node);

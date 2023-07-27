@@ -6,34 +6,39 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:07:20 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/25 19:30:47 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:56:51 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void	deleteNode(t_token **struck_tok, char *str)
+// void	deleteNode2(t_token **struck_tok, int index)
 // {
-// 	t_token *temp;
-// 	t_token *prev;
+// 	t_token	*temp;
 
 // 	temp = *struck_tok;
-// 	if (temp != NULL && temp->tokens == str)
+// 	if (temp && temp->index == index)
 // 	{
-// 		struck_tok = temp->next;
+// 		printf("%s\n", "zorra puta");
+// 		*struck_tok = temp->next;
 // 		free(temp);
 // 		return ;
 // 	}
-// 	while (temp != NULL && temp->tokens != str)
-// 	{
-// 		prev = temp;
-// 		temp = temp->next;
-// 	}
-// 	if (temp == NULL)
-// 		return ;
-// 	prev->next = temp->next;
-// 	free(temp);
 // }
+
+void	deleteNode(t_token **struck_tok, t_token *del)
+{
+	if (*struck_tok == NULL || del == NULL)
+		return ;
+	if (*struck_tok != NULL)
+		*struck_tok = del->next;
+	if (del->next != NULL)
+		del->next->prev = del->prev;
+	if (del->prev != NULL)
+		del->prev->next = del->next;
+	free(del);
+	return ;
+}
 
 t_redirec	*redirec_lstnew(char *token, int type)
 {
