@@ -6,27 +6,14 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:07:20 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/27 17:56:51 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/28 17:22:35 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void	deleteNode2(t_token **struck_tok, int index)
-// {
-// 	t_token	*temp;
 
-// 	temp = *struck_tok;
-// 	if (temp && temp->index == index)
-// 	{
-// 		printf("%s\n", "zorra puta");
-// 		*struck_tok = temp->next;
-// 		free(temp);
-// 		return ;
-// 	}
-// }
-
-void	deleteNode(t_token **struck_tok, t_token *del)
+void	deletenode(t_token **struck_tok, t_token *del)
 {
 	if (*struck_tok == NULL || del == NULL)
 		return ;

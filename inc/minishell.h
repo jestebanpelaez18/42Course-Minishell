@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/27 17:56:58 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/28 17:22:46 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,7 @@ t_token					*next_elem(t_token *args);
 t_redirec				*redirec_lstnew(char *token, int type);
 t_redirec				*redirec_lstlast(t_redirec *lst);
 void					redirec_lstadd_back(t_redirec **lst, t_redirec *new);
-void					deleteNode2(t_token **struck_tok, int index);
-void					deleteNode(t_token **struck_tok, t_token *del);
+void					deletenode(t_token **struck_tok, t_token *del);
 
 void					printList(t_token *node);
 void					printcmd(t_cmd *node);
