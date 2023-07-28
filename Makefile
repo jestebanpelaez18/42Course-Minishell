@@ -24,7 +24,7 @@ SRC = main.c error_exit.c env.c \
 signals.c linked_lst_utils.c parser.c \
 check_input.c tokenization.c tokenization_utils1.c \
 check_input2.c parsing_utils1.c linked_lst_utils2.c \
-linked_lst_utils3.c parse_redic.c
+linked_lst_utils3.c parse_redic.c executor.c 
 
 DEP = $(OBJ:.o=.d)
 

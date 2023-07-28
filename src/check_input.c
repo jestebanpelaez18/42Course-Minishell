@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:43:17 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/21 16:03:31 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/07/28 18:26:36 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	close_pipe(char *str)
 		i++;
 	if (str[i - 1] == '|')
 	{
-		error_msg_noexit("zsh: parse error, unclosed pipe");
+		error_msg_noexit("zsh: parse error near '|' ");
 		return (0);
 	}
 	return (1);

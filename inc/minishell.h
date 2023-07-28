@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/28 17:22:46 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/28 19:39:35 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <sys/wait.h>
 
 # define WORD 0
 # define PIPE 1
@@ -27,6 +28,14 @@
 # define RIGH_R 3
 # define HEREDOC 4
 # define APPEND 5
+
+typedef struct s_pid
+{
+	int					id;
+	int					wid;
+	struct s_pid		*next;
+	struct s_pid		*prev;
+}						t_pid;
 
 typedef struct s_redirec
 {
@@ -64,6 +73,7 @@ typedef struct s_data
 	char				**tokens;
 	t_token				*struc_tok;
 	t_redirec			*redirections;
+	t_pid				*struc_pid;
 }						t_data;
 
 /*Error msg and free*/
@@ -98,6 +108,10 @@ void					set_number_of_pipes(t_data *data, t_token *tokens);
 int						count_commands(t_token *node);
 void					parse_redirection(t_token *node, t_redirec **redirec);
 void					check_redirection(t_token **node);
+
+/*Executor*/
+
+void					executor(t_data *data);
 
 /*Linked list utils*/
 
