@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/28 19:39:35 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:28:40 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,11 @@ void					check_redirection(t_token **node);
 /*Executor*/
 
 void					executor(t_data *data);
+
+
+/*Expander*/
+
+t_cmd					*expander(t_data *data, t_cmd *cmds);
 
 /*Linked list utils*/
 
