@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/31 19:28:40 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/01 19:42:05 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,11 @@ void					executor(t_data *data);
 
 /*Expander*/
 
-t_cmd					*expander(t_data *data, t_cmd *cmds);
+t_token					*expander(t_data *data, t_token *token);
+int						skip_digit(int i, char *str);
+int						is_dollar(char *tok);
+int						ft_strcmp(const char *str1, const char *str2);
+int 					is_equal(char *env);
 
 /*Linked list utils*/
 
