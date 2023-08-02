@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/01 15:35:57 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/02 13:36:06 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,78 @@ void	launch_single_cmd(t_cmd *cmds, t_redirec *redirec, t_data *data)
 {
 }
 
+int	mult_pipes(t_cmd *cmds, t_redirec *redirec, t_data *data)
+{
+	int	fd[3][2];
+	int	i;
+	int	pid1;
+	int	pid2;
+	int	/* variable */;
+	/* char* variable? */
+	
+	while (i < 3)
+	{
+		if (pipe(fd[i]) < 0)
+		{
+			close_all_fd(); //create function where all fd's are closed
+			return (1);
+		}
+		i++;
+	}
+	pid1 = fork();
+	if (pid1 < 0)
+		return (2);
+	if (pid1 == 0)
+	{//child process 1
+		close(fd[0][1]);
+		close(fd[1][0]);
+		close(fd[2][0]);
+		close(fd[2][1]);
+		if (read(fd[0][0], &/* variable */, sizof(/* variable */)))
+			return (3);
+		//apply function here to variable
+		if (write(fd[1][1] &/* variable */, sizeof(/* variable */)))
+			return (4);
+		close(fd[0][0]);
+		close(fd[1][1]);
+		return (0);
+	}
+	pid2 = fork();
+	if (pid2 < 0)
+		return (5);
+	if (pid2 == 0)
+	{//child process 2
+		close(fd[0][0]);
+		close(fd[0][1]);
+		close(fd[1][1]);
+		close(fd[2][0]);
+		if (read(fd[1][0], &/* variable */, sizof(/* variable */)))
+			return (6);
+		//apply function here to variable
+		if (write(fd[2][1] &/* variable */, sizeof(/* variable */)))
+			return (7);
+		close(fd[1][0]);
+		close(fd[2][1]);
+		return (0);
+	}
+	//parent process
+	close(fd[0][0]);
+	close(fd[1][0]);
+	close(fd[1][1]);
+	close(fd[2][1]);
+	if (write(fd[01], /* variable */, sizeof(/* variable */)))
+		return (8);
+	if (read(fd[2][0], &x, sizeof(int)) < 0)
+		return (9);
+	printf("result /* variable */\n");
+	close(fd[0][1]);
+	close(fd[2][0]);
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
+	return (0);
+}
+
+//takes the first command and pipes it into the second
 int	pipes(t_cmd *cmds, t_redirec *redirec, t_data *data)
 {
 	int	fd[2];
@@ -33,7 +105,10 @@ int	pipes(t_cmd *cmds, t_redirec *redirec, t_data *data)
 		close(fd[0]);
 		close(fd[1]);
 		//Execute function
-		//execve(/*/bin/ execute */,cmds, NULL);
+		//if built-in:
+		// built-in();
+		//else
+		// execve(/*/bin/ execute */,cmds, NULL);
 	}
 	pid2 = fork();
 	if (pid2 < 0)
@@ -44,7 +119,10 @@ int	pipes(t_cmd *cmds, t_redirec *redirec, t_data *data)
 		close(fd[0]);
 		close(fd[1]);
 		//Execute function
-		//execve(/*/bin/ execute */,cmds, NULL);
+		//if built-in:
+		// built-in();
+		//else
+		// execve(/*/bin/ execute */,cmds, NULL);
 	}
 	close(fd[0]);
     close(fd[1]);
