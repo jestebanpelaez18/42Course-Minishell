@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:46 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/01 19:43:50 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/02 17:33:24 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,29 @@
 
 // 	return (cmds);
 // }
-int	expand_envp(char *temp, int i, t_data *data)
+
+int	expand_env(char **temp, int i, t_data *data, char *str)
 {
 	char	**envp;
 	int		j;
 	int		n;
+	int		step;
 
 	envp = data->env;
 	j = 0;
+	step = 0;
 	while (envp[j])
 	{
 		n = is_equal(envp[j]);
-		if (ft_strncmp(temp + i, envp[j], n) == 0)
+		if (ft_strncmp(str + i, envp[j], n) == 0
+			&& (len_equal(envp[j]) == (int)ft_strlen(str + 1)))
 		{
-			
-			
+			*temp = ft_strjoin(*temp, envp[j] + len_equal(envp[j]) + 1);
+			step += is_equal(envp[j]);
 		}
 		j++;
 	}
+	return (step);
 }
 
 char	*replace_dollar(char *str, t_data *data)
@@ -55,16 +60,21 @@ char	*replace_dollar(char *str, t_data *data)
 	int		i;
 
 	temp = ft_strdup("");
+	i = 0;
 	while (str[i])
 	{
 		i += skip_digit(i, str);
-		if (str[i] == '$' && str[i + 1] == '?')
-			get_exit_status(temp);
-		else if (str[i] == '$' && (str[i + 1] != ' ' && (str[i + 2] != '"'
-						|| str[i + 2] != '\0')) && str[i + 1] != '\0')
-			i += expand_env(&temp, i + 1, data);
+		// if (str[i] == '$' && str[i + 1] == '?')
+		// 	get_exit_status(temp);
+		if (str[i] == '$' && (str[i + 1] != ' ' && (str[i + 2] != '"' || str[i
+					+ 2] != '\0')) && str[i + 1] != '\0')
+			i += expand_env(&temp, i + 1, data, str);
 		else
 		{
+			if (str[i])
+				i++;
+			temp = ft_strjoin(temp, str + i);
+			i++;
 		}
 	}
 	return (temp);
@@ -76,18 +86,19 @@ void	expand_dollar(t_token *current, t_data *data)
 
 	str = replace_dollar(current->tokens, data);
 	current->tokens = str;
-	return (1);
+	return ;
 }
 
-t_token	*expander(t_data *data, t_token *token)
+void	expander(t_data *data, t_token **token)
 {
-	t_token *tok;
+	t_token	*tok;
 
-	tok = token;
+	tok = *token;
 	while (tok)
 	{
-		if (is_dollar(token->tokens))
+		if (is_dollar(tok->tokens))
 			expand_dollar(tok, data);
 		tok = tok->next;
 	}
+	return ;
 }

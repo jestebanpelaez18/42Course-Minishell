@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/01 19:42:05 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/02 16:05:49 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/wait.h>
 # include <unistd.h>
 # include <readline/history.h>
 # include <readline/readline.h>
-# include <sys/wait.h>
 
 # define WORD 0
 # define PIPE 1
@@ -113,14 +113,14 @@ void					check_redirection(t_token **node);
 
 void					executor(t_data *data);
 
-
 /*Expander*/
 
-t_token					*expander(t_data *data, t_token *token);
+void					expander(t_data *data, t_token **token);
 int						skip_digit(int i, char *str);
 int						is_dollar(char *tok);
 int						ft_strcmp(const char *str1, const char *str2);
-int 					is_equal(char *env);
+int						is_equal(char *env);
+int						len_equal(char *str);
 
 /*Linked list utils*/
 

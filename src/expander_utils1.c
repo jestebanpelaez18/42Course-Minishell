@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:59:25 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/01 19:40:58 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/02 16:28:15 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	skip_digit(int i, char *str)
 	int	j;
 
 	j = i;
-	while (str[j] && is_number(str[j]))
+	while (str[j] != '\0' && is_number(str[j]))
 		j++;
 	return (j - i);
 }
@@ -34,9 +34,9 @@ int	is_dollar(char *tok)
 	int	i;
 
 	i = 0;
-	while (tok[i])
+	while (tok[i] != '\0')
 	{
-		if (tok[i] == "$")
+		if (tok[i] == '$')
 			return (1);
 		i++;
 	}
@@ -48,7 +48,17 @@ int	is_equal(char *env)
 	int	i;
 
 	i = 0;
-	while (env[i] && env[i] != '=')
+	while (env[i] != '\0' && env[i] != '=')
+		i++;
+	return (i);
+}
+
+int	len_equal(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0' && str[i] != '=')
 		i++;
 	return (i);
 }

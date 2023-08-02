@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/31 20:03:53 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/02 16:02:25 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,6 @@ void	tokenization(t_data *data)
 		else
 			i += tok_word(data->line_read, i, &data->struc_tok);
 	}
-	// printList(data->struc_tok);
-	// data->struc_tok = expander(data, data->struc_cmd);
+	expander(data, &data->struc_tok);
+	printList(data->struc_tok);
 }
