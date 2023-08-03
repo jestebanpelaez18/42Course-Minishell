@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:46 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/02 17:33:24 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/03 18:39:11 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ int	expand_env(char **temp, int i, t_data *data, char *str)
 
 	envp = data->env;
 	j = 0;
-	step = 0;
+	step = 1;
 	while (envp[j])
 	{
 		n = is_equal(envp[j]);
 		if (ft_strncmp(str + i, envp[j], n) == 0
-			&& (len_equal(envp[j]) == (int)ft_strlen(str + 1)))
+			&& (len_equal(envp[j]) == dollar_tok_len(str, i)))
 		{
 			*temp = ft_strjoin(*temp, envp[j] + len_equal(envp[j]) + 1);
 			step += is_equal(envp[j]);
@@ -68,12 +68,12 @@ char	*replace_dollar(char *str, t_data *data)
 		// 	get_exit_status(temp);
 		if (str[i] == '$' && (str[i + 1] != ' ' && (str[i + 2] != '"' || str[i
 					+ 2] != '\0')) && str[i + 1] != '\0')
-			i += expand_env(&temp, i + 1, data, str);
+		{
+				i += expand_env(&temp, i + 1, data, str);
+		}
 		else
 		{
-			if (str[i])
-				i++;
-			temp = ft_strjoin(temp, str + i);
+			temp = get_str(temp, str[i]);
 			i++;
 		}
 	}
@@ -83,9 +83,25 @@ char	*replace_dollar(char *str, t_data *data)
 void	expand_dollar(t_token *current, t_data *data)
 {
 	char	*str;
+	int		i;
+	int		j;
 
-	str = replace_dollar(current->tokens, data);
-	current->tokens = str;
+	j = dolar_index(current->tokens);
+	i = 0;
+	if (no_single_quotes(current->tokens))
+	{
+		str = replace_dollar(current->tokens, data);
+		current->tokens = str;
+	}
+	else
+	{
+		if (current->tokens[i] != '\'' && (current->tokens[j - 1] != '\''
+			&& current->tokens[j + 1] != '\0'))
+		{
+			str = replace_dollar(current->tokens, data);
+			current->tokens = str;
+		}
+	}
 	return ;
 }
 

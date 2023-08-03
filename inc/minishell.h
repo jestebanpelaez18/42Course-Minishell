@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/02 16:05:49 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/03 18:18:15 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,10 @@ int						is_dollar(char *tok);
 int						ft_strcmp(const char *str1, const char *str2);
 int						is_equal(char *env);
 int						len_equal(char *str);
+int						dolar_index(char *str);
+int						no_single_quotes(char *str);
+char					*get_str(char *str, char c);
+int						dollar_tok_len(char *str, int j);
 
 /*Linked list utils*/
 
