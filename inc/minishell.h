@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/03 18:18:15 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/04 18:49:34 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ typedef struct s_data
 	t_pid				*struc_pid;
 }						t_data;
 
+int						g_exit_status;
+
 /*Error msg and free*/
 void					error_msg(char *msg);
 void					error_msg_noexit(char *msg);
@@ -125,6 +127,8 @@ int						dolar_index(char *str);
 int						no_single_quotes(char *str);
 char					*get_str(char *str, char c);
 int						dollar_tok_len(char *str, int j);
+char					*rm_double_quotes(char *str);
+char					*rm_single_quotes(char *str);
 
 /*Linked list utils*/
 

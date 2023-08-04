@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/01 17:42:42 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/04 18:50:47 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_data(t_data *data, char **env)
 {
 	data->env = envdup(env);
-	data->exit_status = 0;
+	g_exit_status = 1;
 	data->pipex = 0;
 }
 

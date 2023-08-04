@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 14:25:49 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/03 18:36:04 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/04 18:57:42 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*get_str(char *str, char c)
 int	dollar_tok_len(char *str, int j)
 {
 	int	i;
-	int k;
+	int	k;
 
 	i = j;
 	k = 0;
@@ -83,4 +83,27 @@ int	dollar_tok_len(char *str, int j)
 		i++;
 	}
 	return (k);
+}
+
+char	*rm_double_quotes(char *str)
+{
+	int i;
+	int j;
+	char *temp;
+
+	temp = ft_strdup("");
+	i = 0;
+	j = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] != '\"')
+		{
+			temp[j] = str[i];
+			j++;
+		}
+		i++;
+	}
+	temp[j] = '\0';
+	free(str);
+	return (temp);
 }

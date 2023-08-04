@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:46 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/03 18:39:11 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/04 19:00:31 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@
 
 // 	return (cmds);
 // }
+
+int	get_exit_status(char **str)
+{
+	free(*str);
+	*str = ft_itoa(g_exit_status);
+	return ((int)ft_strlen(*str) + 1);
+}
 
 int	expand_env(char **temp, int i, t_data *data, char *str)
 {
@@ -64,12 +71,12 @@ char	*replace_dollar(char *str, t_data *data)
 	while (str[i])
 	{
 		i += skip_digit(i, str);
-		// if (str[i] == '$' && str[i + 1] == '?')
-		// 	get_exit_status(temp);
+		if (str[i] == '$' && str[i + 1] == '?')
+			i += get_exit_status(&temp);
 		if (str[i] == '$' && (str[i + 1] != ' ' && (str[i + 2] != '"' || str[i
-					+ 2] != '\0')) && str[i + 1] != '\0')
+						+ 2] != '\0')) && str[i + 1] != '\0')
 		{
-				i += expand_env(&temp, i + 1, data, str);
+			i += expand_env(&temp, i + 1, data, str);
 		}
 		else
 		{
@@ -83,26 +90,29 @@ char	*replace_dollar(char *str, t_data *data)
 void	expand_dollar(t_token *current, t_data *data)
 {
 	char	*str;
-	int		i;
 	int		j;
 
 	j = dolar_index(current->tokens);
-	i = 0;
 	if (no_single_quotes(current->tokens))
 	{
 		str = replace_dollar(current->tokens, data);
+		str = rm_double_quotes(str);
 		current->tokens = str;
 	}
 	else
 	{
-		if (current->tokens[i] != '\'' && (current->tokens[j - 1] != '\''
-			&& current->tokens[j + 1] != '\0'))
+		if (current->tokens[0] != '\'' && (current->tokens[j - 1] != '\''
+				&& current->tokens[j + 1] != '\0'))
 		{
 			str = replace_dollar(current->tokens, data);
 			current->tokens = str;
 		}
+		else
+		{
+			str = rm_single_quotes(current->tokens);
+			current->tokens = str;
+		}
 	}
-	return ;
 }
 
 void	expander(t_data *data, t_token **token)
