@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/02 13:36:06 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/04 11:53:03 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,68 @@
 
 void	launch_single_cmd(t_cmd *cmds, t_redirec *redirec, t_data *data)
 {
+}
+
+int	pipesforrealz(t_cmd *cmds, t_redirec *redirec, t_data *data)
+{
+	int	pipes[data->pipex + 1]
+	int	i;
+	int	j;
+	int	x;
+	
+	i = 0;
+	while (i < data->pipex + 1)
+	{
+		if (pipe(pipes[i]) == -1)
+		{
+			printf("Error creating pipe\n");
+			return (1);
+		}
+	}
+	i = 0;
+	j = 0;
+	while (i < data->pipex)
+	{
+		pids[i] = fork();
+		if (pids[i] == -1)
+		{
+			printf("Error creating process\n");
+			return (2);
+		}
+		if (pids[i] == 0)
+		{//child process
+			while (j < data->pipex + 1)
+			{//close all except the read and write of current
+				if (i != j)
+					close(pipes[j][0]);
+				if (i + 1 != j)
+					close(pipes[j][1]);
+				j++;
+			}
+			if (read(pipes[i][0]), &x, sizeof(int) == -1)
+			{//read the variable
+				printf("Error at reading\n");
+				return (3);
+			}
+			/* do something to the variable here! */
+			if (write(pipes[i + 1][1]) == -1)
+			{//write into next pipe
+				printf("Error at writing\n");
+				return (4);
+			}
+			close(pipes[i][0]);
+			close(pipes[i + 1][1]);
+			return (0);
+		}
+	}
+	//main process
+	i = 0;
+	while (i < data->pipex)
+	{
+		wait(NULL);
+		i++;
+	}
+	return (0);
 }
 
 int	mult_pipes(t_cmd *cmds, t_redirec *redirec, t_data *data)
@@ -43,7 +105,7 @@ int	mult_pipes(t_cmd *cmds, t_redirec *redirec, t_data *data)
 		close(fd[1][0]);
 		close(fd[2][0]);
 		close(fd[2][1]);
-		if (read(fd[0][0], &/* variable */, sizof(/* variable */)))
+		if (read(fd[0][0], &/* variable */, sizeof(/* variable */)))
 			return (3);
 		//apply function here to variable
 		if (write(fd[1][1] &/* variable */, sizeof(/* variable */)))
@@ -61,7 +123,7 @@ int	mult_pipes(t_cmd *cmds, t_redirec *redirec, t_data *data)
 		close(fd[0][1]);
 		close(fd[1][1]);
 		close(fd[2][0]);
-		if (read(fd[1][0], &/* variable */, sizof(/* variable */)))
+		if (read(fd[1][0], &/* variable */, sizeof(/* variable */)))
 			return (6);
 		//apply function here to variable
 		if (write(fd[2][1] &/* variable */, sizeof(/* variable */)))
