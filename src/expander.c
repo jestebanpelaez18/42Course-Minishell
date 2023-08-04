@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:46 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/04 19:00:31 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/04 19:16:12 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	expander(t_data *data, t_token **token)
 	tok = *token;
 	while (tok)
 	{
-		if (is_dollar(tok->tokens))
+		if (tok->type == WORD && is_dollar(tok->tokens)) 
 			expand_dollar(tok, data);
 		tok = tok->next;
 	}
