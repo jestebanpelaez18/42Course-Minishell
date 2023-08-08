@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/31 19:02:51 by jpelaez-         ###   ########.fr       */
+/*   Created: 2023/08/01 14:16:39 by jpelaez-          #+#    #+#             */
+/*   Updated: 2023/08/01 14:22:09 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "minishell.h"
 
 void	launch_single_cmd(t_cmd *cmds, t_redirec *redirec, t_data *data)
 {
 }
-
+/**/
 void	executor(t_data *data)
 {
 	t_pid *pid;
@@ -30,7 +32,7 @@ void	executor(t_data *data)
 		if (data->pipex == 0)
 			launch_single_cmd(data->struc_cmd, data->redirections, data);
 		// else
-		// 	launch_multiple_cmd
+		// 	pipes(data->struc_cmd, data->redirections, data)
 		/*Here we have to check the stuff with the pipes,
 		because we have multiple cmd,
 		i Will test with one command because is easie

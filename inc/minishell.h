@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/31 19:28:40 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/04 18:49:34 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/wait.h>
 # include <unistd.h>
 # include <readline/history.h>
 # include <readline/readline.h>
-# include <sys/wait.h>
 
 # define WORD 0
 # define PIPE 1
@@ -76,6 +76,8 @@ typedef struct s_data
 	t_pid				*struc_pid;
 }						t_data;
 
+int						g_exit_status;
+
 /*Error msg and free*/
 void					error_msg(char *msg);
 void					error_msg_noexit(char *msg);
@@ -113,10 +115,20 @@ void					check_redirection(t_token **node);
 
 void					executor(t_data *data);
 
-
 /*Expander*/
 
-t_cmd					*expander(t_data *data, t_cmd *cmds);
+void					expander(t_data *data, t_token **token);
+int						skip_digit(int i, char *str);
+int						is_dollar(char *tok);
+int						ft_strcmp(const char *str1, const char *str2);
+int						is_equal(char *env);
+int						len_equal(char *str);
+int						dolar_index(char *str);
+int						no_single_quotes(char *str);
+char					*get_str(char *str, char c);
+int						dollar_tok_len(char *str, int j);
+char					*rm_double_quotes(char *str);
+char					*rm_single_quotes(char *str);
 
 /*Linked list utils*/
 
