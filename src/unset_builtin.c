@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:52:33 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/08 16:41:38 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/09 12:01:16 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,18 @@ static int	ft_strncmp(const char *str1, const char *str2, size_t n)
 	}
 	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
 }
+
+static int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+
+	while (str[i])
+		i++;
+	return (i);
+}
+
 // void	print_env(char **env)
 // {
 // 	if (!env)
@@ -39,20 +51,15 @@ static int	ft_strncmp(const char *str1, const char *str2, size_t n)
 // 	}
 // }
 
-int	get_env_var(char *arg, char **env)
+int	get_env_var(char *arg, char **env, int index, int len)
 {
 	int	i;
 
 	if (!arg || !env)
 		return (-1);
-	i = 0;
-	while (ft_strncmp(arg, *env, 3))
-	{
-		// Need to check the EXACT string before '='
-		// in cases where the word appears at other places, like TERM/TERM_SESSION_CLASS
+	i = index;
+	while (ft_strncmp(arg, env[i], len))
 		i++;
-		env++;
-	}
 	return (i);
 }
 
@@ -61,13 +68,20 @@ int	main(int argc, char **arg, char **env)
 	char	**e_cpy;
 	char	*str;
 	int		index;
+	int		len;
 
 	(void)argc;
+	index = 0;
 	e_cpy = env;
-	index = get_env_var(arg[1], e_cpy);
-	printf("Match at: %d\n", index);
+	len = ft_strlen(arg[1]);
+	index = get_env_var(arg[1], e_cpy, index, len);
+	while (e_cpy[index][len] != '=')
+	{
+		printf("Match at: %d\n", index);
+		index = get_env_var(arg[1], e_cpy, index + 1, len);
+	}
+	// print_env(e_cpy);
 	str = getenv(e_cpy[index]);
 	printf("%s\n", str);
-	// print_env(e_cpy);
 	return (0);
 }
