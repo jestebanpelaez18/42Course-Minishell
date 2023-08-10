@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:52:33 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/10 10:59:40 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/10 11:12:45 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	main(int argc, char **arg, char **env)
 	index = get_env_var(arg[1], e_cpy, index, len);
 	while (e_cpy[index] && e_cpy[index][len] != '=')
 	{
-		printf("Match at: %d\n", index);
+		// printf("Match at: %d\n", index);
 		index = get_env_var(arg[1], e_cpy, index + 1, len);
 	}
 	// print_env(e_cpy);
