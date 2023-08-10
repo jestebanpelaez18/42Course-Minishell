@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/09 18:39:12 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/10 15:06:39 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void					check_redirection(t_token **node);
 
 void					executor(t_data *data);
 int						envp_cmd(t_data *data);
+void					get_path(t_cmd *cmds, t_data *data);
 
 /*Expander*/
 

@@ -26,7 +26,7 @@ check_input.c tokenization.c tokenization_utils1.c \
 check_input2.c parsing_utils1.c linked_lst_utils2.c \
 linked_lst_utils3.c parse_redic.c expander.c expander_utils1.c \
 expander_utils2.c expander_utils3.c executor.c executor2.c \
-executor_utils1.c \
+executor_utils1.c executor3.c \
 
 DEP = $(OBJ:.o=.d)
 

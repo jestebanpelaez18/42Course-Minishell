@@ -6,11 +6,18 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:39 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/09 18:38:24 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/10 15:04:09 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	get_path(t_cmd *cmds, t_data *data)
+{
+	char *path;
+
+	path = executable_path(cmds->commands);
+}
 
 /*Now this is the final part of the executing,
 this command will work for single command and pipex,
@@ -30,7 +37,7 @@ void	execute_cmd(t_cmd *cmds, t_data *data)
 	// 	//execute built int
 	// }
 	else 
-		get_path(cmds,data);
+		get_path(cmds, data);
 }
 
 /*Here we launch single cmd, we check if the built in is an enviroment comand,
