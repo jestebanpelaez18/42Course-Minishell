@@ -6,13 +6,13 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/10 13:44:06 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/10 14:05:53 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	create_pipes(t_data *data, int pipes)
+void	create_pipes(t_data *data, int **pipes)
 {
 	int	i;
 
@@ -25,26 +25,28 @@ void	create_pipes(t_data *data, int pipes)
 	}
 }
 
-void	close_all_fd(t_data *data)
+void	close_all_fd(t_data *data, int **pipes)
 {
 	int	i;
 
 	i = 0;
 	while (i < data->pipex + 1)
 	{//close all except the read and write of current
-		close(pipes[j][0]);
-		close(pipes[j][1]);
+		close(pipes[i][0]);
+		close(pipes[i][1]);
 		i++;
 	}
 }
 
-int	piper(int data)
+int	piper(t_cmd *cmds, t_redirec *redirec, t_data *data)
 {
 	int pids[data->pipex];
 	int	pipes[data->pipex + 1][2];
 	int	i;
+	int	error;
 	
 	i = 0;
+	redirec = NULL;
 	create_pipes(data, pipes);
 	while (i < data->pipex)
 	{
@@ -53,7 +55,7 @@ int	piper(int data)
 			error_msg("Error creating process\n");
 		if (pids[i] == 0)
 		{//child process
-			close_all_fd(data);
+			close_all_fd(data, pipes);
 			if (i > 0)
 			{
 				if (dup2(pipes[i][0], STDIN_FILENO) == -1)
@@ -66,16 +68,16 @@ int	piper(int data)
 			/* do something to the variable here! */
 			// if built-in -> which builtin -> run builtin()
 			//if execve
-			execve(/bin/echo, echo, 0)
+			execve("./bin/echo", "echo", 0);
 			return (0);
 		}
 	}
 	//main process
-	close_all_fd(data);
+	close_all_fd(data, pipes);
 	i = 0;
 	while (i < data->pipex)
 	{
-		waitpid(pids[i],&y ,0); //&=addres of random int variable necessary for cathing errors etc. and other return values (signals etc).
+		waitpid(pids[i],&error ,0); //&=addres of random int variable necessary for cathing errors etc. and other return values (signals etc).
 		i++;
 	}
 	return (0);
@@ -88,7 +90,7 @@ void	executor(t_data *data)
 	int status;
 
 	signal_in_exec();
-	data->struc_cmd = expander(data, data->struc_cmd);
+	//data->struc_cmd = expander(data, data->struc_cmd);
 	pid = data->struc_pid;
 	pid->id = fork();
 	if (pid->id == 0)
