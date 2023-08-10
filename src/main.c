@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/10 14:28:12 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/10 14:32:30 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int argc, char **argv, char **env)
 		{
 			tokenization(&data);
 			parser(&data);
-			// executor(&data);
+			executor(&data);
 			// do parsing, execute...
 			executor(&data);
 		}
