@@ -6,13 +6,13 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/10 14:05:53 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/10 14:26:39 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	create_pipes(t_data *data, int **pipes)
+void	create_pipes(t_data *data, int (*pipes)[2])
 {
 	int	i;
 
@@ -25,7 +25,7 @@ void	create_pipes(t_data *data, int **pipes)
 	}
 }
 
-void	close_all_fd(t_data *data, int **pipes)
+void	close_all_fd(t_data *data, int (*pipes)[2])
 {
 	int	i;
 
@@ -46,7 +46,8 @@ int	piper(t_cmd *cmds, t_redirec *redirec, t_data *data)
 	int	error;
 	
 	i = 0;
-	redirec = NULL;
+	redirec = NULL;//
+	cmds = NULL;//
 	create_pipes(data, pipes);
 	while (i < data->pipex)
 	{
@@ -68,7 +69,8 @@ int	piper(t_cmd *cmds, t_redirec *redirec, t_data *data)
 			/* do something to the variable here! */
 			// if built-in -> which builtin -> run builtin()
 			//if execve
-			execve("./bin/echo", "echo", 0);
+			char *argv[] = {"echo", NULL};
+			execve("./bin/echo", argv, NULL);
 			return (0);
 		}
 	}
