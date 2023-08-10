@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 16:08:02 by junheeki          #+#    #+#             */
-/*   Updated: 2023/08/09 18:01:17 by junheeki         ###   ########.fr       */
+/*   Updated: 2023/08/10 17:55:16 by junheeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,31 +36,22 @@ void	ft_putendl_fd(char *s, int fd)
 	write(fd, "\n", 1);
 }
 
-int		ft_pwd(char **args)
+int		ft_pwd(void)
 {
-	char *dir;
-	char *buf[PATH_MAX];
+	char cwd[PATH_MAX];
 
-	(void)args;
-	dir = getcwd(buf, PATH_MAX);
-	if (dir == NULL)
-		return (1);
-	ft_putendl_fd(dir, 1);
-	free(dir);
-	return (0);
+	if(getcwd(cwd, PATH_MAX))
+	{
+		ft_putendl_fd(cwd, 1);
+		return(0);
+	}
+	else
+		return(1);
 }
 
-int	main(int argc, char **arg, char **env)
+int	main()
 {
-	char	**e_cpy;
-	char	*str;
-	// int	pwd;
-	(void)argc;
-	(void)arg;
-
-	e_cpy = env;
-
 	// str = getenv(e_cpy[0]);
-	ft_pwd(e_cpy);
+	ft_pwd();
 	return (0);
 }
