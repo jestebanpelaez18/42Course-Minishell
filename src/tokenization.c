@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/20 12:36:35 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/04 19:22:55 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 int	create_node(char *sub_line, t_token **tokens, int operator)
 {
 	t_token	*node;
+	static int index = 0;
 
-	node = ft_lstnew(sub_line, operator);
+	node = ft_lstnew(sub_line, operator, ++index);
 	if (!node)
 		return (0);
 	ft_lstadd_back(tokens, node);
@@ -80,5 +81,6 @@ void	tokenization(t_data *data)
 		else
 			i += tok_word(data->line_read, i, &data->struc_tok);
 	}
+	expander(data, &data->struc_tok);
 	printList(data->struc_tok);
 }

@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:22:27 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/18 17:22:15 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:17:43 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	tok_closed_quotes(char *str, int i, char quote)
 	}
 	return (j);
 }
+
 int	check_delimiter(char c, char *delimiter)
 {
 	int	j;
@@ -76,20 +77,26 @@ int	check_token_type(char c)
 void	printList(t_token *node)
 {
 	t_token *temp;
+	t_token *temp2;
 
 	temp = node;
-	printf("NULL -> ");
-	while (node != NULL)
+	temp2 = node;
+	while (node)
 	{
 		printf("%s -> ", node->tokens);
 		node = node->next;
 	}
 	printf("NULL \n\n");
-	printf("NULL -> ");
-	while (temp != NULL)
+	while (temp)
 	{
 		printf("%d -> ", temp->type);
 		temp = temp->next;
+	}
+	printf("NULL \n");
+	while (temp2)
+	{
+		printf("%d -> ", temp2->index);
+		temp2 = temp2->next;
 	}
 	printf("NULL \n");
 }

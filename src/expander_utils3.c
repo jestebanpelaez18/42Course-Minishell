@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_exit.c                                       :+:      :+:    :+:   */
+/*   expander_utils3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 12:03:02 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/10 13:43:37 by nvan-den         ###   ########.fr       */
+/*   Created: 2023/08/04 17:47:41 by jpelaez-          #+#    #+#             */
+/*   Updated: 2023/08/04 18:57:51 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	error_msg(char *msg)
+char	*rm_single_quotes(char *str)
 {
-	ft_putendl_fd(msg, 2);
-	exit(EXIT_FAILURE);
-}
+	int i;
+	int j;
+	char *temp;
 
-void	error_msg_noexit(char *msg)
-{
-	ft_putendl_fd(msg, 2);
-}
-
-void	free_argt(char **argument)
-{
-	int	i;
-
+	temp = ft_strdup("");
 	i = 0;
-	while (argument[i])
+	j = 0;
+	while (str[i] != '\0')
 	{
-		free(argument[i]);
-		argument[i] = NULL;
+		if (str[i] != '\'')
+		{
+			temp[j] = str[i];
+			j++;
+		}
 		i++;
 	}
-	free(argument);
+	temp[j] = '\0';
+	free(str);
+	return (temp);
 }

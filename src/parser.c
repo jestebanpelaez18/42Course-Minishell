@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:07:32 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/20 12:36:17 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/07/28 17:21:57 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,17 @@ void	printcmd(t_cmd *node)
 	int	i;
 
 	i = 0;
-	while (node->commands[i])
+	while (node)
 	{
-		printf("%s-> ", node->commands[i]);
-		i++;
+		while (node->commands[i] != NULL)
+		{
+			printf("%s-> ", node->commands[i]);
+			i++;
+		}
+		printf("NULL \n\n");
+		i = 0;
+		node = node->next;
 	}
-	printf("NULL \n\n");
 }
 
 t_cmd	*initiate_cmd(t_token *node)
@@ -33,49 +38,52 @@ t_cmd	*initiate_cmd(t_token *node)
 	int		len;
 	int		i;
 
-	tok_temp = node;
-	len = count_commands(tok_temp);
+	len = count_commands(node);
 	cmd = (char **)malloc(sizeof(char *) * (len + 1));
 	if (!cmd)
 		error_msg("allocation error");
 	i = 0;
-	while (len != 0)
+	tok_temp = node;
+	while ((tok_temp && tok_temp->type != PIPE))
 	{
-		cmd[i] = ft_strdup(node->tokens);
-		node = node->next;
-		i++;
-		len--;
+		if (tok_temp->tokens)
+		{
+			cmd[i] = ft_strdup(tok_temp->tokens);
+			i++;
+		}
+		tok_temp = tok_temp->next;
 	}
 	cmd[i] = NULL;
 	temp = cmd_new(cmd);
 	return (temp);
 }
 
-/* int	fill_commands(t_data *data, t_cmd **cmds)
+void	fill_commands(t_token *data, t_cmd **cmds, t_redirec *redirections)
 {
 	t_token	*node;
 	t_cmd	*cmd;
 
-	node = data->tokens; //incompatible pointer types
-	while (node != NULL)
+	node = data;
+	while (node)
 	{
+		node = next_elem(node);
+		parse_redirection(node, &redirections);
+		if (!node)
+			break ;
 		cmd = initiate_cmd(node);
 		if (!cmd)
-			return (0);
+			error_msg("allocation error");
 		cmd_add_back(cmds, cmd);
-		node = node->next;
 	}
-	return (1);
-} */
+}
 
-t_cmd	*start_firts_cmd(t_data *data)
+t_cmd	*start_firts_cmd(t_token *data, t_redirec **redirec)
 {
-	t_token	*tok_node;
 	t_cmd	*cmd;
-
+	
+	(void)redirec;
 	cmd = NULL;
-	tok_node = data->struc_tok;
-	cmd = initiate_cmd(tok_node);
+	cmd = initiate_cmd(data);
 	if (!cmd)
 		return (NULL);
 	return (cmd);
@@ -84,15 +92,12 @@ t_cmd	*start_firts_cmd(t_data *data)
 void	parser(t_data *data)
 {
 	set_number_of_pipes(data, data->struc_tok);
+	parse_redirection(data->struc_tok, &data->redirections);
 	data->struc_cmd = NULL;
-	data->struc_cmd = start_firts_cmd(data);
+	data->struc_cmd = start_firts_cmd(data->struc_tok, &data->redirections);
 	if (!data->struc_cmd)
 		error_msg("allocation error");
-	// delete the nodes in the token for next iterations
-/* 	if (!fill_commands(data, &data->struc_cmd))
-		error_msg("allocation error"); */
-	// printcmd(data->struc_cmd);
+	fill_commands(data->struc_tok, &data->struc_cmd, data->redirections);
+	printcmd(data->struc_cmd);
+	// parse_redirection(node);
 }
-
-/*Have to check the error when y copy the firts command,
-	the other functions are working pretty good*/
