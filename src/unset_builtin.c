@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:52:33 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/09 12:01:16 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/10 10:59:40 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ static int	ft_strncmp(const char *str1, const char *str2, size_t n)
 		return (0);
 	while (i < n - 1 && (str1[i] != '\0' && str2[i] != '\0')
 		&& str1[i] == str2[i])
-	{
 		i++;
-	}
 	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
 }
 
@@ -33,6 +31,8 @@ static int	ft_strlen(char *str)
 {
 	int	i;
 
+	if (!str)
+		return (-1);
 	i = 0;
 
 	while (str[i])
@@ -55,11 +55,13 @@ int	get_env_var(char *arg, char **env, int index, int len)
 {
 	int	i;
 
-	if (!arg || !env)
+	if (!arg || !*env)
 		return (-1);
 	i = index;
-	while (ft_strncmp(arg, env[i], len))
+	while (env[i] && ft_strncmp(arg, env[i], len))
+	{
 		i++;
+	}
 	return (i);
 }
 
@@ -70,12 +72,15 @@ int	main(int argc, char **arg, char **env)
 	int		index;
 	int		len;
 
-	(void)argc;
+	if (argc != 2)
+		return (0);
+	if (!arg[1])
+		return (0);
 	index = 0;
-	e_cpy = env;
+	e_cpy = env; //MALLOC NEW 2D ARRAY
 	len = ft_strlen(arg[1]);
 	index = get_env_var(arg[1], e_cpy, index, len);
-	while (e_cpy[index][len] != '=')
+	while (e_cpy[index] && e_cpy[index][len] != '=')
 	{
 		printf("Match at: %d\n", index);
 		index = get_env_var(arg[1], e_cpy, index + 1, len);
