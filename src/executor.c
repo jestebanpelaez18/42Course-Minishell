@@ -6,17 +6,38 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:39 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/10 15:04:09 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/10 18:30:54 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void do_execution(t_cmd *cmds, char *path, t_data *data)
+{
+	if(cmds->commands[0] == '/')
+	{
+		
+	}
+	else
+		execve(cmds->commands[0],cmds->commands, data->env);
+	
+}
 void	get_path(t_cmd *cmds, t_data *data)
 {
 	char *path;
 
-	path = executable_path(cmds->commands);
+	cmds->commands = separete_args(cmds->commands);	
+	path = executable_path(cmds->commands, data);
+	if(path)
+	{
+		do_execution(cmds, path, data);
+		free(path);
+	}
+	else
+	{
+		error_msg_command("Command not found: ", cmds->commands[0][0]);
+		g_exit_status = 127;
+	}
 }
 
 /*Now this is the final part of the executing,
@@ -34,7 +55,7 @@ void	execute_cmd(t_cmd *cmds, t_data *data)
 {
 	// if(is_builtin)
 	// {
-	// 	//execute built int
+	// 	
 	// }
 	else 
 		get_path(cmds, data);

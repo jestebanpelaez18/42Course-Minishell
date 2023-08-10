@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor_utils1.c                                  :+:      :+:    :+:   */
+/*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/09 17:46:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/10 18:21:29 by jpelaez-         ###   ########.fr       */
+/*   Created: 2023/08/10 17:18:20 by jpelaez-          #+#    #+#             */
+/*   Updated: 2023/08/10 17:19:21 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+ #include "minishell.h"
 
-int	envp_cmd(t_data *data)
+void	free_argt(char **argument)
 {
-// 	if (builint == cd)
-// 		return (1);
-// 	if (builint == env)
-// 		return (1);
-// 	if (builint == export)
-// 		return (1);
-//     if (builint == pwd)
-// 		return (1);
-//     if (builint == unset)
-// 		return (1);
-//     return(0);
+	int	i;
+
+	i = 0;
+	while (argument[i])
+	{
+		free(argument[i]);
+		argument[i] = NULL;
+		i++;
+	}
+	free(argument);
 }
-
-char **separete_args(char **str)
-{
-    
-}	

@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/10 15:06:39 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/10 18:22:00 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int						g_exit_status;
 void					error_msg(char *msg);
 void					error_msg_noexit(char *msg);
 void					free_argt(char **argument);
+void					error_msg_command(char *msg, char *command);
 
 /*Signal functions*/
 void					signal_in_exec(void);
@@ -90,6 +91,10 @@ void					start_signal(void);
 
 /* Enviroment functions */
 char					**envdup(char **env);
+
+/*Free stuff*/
+
+void					free_argt(char **argument);
 
 /*Check input*/
 int						check_line(t_data *data, char *line);
@@ -111,12 +116,14 @@ void					set_number_of_pipes(t_data *data, t_token *tokens);
 int						count_commands(t_token *node);
 void					parse_redirection(t_token *node, t_redirec **redirec);
 void					check_redirection(t_token **node);
+char 					**separete_args(char **str);
 
 /*Executor*/
 
 void					executor(t_data *data);
 int						envp_cmd(t_data *data);
 void					get_path(t_cmd *cmds, t_data *data);
+char 					*executable_path(char **commands, t_data *data);
 
 /*Expander*/
 
