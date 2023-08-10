@@ -202,3 +202,91 @@ int	pipes(t_cmd *cmds, t_redirec *redirec, t_data *data)
     waitpid(pid1, NULL, 0);
     waitpid(pid2, NULL, 0);
 }
+
+//-----------------------------------------------------------|
+
+#include "minishell.h"
+
+void create_pipes_recursive(int num_pipes, int (*pipes)[2], int current_pipe)
+{
+    if (current_pipe >= num_pipes) {
+        return;
+    }
+
+    if (pipe(pipes[current_pipe]) == -1) {
+        error_msg("Error creating pipe\n");
+    }
+
+    create_pipes_recursive(num_pipes, pipes, current_pipe + 1);
+}
+
+void close_unused_pipes(int num_pipes, int (*pipes)[2], int current_pipe)
+{
+    if (current_pipe < num_pipes - 1) {
+        close(pipes[current_pipe][1]); // Close write end of previous pipe
+    }
+
+    if (current_pipe > 0) {
+        close(pipes[current_pipe - 1][0]); // Close read end of previous pipe
+    }
+}
+
+void execute_single_command(int pipe_read_end, int pipe_write_end, t_cmd *cmd)
+{
+    dup2(pipe_read_end, STDIN_FILENO);
+    dup2(pipe_write_end, STDOUT_FILENO);
+
+    // Execute the command
+    char *argv[] = {cmd->path, cmd->arg1, cmd->arg2, NULL};
+    execvp(cmd->path, argv);
+
+    // If execvp fails, print an error message
+    perror("Error executing command");
+    exit(EXIT_FAILURE);
+}
+
+void execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], int current_pipe)
+{
+    if (current_pipe >= num_pipes) {
+        return;
+    }
+
+    int pid = fork();
+    if (pid == -1) {
+        error_msg("Error creating process\n");
+    } else if (pid == 0) { // Child process
+        close_unused_pipes(num_pipes, pipes, current_pipe);
+        
+        if (current_pipe > 0) {
+            dup2(pipes[current_pipe - 1][0], STDIN_FILENO); // Read from previous pipe
+        }
+
+        if (current_pipe < num_pipes - 1) {
+            dup2(pipes[current_pipe][1], STDOUT_FILENO); // Write to current pipe
+        }
+
+        execute_single_command(pipes[current_pipe][0], pipes[current_pipe][1], &cmds[current_pipe]);
+    } else { // Parent process
+        close(pipes[current_pipe][1]); // Close write end of current pipe
+        execute_pipes(cmds, num_pipes, pipes, current_pipe + 1);
+        wait(NULL);
+    }
+}
+
+void executor(t_data *data)
+{
+    signal_in_exec();
+
+    // Create pipes
+    int pipes[data->pipex][2];
+    create_pipes_recursive(data->pipex, pipes, 0);
+
+    // Execute commands in pipes
+    execute_pipes(data->struc_cmd, data->pipex, pipes, 0);
+
+    // Close all pipes
+    for (int i = 0; i < data->pipex; i++) {
+        close(pipes[i][0]);
+        close(pipes[i][1]);
+    }
+}
