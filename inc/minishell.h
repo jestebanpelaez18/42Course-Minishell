@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/20 12:31:39 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/10 10:50:46 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <sys/wait.h>
 
 # define WORD 0
 # define PIPE 1

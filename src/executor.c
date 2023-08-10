@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/04 15:49:55 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/10 10:55:37 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	launch_single_cmd(t_cmd *cmds, t_redirec *redirec, t_data *data)
 
 int	pipesforrealz(t_cmd *cmds, t_redirec *redirec, t_data *data)
 {
-	int	pipes[data->pipex + 1]
+	int	pipes[data->pipex + 1][2];
 	int	i;
 	int	j;
 	int	x;
@@ -97,7 +97,7 @@ int	pipesforrealz(t_cmd *cmds, t_redirec *redirec, t_data *data)
 	i = 0;
 	while (i < data->pipex)
 	{
-		wait(NULL);
+		waitpid(pids[i],&y ,0); //&=addres of random int variable necessary for cathing errors etc. and other return values (signals etc).
 		i++;
 	}
 	return (0);
