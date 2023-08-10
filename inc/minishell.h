@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/31 19:28:40 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/10 17:57:06 by junheeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,9 @@ void					error_msg(char *msg);
 void					error_msg_noexit(char *msg);
 void					free_argt(char **argument);
 
+/*Builtins*/
+int						ft_pwd(void);
+int						ft_cd(char **args, t_data *data);
 /*Signal functions*/
 void					signal_in_exec(void);
 void					start_signal(void);

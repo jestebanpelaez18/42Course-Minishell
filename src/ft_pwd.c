@@ -6,7 +6,7 @@
 /*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 16:08:02 by junheeki          #+#    #+#             */
-/*   Updated: 2023/08/10 17:55:16 by junheeki         ###   ########.fr       */
+/*   Updated: 2023/08/10 17:57:30 by junheeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,25 @@
 #include <sys/param.h>
 #include <stdlib.h>
 
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
+// void	ft_putchar_fd(char c, int fd)
+// {
+// 	write(fd, &c, 1);
+// }
 
-void	ft_putendl_fd(char *s, int fd)
-{
-	size_t	i;
+// void	ft_putendl_fd(char *s, int fd)
+// {
+// 	size_t	i;
 
-	i = 0;
-	if (s == NULL)
-		return ;
-	while (s[i] != '\0')
-	{
-		ft_putchar_fd(s[i], fd);
-		i++;
-	}
-	write(fd, "\n", 1);
-}
+// 	i = 0;
+// 	if (s == NULL)
+// 		return ;
+// 	while (s[i] != '\0')
+// 	{
+// 		ft_putchar_fd(s[i], fd);
+// 		i++;
+// 	}
+// 	write(fd, "\n", 1);
+// }
 
 int		ft_pwd(void)
 {
@@ -49,9 +49,9 @@ int		ft_pwd(void)
 		return(1);
 }
 
-int	main()
-{
-	// str = getenv(e_cpy[0]);
-	ft_pwd();
-	return (0);
-}
+// int	main()
+// {
+// 	// str = getenv(e_cpy[0]);
+// 	ft_pwd();
+// 	return (0);
+// }
