@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/04 11:53:03 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/04 15:49:55 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	pipesforrealz(t_cmd *cmds, t_redirec *redirec, t_data *data)
 	int	i;
 	int	j;
 	int	x;
+	int	y;
 	
 	i = 0;
 	while (i < data->pipex + 1)
@@ -52,13 +53,13 @@ int	pipesforrealz(t_cmd *cmds, t_redirec *redirec, t_data *data)
 					close(pipes[j][1]);
 				j++;
 			}
-			if (read(pipes[i][0]), &x, sizeof(int) == -1)
+			if (read(pipes[i][0], &x, sizeof(int)) == -1)
 			{//read the variable
 				printf("Error at reading\n");
 				return (3);
 			}
 			/* do something to the variable here! */
-			if (write(pipes[i + 1][1]) == -1)
+			if (write(pipes[i + 1][1], &x, sizeof(int)) == -1)
 			{//write into next pipe
 				printf("Error at writing\n");
 				return (4);
@@ -69,6 +70,30 @@ int	pipesforrealz(t_cmd *cmds, t_redirec *redirec, t_data *data)
 		}
 	}
 	//main process
+	j = 0;
+	while (j < data->pipex + 1)
+	{//close all except the read and write of current
+		if (j != data->pipex)
+			close(pipes[j][0]);
+		if (j != 0)
+			close(pipes[j][1]);
+		j++;
+	}
+	y = 5; //or any other variable
+	printf("main process sent %d\n", y);
+	if (write(pipes[0][1], &y, sizeof(int)) == -1)
+	{
+		printf("Error at writing\n");
+		return (5);
+	}
+	if (read(pipes[pipex->num][0], &y, sizeof(int)) == -1)
+	{
+		printf("Error at reading\n");
+		return (6);
+	}
+	printf("the final result is %d\n", y);
+	close(pipes[0][1]);
+	close(pipes[pipex->num][0]);
 	i = 0;
 	while (i < data->pipex)
 	{
