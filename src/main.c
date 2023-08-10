@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/21 15:47:46 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/10 13:39:58 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	main(int argc, char **argv, char **env)
 			tokenization(&data);
 			parser(&data);
 			// do parsing, execute...
+			executor(&data);
 		}
 		// free(&data.line_read);
 	}

@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/10 10:50:46 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/10 13:39:08 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ void				cmd_add_back(t_cmd **lst, t_cmd *new);
 int					create_cmd_node(char **sub_line, t_cmd **commands);
 
 void				printList(t_token *node);
+void				executor(t_data *data);
 
 #endif
