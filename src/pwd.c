@@ -6,7 +6,7 @@
 /*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 16:08:02 by junheeki          #+#    #+#             */
-/*   Updated: 2023/08/08 15:11:17 by junheeki         ###   ########.fr       */
+/*   Updated: 2023/08/09 18:01:17 by junheeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ void	ft_putendl_fd(char *s, int fd)
 int		ft_pwd(char **args)
 {
 	char *dir;
+	char *buf[PATH_MAX];
 
 	(void)args;
-	dir = getcwd(NULL, 0);
+	dir = getcwd(buf, PATH_MAX);
 	if (dir == NULL)
 		return (1);
 	ft_putendl_fd(dir, 1);
