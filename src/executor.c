@@ -6,93 +6,88 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/10 16:25:00 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/11 13:09:30 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	create_pipes(int num_pipes, int (*pipes)[2])
+void create_pipes(int num_pipes, int (*pipes)[2])
 {
-	int	i;
-
-	i = 0;
-	while (i < num_pipes)
-	{
-		if (pipe(pipes[i]) == -1)
-			error_msg("Error creating pipe\n");
-		i++;
-	}
+    int i = 0;
+    while (i < num_pipes)
+    {
+        if (pipe(pipes[i]) == -1)
+            error_msg("Error creating pipe\n");
+        i++;
+    }
 }
 
-void	close_all_fd(int num_pipes, int (*pipes)[2], int current_pipe)
+void close_unused_pipes(int num_pipes, int (*pipes)[2], int current_pipe)
 {
-	int	i;
-
-	i = 0;
-	while (i < num_pipes)
-	{//close all except the read and write of current
-		if (i != current_pipe)
-		{
-			close(pipes[i][0]);
-			close(pipes[i][1]);
-		}
-		i++;
-	}
+    int i = 0;
+    while (i < num_pipes)
+    {
+        if (i != current_pipe)
+        {
+            close(pipes[i][0]);
+            close(pipes[i][1]);
+        }
+        i++;
+    }
 }
 
-int	execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], int current_pipe)
+void execute_single_command(int pipe_read_end, int pipe_write_end, t_cmd *cmd)
 {
-	int pids[data->pipex + 1];
-	int	pipes[data->pipex + 1][2];
+    dup2(pipe_read_end, STDIN_FILENO);
+    dup2(pipe_write_end, STDOUT_FILENO);
+	cmd = NULL;
+    // Execute the command
+    char *argv[] = {"/bin/echo", "echo", NULL};
+    execvp("/bin/echo", argv);
+
+    // If execvp fails, print an error message
+    perror("Error executing command");
+    exit(EXIT_FAILURE);
+}
+
+void execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data)
+{
+	int status;
+	int pid[data->pipex + 1];
 	int	i;
-	int	error;
 	
 	i = 0;
-	redirec = NULL;//
-	cmds = NULL;//
-	create_pipes(data->pipex + 1, pipes);
-	while (i < data->pipex)
+	while (i < num_pipes)
 	{
-		pids[i] = fork();
-		if (pids[i] == -1)
+		pid[i] = fork();
+		if (pid[i] == -1)
 			error_msg("Error creating process\n");
-		if (pids[i] == 0)
-		{//child process
-			close_all_fd(data->pipex + 1, pipes, i);
+		else if (pid[i] == 0)
+		{ // Child process
+			close_unused_pipes(num_pipes, pipes, i);
 			if (i > 0)
-			{
-				if (dup2(pipes[i - 1][0], STDIN_FILENO) == -1)
-			//receive the variable from last pipe
-					error_msg("Error at dup read\n");
-				close(pipes[i][0]);
-			}
-			if (i < data->pipex)
-			{
-				if (dup2(pipes[i][1], STDOUT_FILENO) == -1)
-				//write the variable into the next pipe
-						error_msg("Error at dup write\n");
-			}
-			/* do something to the variable here! */
-			// if built-in -> which builtin -> run builtin()
-			//if execve
-			printf("hi\n");
-			char *argv[] = {"echo hi\n", NULL};
-			execvp("echo", argv);
-			error_msg("Error executing command\n");
+				dup2(pipes[i- 1][0], STDIN_FILENO); // Read from previous pipe
+			if (i < num_pipes - 1)
+				dup2(pipes[i][1], STDOUT_FILENO); // Write to current pipe
+			execute_single_command(pipes[i][0], pipes[i][1], &cmds[i]);
+		} 
+		else 
+		{ // Parent process
+			close(pipes[i][1]); // Close write end of current pipe
 		}
 		i++;
 	}
-	//main process
-	close_all_fd(data->pipex + 1, pipes, -1);
 	i = 0;
-	while (i < data->pipex + 1)
+	while (i < num_pipes)
 	{
-		waitpid(pids[i],&error ,0); //&=addres of random int variable necessary for cathing errors etc. and other return values (signals etc).
+        waitpid(pid[i], &status, 0);
+        if (WIFEXITED(status))
+            printf("Child process %d exited with status %d\n", pid[i], WEXITSTATUS(status));
+        else if (WIFSIGNALED(status))
+            printf("Child process %d terminated by signal %d\n", pid[i], WTERMSIG(status));
 		i++;
 	}
-	return (0);
-	
 }
 
 void	executor(t_data *data)
@@ -103,11 +98,12 @@ void	executor(t_data *data)
 	i = 0;
 	signal_in_exec();
 	//data->struc_cmd = expander(data, data->struc_cmd);
-	create_pipes_recursive(data->pipex, pipes, 0);
-	execute_pipes(data->struc_cmd, data->pipex, pipes, 0);
-	while (i < data->pipex);
+	create_pipes(data->pipex, pipes);
+	execute_pipes(data->struc_cmd, data->pipex, pipes, data);
+	while (i < data->pipex)
 	{
 		close(pipes[i][0]);
 		close(pipes[i][1]);
+		i++;
 	}
 }
