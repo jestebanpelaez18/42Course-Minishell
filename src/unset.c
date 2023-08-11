@@ -6,13 +6,61 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:52:33 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/10 16:05:07 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/11 13:56:03 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+static char	*ft_strdup(const char *src)
+{
+	int		len;
+	int		i;
+	char	*dest;
+
+	len = 0;
+	while (src[len])
+	{
+		len++;
+	}
+	dest = malloc(sizeof(char) * (len + 1));
+	i = 0;
+	if (dest == NULL)
+	{
+		return (0);
+	}
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+static char	**envdup(char **env)
+{
+	char	**env_copy;
+	int		len;
+	int		i;
+
+	len = 0;
+	while (env[len] != NULL)
+		len++;
+	env_copy = malloc(sizeof(char *) * (len + 1));
+	if (!env_copy)
+		return (NULL);
+	i = 0;
+	while (env[i] != NULL)
+	{
+		env_copy[i] = ft_strdup(env[i]);
+		i++;
+	}
+	env_copy[i] = NULL;
+	return (env_copy);
+}
 
 static int	ft_strncmp(const char *str1, const char *str2, size_t n)
 {
@@ -34,22 +82,10 @@ static int	ft_strlen(char *str)
 	if (!str)
 		return (-1);
 	i = 0;
-
 	while (str[i])
 		i++;
 	return (i);
 }
-
-// void	print_env(char **env)
-// {
-// 	if (!env)
-// 		return ;
-// 	while (*env)
-// 	{
-// 		printf("%s\n", *env);
-// 		env++;
-// 	}
-// }
 
 int	get_env_var(char *arg, char **env, int index, int len)
 {
@@ -65,28 +101,38 @@ int	get_env_var(char *arg, char **env, int index, int len)
 	return (i);
 }
 
-int	main(int argc, char **arg, char **env)
+char	*match_env_var(char *cmd, char**env)
 {
 	char	**e_cpy;
 	char	*str;
 	int		index;
 	int		len;
 
+	if (!cmd)
+		return (0);
+	index = 0;
+	e_cpy = envdup(env);
+	if (!e_cpy)
+		return (NULL);
+	len = ft_strlen(cmd);
+	index = get_env_var(cmd, e_cpy, index, len);
+	while (e_cpy[index] && e_cpy[index][len] != '=')
+		index = get_env_var(cmd, e_cpy, index + 1, len);
+	str = getenv(e_cpy[index]);
+	return (str);
+}
+
+int	main(int argc, char **arg, char **env)
+{
+	char	*str;
+
 	if (argc != 2)
 		return (0);
 	if (!arg[1])
 		return (0);
-	index = 0;
-	e_cpy = env; //MALLOC NEW 2D ARRAY
-	len = ft_strlen(arg[1]);
-	index = get_env_var(arg[1], e_cpy, index, len);
-	while (e_cpy[index] && e_cpy[index][len] != '=')
-	{
-		// printf("Match at: %d\n", index);
-		index = get_env_var(arg[1], e_cpy, index + 1, len);
-	}
-	// print_env(e_cpy);
-	str = getenv(e_cpy[index]);
+	str = match_env_var(arg[1], env);
 	printf("%s\n", str);
+	// print_env(e_cpy);
+	//returns the string to match and erase.
 	return (0);
 }

@@ -6,69 +6,79 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/10 17:17:13 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/11 13:38:27 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-static int	ft_strlen(char *str)
+static int	ft_strlen(const char *str)
 {
 	int	i;
 
 	if (!str)
 		return (-1);
 	i = 0;
-
 	while (str[i])
 		i++;
 	return (i);
 }
 
-static int	ft_strncmp(const char *str1, const char *str2, size_t n)
+int	ft_strcmp(const char *str1, const char *str2)
 {
-	size_t	i;
+	int	i;
+	int	len1;
+	int	len2;
 
 	i = 0;
-	if (n == 0)
+	if (!str1 || !str2)
 		return (0);
-	while (i < n - 1 && (str1[i] != '\0' && str2[i] != '\0')
+	len1 = ft_strlen(str1);
+	len2 = ft_strlen(str2);
+	if (len1 != len2)
+		return (0);
+	while (i < len2 && (str1[i] != '\0' && str2[i] != '\0')
 		&& str1[i] == str2[i])
-		i++;
-	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
-}
-
-/*Compares if the given command is from a list of builtins or not.
-Returns -1 if the str is empty or is there is no match,
-otherwise 0 or higher.*/
-int	is_builtin(char *str)
-{
-	int				i;
-	int				len;
-	static char		*arr[2] = {"echo", "unset"};
-
-	if (!str)
-		return (-1);
-	len = ft_strlen(str);
-	i = 0;
-
-	while (arr[i] && i <= 2 && ft_strncmp(str, arr[i], len) != 0)
 	{
 		i++;
 	}
-	if (i >= 2)
-		i = -1;
-	return (i);
+	if (i == len2)
+		return (1);
+	return (0);
+}
+
+/*Compares if the given command is from a list of builtins or not.
+Returns -1 if the str is empty, 0 if no match and 1 if there is a match.*/
+int	is_builtin(char *str)
+{
+	int				i;
+	int				flag;
+	static char		*arr[3] = {"echo", "unset", "export"};
+
+	if (!str)
+		return (-1);
+	i = 0;
+	flag = 0;
+	while (arr[i] && i <= 2)
+	{
+		if (ft_strcmp(str, arr[i]) == 1)
+		{
+			flag = 1;
+			break ;
+		}
+		i++;
+	}
+	return (flag);
 }
 
 /*TESTING*/
-// int	main(int argc, char **arg)
-// {
-// 	int	i;
+int	main(int argc, char **arg)
+{
+	int	i;
 
-// 	(void)argc;
-// 	i = is_builtin(arg[1]);
-
-// 	printf("%d\n", i);
-// 	return (0);
-// }
+	(void)argc;
+	// (void)arg;
+	i = is_builtin(arg[1]);
+	printf("%d\n", i);
+	return (0);
+}
