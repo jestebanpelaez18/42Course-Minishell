@@ -1,0 +1,292 @@
+void	launch_single_cmd(t_cmd *cmds, t_redirec *redirec, t_data *data)
+{
+}
+
+int	pipesforrealz(t_cmd *cmds, t_redirec *redirec, t_data *data)
+{
+	int	pipes[data->pipex + 1][2];
+	int	i;
+	int	j;
+	int	x;
+	int	y;
+	
+	i = 0;
+	while (i < data->pipex + 1)
+	{
+		if (pipe(pipes[i]) == -1)
+		{
+			printf("Error creating pipe\n");
+			return (1);
+		}
+	}
+	i = 0;
+	j = 0;
+	while (i < data->pipex)
+	{
+		pids[i] = fork();
+		if (pids[i] == -1)
+		{
+			printf("Error creating process\n");
+			return (2);
+		}
+		if (pids[i] == 0)
+		{//child process
+			while (j < data->pipex + 1)
+			{//close all except the read and write of current
+				if (i != j)
+					close(pipes[j][0]);
+				if (i + 1 != j)
+					close(pipes[j][1]);
+				j++;
+			}
+			if (read(pipes[i][0], &x, sizeof(int)) == -1)
+			{//read the variable
+				printf("Error at reading\n");
+				return (3);
+			}
+			/* do something to the variable here! */
+			if (write(pipes[i + 1][1], &x, sizeof(int)) == -1)
+			{//write into next pipe
+				printf("Error at writing\n");
+				return (4);
+			}
+			close(pipes[i][0]);
+			close(pipes[i + 1][1]);
+			return (0);
+		}
+	}
+	//main process
+	j = 0;
+	while (j < data->pipex + 1)
+	{//close all except the read and write of current
+		if (j != data->pipex)
+			close(pipes[j][0]);
+		if (j != 0)
+			close(pipes[j][1]);
+		j++;
+	}
+	y = 5; //or any other variable
+	printf("main process sent %d\n", y);
+	if (write(pipes[0][1], &y, sizeof(int)) == -1)
+	{
+		printf("Error at writing\n");
+		return (5);
+	}
+	if (read(pipes[pipex->num][0], &y, sizeof(int)) == -1)
+	{
+		printf("Error at reading\n");
+		return (6);
+	}
+	printf("the final result is %d\n", y);
+	close(pipes[0][1]);
+	close(pipes[pipex->num][0]);
+	i = 0;
+	while (i < data->pipex)
+	{
+		waitpid(pids[i],&y ,0); //&=addres of random int variable necessary for cathing errors etc. and other return values (signals etc).
+		i++;
+	}
+	return (0);
+}
+
+int	mult_pipes(t_cmd *cmds, t_redirec *redirec, t_data *data)
+{
+	int	fd[3][2];
+	int	i;
+	int	pid1;
+	int	pid2;
+	int	/* variable */;
+	/* char* variable? */
+	
+	while (i < 3)
+	{
+		if (pipe(fd[i]) < 0)
+		{
+			close_all_fd(); //create function where all fd's are closed
+			return (1);
+		}
+		i++;
+	}
+	pid1 = fork();
+	if (pid1 < 0)
+		return (2);
+	if (pid1 == 0)
+	{//child process 1
+		close(fd[0][1]);
+		close(fd[1][0]);
+		close(fd[2][0]);
+		close(fd[2][1]);
+		if (read(fd[0][0], &/* variable */, sizeof(/* variable */)))
+			return (3);
+		//apply function here to variable
+		if (write(fd[1][1] &/* variable */, sizeof(/* variable */)))
+			return (4);
+		close(fd[0][0]);
+		close(fd[1][1]);
+		return (0);
+	}
+	pid2 = fork();
+	if (pid2 < 0)
+		return (5);
+	if (pid2 == 0)
+	{//child process 2
+		close(fd[0][0]);
+		close(fd[0][1]);
+		close(fd[1][1]);
+		close(fd[2][0]);
+		if (read(fd[1][0], &/* variable */, sizeof(/* variable */)))
+			return (6);
+		//apply function here to variable
+		if (write(fd[2][1] &/* variable */, sizeof(/* variable */)))
+			return (7);
+		close(fd[1][0]);
+		close(fd[2][1]);
+		return (0);
+	}
+	//parent process
+	close(fd[0][0]);
+	close(fd[1][0]);
+	close(fd[1][1]);
+	close(fd[2][1]);
+	if (write(fd[01], /* variable */, sizeof(/* variable */)))
+		return (8);
+	if (read(fd[2][0], &x, sizeof(int)) < 0)
+		return (9);
+	printf("result /* variable */\n");
+	close(fd[0][1]);
+	close(fd[2][0]);
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
+	return (0);
+}
+
+//takes the first command and pipes it into the second
+int	pipes(t_cmd *cmds, t_redirec *redirec, t_data *data)
+{
+	int	fd[2];
+	int	pid1;
+	int	pid2;
+
+	if (pipe(fd) == -1)
+		return (1);
+	pid1 = fork();
+	if (pid1 < 0)
+		return (2);
+	if (pid1 == 0)
+	{//child process 1
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[0]);
+		close(fd[1]);
+		//Execute function
+		//if built-in:
+		// built-in();
+		//else
+		// execve(/*/bin/ execute */,cmds, NULL);
+	}
+	pid2 = fork();
+	if (pid2 < 0)
+		return (3);
+	if (pid2 == 0)
+	{//child process 2
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[0]);
+		close(fd[1]);
+		//Execute function
+		//if built-in:
+		// built-in();
+		//else
+		// execve(/*/bin/ execute */,cmds, NULL);
+	}
+	close(fd[0]);
+    close(fd[1]);
+    waitpid(pid1, NULL, 0);
+    waitpid(pid2, NULL, 0);
+}
+
+//-----------------------------------------------------------|
+
+#include "minishell.h"
+
+void create_pipes_recursive(int num_pipes, int (*pipes)[2], int current_pipe)
+{
+    if (current_pipe >= num_pipes) {
+        return;
+    }
+
+    if (pipe(pipes[current_pipe]) == -1) {
+        error_msg("Error creating pipe\n");
+    }
+
+    create_pipes_recursive(num_pipes, pipes, current_pipe + 1);
+}
+
+void close_unused_pipes(int num_pipes, int (*pipes)[2], int current_pipe)
+{
+    if (current_pipe < num_pipes - 1) {
+        close(pipes[current_pipe][1]); // Close write end of previous pipe
+    }
+
+    if (current_pipe > 0) {
+        close(pipes[current_pipe - 1][0]); // Close read end of previous pipe
+    }
+}
+
+void execute_single_command(int pipe_read_end, int pipe_write_end, t_cmd *cmd)
+{
+    dup2(pipe_read_end, STDIN_FILENO);
+    dup2(pipe_write_end, STDOUT_FILENO);
+
+    // Execute the command
+    char *argv[] = {cmd->path, cmd->arg1, cmd->arg2, NULL};
+    execvp(cmd->path, argv);
+
+    // If execvp fails, print an error message
+    perror("Error executing command");
+    exit(EXIT_FAILURE);
+}
+
+void execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], int current_pipe)
+{
+    if (current_pipe >= num_pipes) {
+        return;
+    }
+
+    int pid = fork();
+    if (pid == -1) {
+        error_msg("Error creating process\n");
+    } else if (pid == 0) { // Child process
+        close_unused_pipes(num_pipes, pipes, current_pipe);
+        
+        if (current_pipe > 0) {
+            dup2(pipes[current_pipe - 1][0], STDIN_FILENO); // Read from previous pipe
+        }
+
+        if (current_pipe < num_pipes - 1) {
+            dup2(pipes[current_pipe][1], STDOUT_FILENO); // Write to current pipe
+        }
+
+        execute_single_command(pipes[current_pipe][0], pipes[current_pipe][1], &cmds[current_pipe]);
+    } else { // Parent process
+        close(pipes[current_pipe][1]); // Close write end of current pipe
+        execute_pipes(cmds, num_pipes, pipes, current_pipe + 1);
+        wait(NULL);
+    }
+}
+
+void executor(t_data *data)
+{
+    signal_in_exec();
+
+    // Create pipes
+    int pipes[data->pipex][2];
+    create_pipes_recursive(data->pipex, pipes, 0);
+
+    // Execute commands in pipes
+    execute_pipes(data->struc_cmd, data->pipex, pipes, 0);
+
+    // Close all pipes
+    for (int i = 0; i < data->pipex; i++) {
+        close(pipes[i][0]);
+        close(pipes[i][1]);
+    }
+}
