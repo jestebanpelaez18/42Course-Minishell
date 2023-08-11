@@ -6,14 +6,16 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:52:33 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/11 13:56:03 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/11 14:40:56 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+//#include "minishell.h"
 
+/*REMOVE FROM FINAL*/
 static char	*ft_strdup(const char *src)
 {
 	int		len;
@@ -40,6 +42,7 @@ static char	*ft_strdup(const char *src)
 	return (dest);
 }
 
+/*REMOVE FROM FINAL*/
 static char	**envdup(char **env)
 {
 	char	**env_copy;
@@ -62,6 +65,7 @@ static char	**envdup(char **env)
 	return (env_copy);
 }
 
+/*REMOVE FROM FINAL*/
 static int	ft_strncmp(const char *str1, const char *str2, size_t n)
 {
 	size_t	i;
@@ -75,6 +79,7 @@ static int	ft_strncmp(const char *str1, const char *str2, size_t n)
 	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
 }
 
+/*REMOVE FROM FINAL*/
 static int	ft_strlen(char *str)
 {
 	int	i;
@@ -131,8 +136,7 @@ int	main(int argc, char **arg, char **env)
 	if (!arg[1])
 		return (0);
 	str = match_env_var(arg[1], env);
-	printf("%s\n", str);
-	// print_env(e_cpy);
-	//returns the string to match and erase.
+	/*When the match is found, what do*/
+// 	printf("%s\n", str);
 	return (0);
 }

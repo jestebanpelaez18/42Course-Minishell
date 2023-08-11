@@ -6,12 +6,14 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/11 13:38:27 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/11 14:37:31 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+//#include "minishell.h"
 
+/*REMOVE FROM FINAL*/
 static int	ft_strlen(const char *str)
 {
 	int	i;
@@ -24,7 +26,7 @@ static int	ft_strlen(const char *str)
 	return (i);
 }
 
-int	ft_strcmp(const char *str1, const char *str2)
+int	cmd_cmp(const char *str1, const char *str2)
 {
 	int	i;
 	int	len1;
@@ -61,7 +63,7 @@ int	is_builtin(char *str)
 	flag = 0;
 	while (arr[i] && i <= 2)
 	{
-		if (ft_strcmp(str, arr[i]) == 1)
+		if (cmd_cmp(str, arr[i]) == 1)
 		{
 			flag = 1;
 			break ;
