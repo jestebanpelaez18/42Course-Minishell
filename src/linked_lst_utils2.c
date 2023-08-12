@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:39:22 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/25 18:12:20 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/12 17:31:58 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_cmd	*cmd_last(t_cmd *lst)
 	t_cmd	*current;
 
 	current = lst;
-	while (current->next != NULL)
+	while (current && current->next)
 		current = current->next;
 	return (current);
 }

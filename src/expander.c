@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:46 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/04 19:16:12 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:48:37 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	expander(t_data *data, t_token **token)
 	tok = *token;
 	while (tok)
 	{
-		if (tok->type == WORD && is_dollar(tok->tokens)) 
+		if (tok && tok->type == WORD && is_dollar(tok->tokens)) 
 			expand_dollar(tok, data);
 		tok = tok->next;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/04 18:50:47 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/12 18:55:02 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_data(t_data *data, char **env)
 {
 	data->env = envdup(env);
-	g_exit_status = 1;
+	g_exit_status = 0;
 	data->pipex = 0;
 }
 
@@ -55,7 +55,8 @@ int	main(int argc, char **argv, char **env)
 			// executor(&data);
 			// do parsing, execute...
 		}
-		// free(&data.line_read);
+		//reset(&data);
+		//init_data(&data,env);
 	}
 	return (0);
 }

@@ -3,26 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:39 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/10 18:30:54 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/12 17:12:01 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void do_execution(t_cmd *cmds, char *path, t_data *data)
+int do_execution(t_cmd *cmds, char *path, t_data *data)
 {
-	if(cmds->commands[0] == '/')
-	{
-		
-	}
-	else
+	if(access(cmds->commands[0],F_OK) == 0)
 		execve(cmds->commands[0],cmds->commands, data->env);
+	else
+		execve(path ,cmds->commands, data->env);
+	return(0);
 	
 }
-void	get_path(t_cmd *cmds, t_data *data)
+int	get_path(t_cmd *cmds, t_data *data)
 {
 	char *path;
 
@@ -30,14 +29,20 @@ void	get_path(t_cmd *cmds, t_data *data)
 	path = executable_path(cmds->commands, data);
 	if(path)
 	{
-		do_execution(cmds, path, data);
+		if(!do_execution(cmds, path, data))
+		{
+			error_msg_command("Command not found: ", cmds->commands[0]);
+			g_exit_status = 127;
+		}
 		free(path);
 	}
 	else
 	{
-		error_msg_command("Command not found: ", cmds->commands[0][0]);
+		error_msg_command("Command not found: ", cmds->commands[0]);
 		g_exit_status = 127;
 	}
+	return(g_exit_status);
+
 }
 
 /*Now this is the final part of the executing,
@@ -53,12 +58,16 @@ the shell will search these directories for the executable file corresponding to
 
 void	execute_cmd(t_cmd *cmds, t_data *data)
 {
+	int exit_status;
+
+	exit_status = 0;
 	// if(is_builtin)
 	// {
 	// 	
 	// }
-	else 
-		get_path(cmds, data);
+	// else 
+	exit_status = get_path(cmds, data);
+	exit(exit_status);
 }
 
 /*Here we launch single cmd, we check if the built in is an enviroment comand,
@@ -68,38 +77,36 @@ that affects or modify our enviroment, if that is the case,
 in the parent procces,
 	because in that way we will keep the changes in our minishell,
 in other case we execure our program whit execvp or built in if is the case */
-void	launch_single_cmd(t_cmd *cmds, t_redirec *redirec, t_data *data)
+void	launch_single_cmd(t_cmd *cmds, t_data *data)
 {
 	t_pid	*pid;
 	int		status;
 
-	if (envp_cmd(data))
-	{
-		// Run built in
-		// come back to minishell loop, basically we finish the execution
-	}
+	// if (envp_cmd(data))
+	// {
+	// 	// Run built in
+	// 	// come back to minishell loop, basically we finish the execution
+	// }
 	pid = data->struc_pid;
 	pid->id = fork();
 	if (pid->id == 0)
 		execute_cmd(cmds, data);
 	else if (pid->id < 0)
 		perror("fork");
-	else
-		pid->wid = waitpid(pid->id, &status, WUNTRACED);
+	waitpid(pid->id, &status, WUNTRACED);
+	if(WIFEXITED(status))
+		g_exit_status = WEXITSTATUS(status);
 }
 
 /*Start the execution, we handle the signals during the execution,
 	then we setup redirections */
 void	executor(t_data *data)
 {
-	t_pid	*pid;
-	int		status;
-
 	signal_in_exec();
 	setup_redirections(data->redirections);
 	// setup_heredoc(data->redirections);
 	if (data->pipex == 0)
-		launch_single_cmd(data->struc_cmd, data->redirections, data);
+		launch_single_cmd(data->struc_cmd, data);
 	// else
 	// 	pipes(data->struc_cmd, data->redirections, data)
 	/*Here we have to check the stuff with the pipes,

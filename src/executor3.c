@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   executor3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:04:19 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/10 17:36:47 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/12 17:52:06 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*copy_path(char **env)
+char	*copy_path(char **env)
 {
 	int		i;
 	char	*temp_env;
@@ -30,7 +30,7 @@ static char	*copy_path(char **env)
 	return (temp_env);
 }
 
-static char	*copy_exec_path(char *directory, char **cmds)
+static char	*copy_exec_path(char *directory, char *cmds)
 {
 	char	*temp_exec;
 	char	*temp2_exec;
@@ -39,7 +39,7 @@ static char	*copy_exec_path(char *directory, char **cmds)
 	temp_exec = ft_strdup(directory);
 	temp2_exec = ft_strjoin(temp_exec, "/");
 	free(temp_exec);
-	temp3_exec = ft_strjoin(temp2_exec, cmds[0][0]);
+	temp3_exec = ft_strjoin(temp2_exec, cmds);
 	free(temp2_exec);
 	return (temp3_exec);
 }
@@ -48,13 +48,16 @@ char	*executable_path(char **commands, t_data *data)
 {
 	char	*path_exec;
 	char	**directories;
+	char	**envp;
 	int		j;
 
 	j = 0;
-	directories = ft_split(copy_path(data->env), ":");
+	envp = data->env;
+	printf("%s\n",envp[0]);
+	directories = ft_split(copy_path(envp), ':');
 	while (directories[j])
 	{
-		path_exec = copy_exec_path(directories[j], commands);
+		path_exec = copy_exec_path(directories[j], commands[0]);
 		if (access(path_exec, X_OK) == 0)
 		{
 			free_argt(directories);

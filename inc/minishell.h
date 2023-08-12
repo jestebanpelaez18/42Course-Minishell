@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/10 18:22:00 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/12 18:48:08 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,9 @@ typedef struct s_cmd
 typedef struct s_data
 {
 	char				**env;
-	int					exit_status;
 	int					pipex;
 	t_cmd				*struc_cmd;
 	char				*line_read;
-	char				**tokens;
 	t_token				*struc_tok;
 	t_redirec			*redirections;
 	t_pid				*struc_pid;
@@ -84,6 +82,8 @@ void					error_msg(char *msg);
 void					error_msg_noexit(char *msg);
 void					free_argt(char **argument);
 void					error_msg_command(char *msg, char *command);
+void 					reset(t_data *data);
+
 
 /*Signal functions*/
 void					signal_in_exec(void);
@@ -91,6 +91,10 @@ void					start_signal(void);
 
 /* Enviroment functions */
 char					**envdup(char **env);
+
+/*INIT DATA*/
+
+void	init_data(t_data *data, char **env);
 
 /*Free stuff*/
 
@@ -122,8 +126,9 @@ char 					**separete_args(char **str);
 
 void					executor(t_data *data);
 int						envp_cmd(t_data *data);
-void					get_path(t_cmd *cmds, t_data *data);
+int						get_path(t_cmd *cmds, t_data *data);
 char 					*executable_path(char **commands, t_data *data);
+char 					**separete_args(char **str);
 
 /*Expander*/
 
