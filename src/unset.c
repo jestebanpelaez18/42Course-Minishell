@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:52:33 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/11 14:40:56 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/13 16:52:39 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,11 @@ char	*match_env_var(char *cmd, char**env)
 	index = get_env_var(cmd, e_cpy, index, len);
 	while (e_cpy[index] && e_cpy[index][len] != '=')
 		index = get_env_var(cmd, e_cpy, index + 1, len);
+	/*Use the index to remove the correct env variable*/
+	/*char **remove_env_var(e_cpy, index)*/
+	/*Re-allocate the string at the [index] and leave it with only the env var name*/
+	/*Difference between env and export is that the unset variables are still viewable by using export, they are merely empty.*/
+	/*As in USER=''*/
 	str = getenv(e_cpy[index]);
 	return (str);
 }
@@ -137,6 +142,7 @@ int	main(int argc, char **arg, char **env)
 		return (0);
 	str = match_env_var(arg[1], env);
 	/*When the match is found, what do*/
+	/**/
 // 	printf("%s\n", str);
 	return (0);
 }
