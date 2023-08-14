@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_exit.c                                       :+:      :+:    :+:   */
+/*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 12:03:02 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 14:35:18 by jpelaez-         ###   ########.fr       */
+/*   Created: 2023/08/10 17:18:20 by jpelaez-          #+#    #+#             */
+/*   Updated: 2023/08/10 17:19:21 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+ #include "minishell.h"
 
-void	error_msg(char *msg)
+void	free_argt(char **argument)
 {
-	ft_putendl_fd(msg, 2);
-	exit(EXIT_FAILURE);
-}
+	int	i;
 
-void	error_msg_noexit(char *msg)
-{
-	ft_putendl_fd(msg, 2);
-}
-
-void	error_msg_command(char *msg, char *command)
-{
-	ft_putstr_fd(msg, 2);
-	ft_putendl_fd(command, 2);
+	i = 0;
+	while (argument[i])
+	{
+		free(argument[i]);
+		argument[i] = NULL;
+		i++;
+	}
+	free(argument);
 }
