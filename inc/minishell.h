@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 13:28:56 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:31:50 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void					check_redirection(t_token **node);
 void					executor(t_data *data);
 void 					execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data);
 void 					execute_command(int pipe_read_end, int pipe_write_end, t_cmd *cmd, t_data *data);
+void					create_pipes(int num_pipes, int (*pipes)[2]);
 
 /*Expander*/
 
