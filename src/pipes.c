@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/14 13:21:12 by nvan-den          #+#    #+#             */
-/*   Updated: 2023/08/14 13:29:05 by nvan-den         ###   ########.fr       */
+/*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
+/*   Updated: 2023/08/14 14:27:06 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,20 @@ void close_unused_pipes(int num_pipes, int (*pipes)[2], int current_pipe)
     }
 }
 
+void execute_single_command(int pipe_read_end, int pipe_write_end, t_cmd *cmd)
+{
+    dup2(pipe_read_end, STDIN_FILENO);
+    dup2(pipe_write_end, STDOUT_FILENO);
+	cmd = NULL;
+    // Execute the command
+    char *argv[] = {"/bin/echo", "echo", NULL};
+    execvp("/bin/echo", argv);
+
+    // If execvp fails, print an error message
+    perror("Error executing command");
+    exit(EXIT_FAILURE);
+}
+
 void execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data)
 {
 	int status;
@@ -56,7 +70,7 @@ void execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data)
 				dup2(pipes[i- 1][0], STDIN_FILENO); // Read from previous pipe
 			if (i < num_pipes - 1)
 				dup2(pipes[i][1], STDOUT_FILENO); // Write to current pipe
-			execute_command(pipes[i][0], pipes[i][1], &cmds[i], data);
+			execute_single_command(pipes[i][0], pipes[i][1], &cmds[i]);
 		} 
 		else 
 		{ // Parent process
@@ -72,6 +86,24 @@ void execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data)
             printf("Child process %d exited with status %d\n", pid[i], WEXITSTATUS(status));
         else if (WIFSIGNALED(status))
             printf("Child process %d terminated by signal %d\n", pid[i], WTERMSIG(status));
+		i++;
+	}
+}
+
+void	pipes_executor(t_data *data)
+{
+	int	i;
+	int pipes[data->pipex][2];
+	
+	i = 0;
+	signal_in_exec();
+	//data->struc_cmd = expander(data, data->struc_cmd);
+	create_pipes(data->pipex, pipes);
+	execute_pipes(data->struc_cmd, data->pipex, pipes, data);
+	while (i < data->pipex)
+	{
+		close(pipes[i][0]);
+		close(pipes[i][1]);
 		i++;
 	}
 }
