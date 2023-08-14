@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 15:44:01 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:54:40 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,18 @@ void	close_unused_pipes(int num_pipes, int (*pipes)[2], int current_pipe)
 }
 
 void	execute_single_command(int pipe_read_end, int pipe_write_end,
-		t_cmd *cmd)
+		t_cmd *cmd, t_data *data)
 {
 	dup2(pipe_read_end, STDIN_FILENO);
 	dup2(pipe_write_end, STDOUT_FILENO);
 	cmd = NULL;
+	execute_cmd(cmd, data);
 	// Execute the command
-	char *argv[] = {"/bin/echo", "echo", NULL};
-	execvp("/bin/echo", argv);
+	// char *argv[] = {"/bin/echo", "echo", NULL};
+	// execvp("/bin/echo", argv);
 	// If execvp fails, print an error message
-	perror("Error executing command");
-	exit(EXIT_FAILURE);
+	// perror("Error executing command");
+	// exit(EXIT_FAILURE);
 }
 
 void	execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data)
@@ -74,7 +75,7 @@ void	execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data)
 				dup2(pipes[i - 1][0], STDIN_FILENO); // Read from previous pipe
 			if (i < num_pipes - 1)
 				dup2(pipes[i][1], STDOUT_FILENO); // Write to current pipe
-			execute_single_command(pipes[i][0], pipes[i][1], &cmds[i]);
+			execute_single_command(pipes[i][0], pipes[i][1], &cmds[i], data);
 		}
 		else
 		{                       // Parent process
