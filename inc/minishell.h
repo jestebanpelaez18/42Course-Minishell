@@ -3,7 +3,8 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+
+/*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
 /*   Updated: 2023/08/14 14:24:05 by jpelaez-         ###   ########.fr       */
@@ -22,6 +23,7 @@
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <sys/wait.h>
 
 # define WORD 0
 # define PIPE 1
@@ -85,6 +87,9 @@ void					error_msg_command(char *msg, char *command);
 void 					reset(t_data *data);
 
 
+/*Builtins*/
+int						ft_pwd(void);
+int						ft_cd(char **args, t_data *data);
 /*Signal functions*/
 void					signal_in_exec(void);
 void					start_signal(void);
@@ -134,6 +139,14 @@ int						do_execution(t_cmd *cmds, char *path, t_data *data);
 int						get_path(t_cmd *cmds, t_data *data);
 void					execute_cmd(t_cmd *cmds, t_data *data);
 
+/*Pipes*/
+
+void					pipes_executor(t_data *data);
+void 					execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data);
+void 					execute_command(int pipe_read_end, int pipe_write_end, t_cmd *cmd, t_data *data);
+void					create_pipes(int num_pipes, int (*pipes)[2]);
+
+
 /*Expander*/
 
 void					expander(t_data *data, t_token **token);
@@ -169,7 +182,6 @@ t_redirec				*redirec_lstlast(t_redirec *lst);
 void					redirec_lstadd_back(t_redirec **lst, t_redirec *new);
 void					deletenode(t_token **struck_tok, t_token *del);
 
-void					printList(t_token *node);
-void					printcmd(t_cmd *node);
+void				printList(t_token *node);
 
 #endif
