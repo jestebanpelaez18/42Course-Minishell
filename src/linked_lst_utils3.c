@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:07:20 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/28 17:22:35 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/12 17:31:29 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_redirec	*redirec_lstlast(t_redirec *lst)
 	t_redirec	*current;
 
 	current = lst;
-	while (current->next != NULL)
+	while (current->next)
 		current = current->next;
 	return (current);
 }

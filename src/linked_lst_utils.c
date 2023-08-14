@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:02:33 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/27 16:47:42 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/12 17:50:41 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_token	*ft_lstlast(t_token *lst)
 	t_token	*current;
 
 	current = lst;
-	while (current->next != NULL)
+	while (current->next)
 		current = current->next;
 	return (current);
 }
