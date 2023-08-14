@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:52:33 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/13 16:52:39 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/14 12:00:43 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,25 @@ int	get_env_var(char *arg, char **env, int index, int len)
 	return (i);
 }
 
-char	*match_env_var(char *cmd, char**env)
+char **remove_env_var(char **e_cpy, char *cmd, int index)
+{
+	int	j;
+
+	j = 0;
+	(void)cmd;
+	while (e_cpy[index][j])
+	{
+		e_cpy[index][j] = 0;
+		j++;
+	}
+	e_cpy[index] = ft_strdup(cmd);
+	return (e_cpy);
+}
+
+char	**match_env_var(char *cmd, char**env)
 {
 	char	**e_cpy;
-	char	*str;
+	// char	*str;
 	int		index;
 	int		len;
 
@@ -128,21 +143,24 @@ char	*match_env_var(char *cmd, char**env)
 	/*Re-allocate the string at the [index] and leave it with only the env var name*/
 	/*Difference between env and export is that the unset variables are still viewable by using export, they are merely empty.*/
 	/*As in USER=''*/
-	str = getenv(e_cpy[index]);
-	return (str);
+	e_cpy = remove_env_var(e_cpy, cmd, index);
+	// str = getenv(e_cpy[index]);
+	return (e_cpy);
 }
 
 int	main(int argc, char **arg, char **env)
 {
-	char	*str;
+	char	**env_new;
 
 	if (argc != 2)
 		return (0);
 	if (!arg[1])
 		return (0);
-	str = match_env_var(arg[1], env);
-	/*When the match is found, what do*/
-	/**/
-// 	printf("%s\n", str);
+	env_new = match_env_var(arg[1], env);
+	while (*env_new)
+	{
+		printf("%s\n", *env_new);
+		env_new++;
+	}
 	return (0);
 }
