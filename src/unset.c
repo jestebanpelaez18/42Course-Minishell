@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:52:33 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/14 15:23:54 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/14 15:32:49 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,4 @@ static	char	**unset(char *cmd, char**env)
 		index = get_env_var(cmd, e_cpy, index + 1, len);
 	e_cpy = remove_env_var(e_cpy, cmd, index);
 	return (e_cpy);
-}
-
-int	main(int argc, char **arg, char **env)
-{
-	char	**unset_env;
-
-	unset_env = unset("PWD", env);
-
-	while (*unset_env)
-	{
-		printf("%s\n", *unset_env);
-		unset_env++;
-	}
-	return (0);
 }
