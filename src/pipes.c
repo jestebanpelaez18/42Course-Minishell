@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 14:27:06 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:42:55 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data)
 	}
 }
 
-void	pipes_executor(t_data *data)
+void	launch_pipes(t_data *data)
 {
 	int	i;
 	int pipes[data->pipex][2];

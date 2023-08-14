@@ -141,7 +141,7 @@ void					execute_cmd(t_cmd *cmds, t_data *data);
 
 /*Pipes*/
 
-void					pipes_executor(t_data *data);
+void					launch_pipes(t_data *data);
 void 					execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data);
 void 					execute_command(int pipe_read_end, int pipe_write_end, t_cmd *cmd, t_data *data);
 void					create_pipes(int num_pipes, int (*pipes)[2]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:39 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 14:22:00 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:42:33 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	executor(t_data *data)
 	// setup_heredoc(data->redirections);
 	if (data->pipex == 0)
 		launch_single_cmd(data->struc_cmd, data);
-	// else
-	// 	pipes(data->struc_cmd, data->redirections, data)
+	else
+	 	launch_pipes(data);
 	/*Here we have to check the stuff with the pipes,
 		because we have multiple cmd,
 		i Will test with one command because is easie
