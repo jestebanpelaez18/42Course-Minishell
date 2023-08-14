@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 16:50:08 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/14 17:00:05 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	execute_cmd(t_cmd *cmds, t_data *data)
 	if(is_builtin(cmds->commands[0]))
 	{
 		// exit_status = run_built(cmds->commands);
+		/*Make run_builtin function.*/
+		/*Reuse the cmdcmp to run certain commands.*/
 		printf("YAY, IT WORKED!!!\n");
 	}
 	else
