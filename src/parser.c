@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:07:32 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/28 17:21:57 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:34:40 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,4 @@ void	parser(t_data *data)
 	if (!data->struc_cmd)
 		error_msg("allocation error");
 	fill_commands(data->struc_tok, &data->struc_cmd, data->redirections);
-	printcmd(data->struc_cmd);
-	// parse_redirection(node);
 }
