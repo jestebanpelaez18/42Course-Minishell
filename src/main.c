@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/04 18:50:47 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/10 16:18:46 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ int	main(int argc, char **argv, char **env)
 		{
 			tokenization(&data);
 			parser(&data);
-			// executor(&data);
+			executor(&data);
 			// do parsing, execute...
+			executor(&data);
 		}
 		// free(&data.line_read);
 	}

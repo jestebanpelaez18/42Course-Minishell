@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/04 18:49:34 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/10 13:43:22 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <unistd.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <sys/wait.h>
 
 # define WORD 0
 # define PIPE 1
@@ -145,7 +146,6 @@ t_redirec				*redirec_lstlast(t_redirec *lst);
 void					redirec_lstadd_back(t_redirec **lst, t_redirec *new);
 void					deletenode(t_token **struck_tok, t_token *del);
 
-void					printList(t_token *node);
-void					printcmd(t_cmd *node);
+void				printList(t_token *node);
 
 #endif
