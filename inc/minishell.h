@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/12 18:48:08 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:24:05 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,10 @@ int						envp_cmd(t_data *data);
 int						get_path(t_cmd *cmds, t_data *data);
 char 					*executable_path(char **commands, t_data *data);
 char 					**separete_args(char **str);
+void					launch_single_cmd(t_cmd *cmds, t_data *data);
+int						do_execution(t_cmd *cmds, char *path, t_data *data);
+int						get_path(t_cmd *cmds, t_data *data);
+void					execute_cmd(t_cmd *cmds, t_data *data);
 
 /*Expander*/
 
