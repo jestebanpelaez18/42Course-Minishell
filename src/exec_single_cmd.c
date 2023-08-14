@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_single_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 14:49:48 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:50:08 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	get_path(t_cmd *cmds, t_data *data)
 {
 	char	*path;
 
-	cmds->commands = separete_args(cmds->commands);
+	// cmds->commands = separete_args(cmds->commands);
 	path = executable_path(cmds->commands, data);
 	if (path)
 	{
@@ -60,12 +60,14 @@ void	execute_cmd(t_cmd *cmds, t_data *data)
 	int	exit_status;
 
 	exit_status = 0;
-	// if(is_builtin)
-	// {
-	//
-	// }
-	// else
-	exit_status = get_path(cmds, data);
+	cmds->commands = separete_args(cmds->commands);
+	if(is_builtin(cmds->commands[0]))
+	{
+		// exit_status = run_built(cmds->commands);
+		printf("YAY, IT WORKED!!!\n");
+	}
+	else
+		exit_status = get_path(cmds, data);
 	//exit(exit_status);
 }
 /*Here we launch single cmd, we check if the built in is an enviroment comand,
@@ -78,7 +80,7 @@ in other case we execure our program whit execvp or built in if is the case */
 
 void	launch_single_cmd(t_cmd *cmds, t_data *data)
 {
-	t_pid *pid;
+	int pid;
 	int status;
 
 	// if (envp_cmd(data))
@@ -86,13 +88,14 @@ void	launch_single_cmd(t_cmd *cmds, t_data *data)
 	// 	// Run built in
 	// 	// come back to minishell loop, basically we finish the execution
 	// }
-	pid = data->struc_pid;
-	pid->id = fork();
-	if (pid->id == 0)
+	// data->struc_pid = NULL;
+    // pid = data->struc_pid;
+	pid = fork();
+	if (pid == 0)
 		execute_cmd(cmds, data);
-	else if (pid->id < 0)
+	else if (pid < 0)
 		perror("fork");
-	waitpid(pid->id, &status, WUNTRACED);
+	waitpid(pid, &status, WUNTRACED);
 	if (WIFEXITED(status))
 		g_exit_status = WEXITSTATUS(status);
 }

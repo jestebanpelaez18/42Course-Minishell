@@ -6,27 +6,13 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/11 14:37:31 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/14 16:42:45 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-//#include "minishell.h"
+#include "minishell.h"
 
-/*REMOVE FROM FINAL*/
-static int	ft_strlen(const char *str)
-{
-	int	i;
-
-	if (!str)
-		return (-1);
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int	cmd_cmp(const char *str1, const char *str2)
+static	int	cmd_cmp(const char *str1, const char *str2)
 {
 	int	i;
 	int	len1;
@@ -71,16 +57,4 @@ int	is_builtin(char *str)
 		i++;
 	}
 	return (flag);
-}
-
-/*TESTING*/
-int	main(int argc, char **arg)
-{
-	int	i;
-
-	(void)argc;
-	// (void)arg;
-	i = is_builtin(arg[1]);
-	printf("%d\n", i);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:52:33 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/14 15:42:35 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/14 16:34:44 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@ static	int	get_env_var(char *arg, char **env, int index, int len)
 	return (i);
 }
 
-static	char	**remove_env_var(char **e_cpy, char *cmd, int index)
+static	char	**remove_env_var(char **e_cpy, int index)
 {
 	int	j;
 
 	j = 0;
-	(void)cmd;
 	while (e_cpy[index][j])
 	{
 		e_cpy[index][j] = 0;
@@ -38,7 +37,7 @@ static	char	**remove_env_var(char **e_cpy, char *cmd, int index)
 	return (e_cpy);
 }
 
-static	char	**match_env_var(char *cmd, char**env)
+static	char	**unset(char *cmd, char**env)
 {
 	char	**e_cpy;
 	int		index;
@@ -54,6 +53,6 @@ static	char	**match_env_var(char *cmd, char**env)
 	index = get_env_var(cmd, e_cpy, index, len);
 	while (e_cpy[index] && e_cpy[index][len] != '=')
 		index = get_env_var(cmd, e_cpy, index + 1, len);
-	e_cpy = remove_env_var(e_cpy, cmd, index);
+	e_cpy = remove_env_var(e_cpy, index);
 	return (e_cpy);
 }
