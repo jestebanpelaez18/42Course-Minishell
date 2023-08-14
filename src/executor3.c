@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:04:19 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/12 17:52:06 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:47:45 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	*copy_path(char **env)
 	char	*temp_env;
 
 	i = 0;
+	temp_env = NULL;
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], "PATH=", 5))

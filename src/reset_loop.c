@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   reset_loop.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 17:54:31 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/12 18:55:43 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:48:43 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-void reset_tok(t_redirec **tokens)
+void reset_redirect(t_redirec **tokens)
 {
     t_redirec *temp;
 
@@ -30,7 +30,7 @@ void reset_tok(t_redirec **tokens)
     *tokens = NULL;
 }
 
-void reset_tok(t_token **tokens)
+void reset_token(t_token **tokens)
 {
     t_token *temp;
 
@@ -67,8 +67,8 @@ void reset_cmds(t_cmd **struc_cmd)
 void reset(t_data *data)
 {
     reset_cmds(&data->struc_cmd);
-    reset_tok(&data->struc_tok);
-    reset_redic(&data->redirections);
+    reset_token(&data->struc_tok);
+    reset_redirect(&data->redirections);
     if(data->line_read)
         free(data->line_read);
     return ;

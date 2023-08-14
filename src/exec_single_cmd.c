@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_single_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 14:22:44 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:49:48 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	execute_cmd(t_cmd *cmds, t_data *data)
 	// }
 	// else
 	exit_status = get_path(cmds, data);
-	exit(exit_status);
+	//exit(exit_status);
 }
 /*Here we launch single cmd, we check if the built in is an enviroment comand,
 	it means
