@@ -7,8 +7,7 @@
 /*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 13:31:50 by nvan-den         ###   ########.fr       */
-
+/*   Updated: 2023/08/14 14:24:05 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +20,7 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <sys/wait.h>
@@ -69,11 +69,9 @@ typedef struct s_cmd
 typedef struct s_data
 {
 	char				**env;
-	int					exit_status;
 	int					pipex;
 	t_cmd				*struc_cmd;
 	char				*line_read;
-	char				**tokens;
 	t_token				*struc_tok;
 	t_redirec			*redirections;
 	t_pid				*struc_pid;
@@ -85,6 +83,9 @@ int						g_exit_status;
 void					error_msg(char *msg);
 void					error_msg_noexit(char *msg);
 void					free_argt(char **argument);
+void					error_msg_command(char *msg, char *command);
+void 					reset(t_data *data);
+
 
 /*Builtins*/
 int						ft_pwd(void);
@@ -95,6 +96,14 @@ void					start_signal(void);
 
 /* Enviroment functions */
 char					**envdup(char **env);
+
+/*INIT DATA*/
+
+void	init_data(t_data *data, char **env);
+
+/*Free stuff*/
+
+void					free_argt(char **argument);
 
 /*Check input*/
 int						check_line(t_data *data, char *line);
@@ -116,13 +125,27 @@ void					set_number_of_pipes(t_data *data, t_token *tokens);
 int						count_commands(t_token *node);
 void					parse_redirection(t_token *node, t_redirec **redirec);
 void					check_redirection(t_token **node);
+char 					**separete_args(char **str);
 
 /*Executor*/
 
 void					executor(t_data *data);
+int						envp_cmd(t_data *data);
+int						get_path(t_cmd *cmds, t_data *data);
+char 					*executable_path(char **commands, t_data *data);
+char 					**separete_args(char **str);
+void					launch_single_cmd(t_cmd *cmds, t_data *data);
+int						do_execution(t_cmd *cmds, char *path, t_data *data);
+int						get_path(t_cmd *cmds, t_data *data);
+void					execute_cmd(t_cmd *cmds, t_data *data);
+
+/*Pipes*/
+
+void					pipes_executor(t_data *data);
 void 					execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data);
 void 					execute_command(int pipe_read_end, int pipe_write_end, t_cmd *cmd, t_data *data);
 void					create_pipes(int num_pipes, int (*pipes)[2]);
+
 
 /*Expander*/
 
@@ -139,6 +162,11 @@ int						dollar_tok_len(char *str, int j);
 char					*rm_double_quotes(char *str);
 char					*rm_single_quotes(char *str);
 
+/*setup redirections*/
+
+void					input_redirection(t_redirec *input);
+void					output_redirection(t_redirec *input);
+void					setup_redirections(t_redirec *redirections);
 /*Linked list utils*/
 
 void					ft_lstadd_back(t_token **lst, t_token *new);
