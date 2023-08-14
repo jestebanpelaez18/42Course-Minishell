@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 17:54:31 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 14:54:25 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/14 17:22:54 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	reset(t_data *data)
 {
 	reset_cmds(&data->struc_cmd);
 	reset_token(&data->struc_tok);
-	reset_redirect(&data->redirections);
+	if (data->redirections)
+		reset_redirect(&data->redirections);
 	if (data->line_read)
 		free(data->line_read);
 	return ;

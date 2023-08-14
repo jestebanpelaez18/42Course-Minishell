@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 15:21:45 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:43:57 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	get_path(t_cmd *cmds, t_data *data)
 	char	*path;
 
 	cmds->commands = separete_args(cmds->commands);
+     
 	path = executable_path(cmds->commands, data);
 	if (path)
 	{
