@@ -6,12 +6,11 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:52:33 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/14 13:39:25 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/14 15:23:54 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "minishell.h"
+#include <stdio.h>
 
 static	int	get_env_var(char *arg, char **env, int index, int len)
 {
@@ -39,7 +38,7 @@ static	char	**remove_env_var(char **e_cpy, char *cmd, int index)
 	return (e_cpy);
 }
 
-static	char	**match_env_var(char *cmd, char**env)
+static	char	**unset(char *cmd, char**env)
 {
 	char	**e_cpy;
 	int		index;
@@ -57,4 +56,18 @@ static	char	**match_env_var(char *cmd, char**env)
 		index = get_env_var(cmd, e_cpy, index + 1, len);
 	e_cpy = remove_env_var(e_cpy, cmd, index);
 	return (e_cpy);
+}
+
+int	main(int argc, char **arg, char **env)
+{
+	char	**unset_env;
+
+	unset_env = unset("PWD", env);
+
+	while (*unset_env)
+	{
+		printf("%s\n", *unset_env);
+		unset_env++;
+	}
+	return (0);
 }
