@@ -3,41 +3,107 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/31 19:02:51 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/11 13:09:30 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	launch_single_cmd(t_cmd *cmds, t_redirec *redirec, t_data *data)
+void create_pipes(int num_pipes, int (*pipes)[2])
 {
+    int i = 0;
+    while (i < num_pipes)
+    {
+        if (pipe(pipes[i]) == -1)
+            error_msg("Error creating pipe\n");
+        i++;
+    }
+}
+
+void close_unused_pipes(int num_pipes, int (*pipes)[2], int current_pipe)
+{
+    int i = 0;
+    while (i < num_pipes)
+    {
+        if (i != current_pipe)
+        {
+            close(pipes[i][0]);
+            close(pipes[i][1]);
+        }
+        i++;
+    }
+}
+
+void execute_single_command(int pipe_read_end, int pipe_write_end, t_cmd *cmd)
+{
+    dup2(pipe_read_end, STDIN_FILENO);
+    dup2(pipe_write_end, STDOUT_FILENO);
+	cmd = NULL;
+    // Execute the command
+    char *argv[] = {"/bin/echo", "echo", NULL};
+    execvp("/bin/echo", argv);
+
+    // If execvp fails, print an error message
+    perror("Error executing command");
+    exit(EXIT_FAILURE);
+}
+
+void execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data)
+{
+	int status;
+	int pid[data->pipex + 1];
+	int	i;
+	
+	i = 0;
+	while (i < num_pipes)
+	{
+		pid[i] = fork();
+		if (pid[i] == -1)
+			error_msg("Error creating process\n");
+		else if (pid[i] == 0)
+		{ // Child process
+			close_unused_pipes(num_pipes, pipes, i);
+			if (i > 0)
+				dup2(pipes[i- 1][0], STDIN_FILENO); // Read from previous pipe
+			if (i < num_pipes - 1)
+				dup2(pipes[i][1], STDOUT_FILENO); // Write to current pipe
+			execute_single_command(pipes[i][0], pipes[i][1], &cmds[i]);
+		} 
+		else 
+		{ // Parent process
+			close(pipes[i][1]); // Close write end of current pipe
+		}
+		i++;
+	}
+	i = 0;
+	while (i < num_pipes)
+	{
+        waitpid(pid[i], &status, 0);
+        if (WIFEXITED(status))
+            printf("Child process %d exited with status %d\n", pid[i], WEXITSTATUS(status));
+        else if (WIFSIGNALED(status))
+            printf("Child process %d terminated by signal %d\n", pid[i], WTERMSIG(status));
+		i++;
+	}
 }
 
 void	executor(t_data *data)
 {
-	t_pid *pid;
-	int status;
-
+	int	i;
+	int pipes[data->pipex][2];
+	
+	i = 0;
 	signal_in_exec();
-	data->struc_cmd = expander(data, data->struc_cmd);
-	pid = data->struc_pid;
-	pid->id = fork();
-	if (pid->id == 0)
+	//data->struc_cmd = expander(data, data->struc_cmd);
+	create_pipes(data->pipex, pipes);
+	execute_pipes(data->struc_cmd, data->pipex, pipes, data);
+	while (i < data->pipex)
 	{
-		if (data->pipex == 0)
-			launch_single_cmd(data->struc_cmd, data->redirections, data);
-		// else
-		// 	launch_multiple_cmd
-		/*Here we have to check the stuff with the pipes,
-		because we have multiple cmd,
-		i Will test with one command because is easie
-	and the we can test for multiple commands*/
+		close(pipes[i][0]);
+		close(pipes[i][1]);
+		i++;
 	}
-	else if (pid->id < 0)
-		perror("fork");
-	else
-		pid->wid = waitpid(pid->id, &status, WUNTRACED);
 }

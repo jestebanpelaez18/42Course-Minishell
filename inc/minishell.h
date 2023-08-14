@@ -3,6 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+
 /*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
@@ -17,6 +18,7 @@
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/wait.h>
 # include <unistd.h>
 # include <readline/history.h>
 # include <readline/readline.h>
@@ -76,6 +78,8 @@ typedef struct s_data
 	t_pid				*struc_pid;
 }						t_data;
 
+int						g_exit_status;
+
 /*Error msg and free*/
 void					error_msg(char *msg);
 void					error_msg_noexit(char *msg);
@@ -116,10 +120,20 @@ void					check_redirection(t_token **node);
 
 void					executor(t_data *data);
 
-
 /*Expander*/
 
-t_cmd					*expander(t_data *data, t_cmd *cmds);
+void					expander(t_data *data, t_token **token);
+int						skip_digit(int i, char *str);
+int						is_dollar(char *tok);
+int						ft_strcmp(const char *str1, const char *str2);
+int						is_equal(char *env);
+int						len_equal(char *str);
+int						dolar_index(char *str);
+int						no_single_quotes(char *str);
+char					*get_str(char *str, char c);
+int						dollar_tok_len(char *str, int j);
+char					*rm_double_quotes(char *str);
+char					*rm_single_quotes(char *str);
 
 /*Linked list utils*/
 
@@ -136,7 +150,6 @@ t_redirec				*redirec_lstlast(t_redirec *lst);
 void					redirec_lstadd_back(t_redirec **lst, t_redirec *new);
 void					deletenode(t_token **struck_tok, t_token *del);
 
-void					printList(t_token *node);
-void					printcmd(t_cmd *node);
+void				printList(t_token *node);
 
 #endif
