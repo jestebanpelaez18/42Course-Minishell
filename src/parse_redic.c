@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redic.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:43:55 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/28 17:50:53 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/15 18:47:32 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	create_single_redirection(t_token *token, t_redirec **redirection)
 	if (!create_redirection(ft_strdup(token->next->tokens), redirection,
 			token->type))
 		error_msg("allocation error");
-	printredic(*redirection);
 	deletenode(&token->next, token->next);
 	deletenode(&token, token);
 }

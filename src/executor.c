@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:39 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 15:43:57 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/15 18:15:39 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	executor(t_data *data)
 {
 	signal_in_exec();
-	setup_redirections(data->redirections);
+	// setup_redirections(data->redirections);
 	// setup_heredoc(data->redirections);
 	if (data->pipex == 0)
 		launch_single_cmd(data->struc_cmd, data);

@@ -99,7 +99,7 @@ char					**envdup(char **env);
 
 /*INIT DATA*/
 
-void	init_data(t_data *data, char **env);
+void					init_data(t_data *data);
 
 /*Free stuff*/
 

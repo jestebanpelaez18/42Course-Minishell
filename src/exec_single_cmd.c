@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 15:43:57 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/15 18:53:34 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	get_path(t_cmd *cmds, t_data *data)
 	char	*path;
 
 	cmds->commands = separete_args(cmds->commands);
-     
 	path = executable_path(cmds->commands, data);
 	if (path)
 	{
@@ -87,11 +86,12 @@ void	launch_single_cmd(t_cmd *cmds, t_data *data)
 	// 	// Run built in
 	// 	// come back to minishell loop, basically we finish the execution
 	// }
-	// data->struc_pid = NULL;
-    // pid = data->struc_pid;
 	pid = fork();
 	if (pid == 0)
+	{
+		setup_redirections(data->redirections);
 		execute_cmd(cmds, data);
+	}
 	else if (pid < 0)
 		perror("fork");
 	waitpid(pid, &status, WUNTRACED);
