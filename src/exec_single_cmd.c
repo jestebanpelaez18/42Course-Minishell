@@ -6,7 +6,11 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/08/14 17:00:05 by rrask            ###   ########.fr       */
+=======
+/*   Updated: 2023/08/14 15:43:57 by jpelaez-         ###   ########.fr       */
+>>>>>>> 1dfe49ced1999b8dd43dfc93bae7d254da1aefe1
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +29,8 @@ int	get_path(t_cmd *cmds, t_data *data)
 {
 	char	*path;
 
-	// cmds->commands = separete_args(cmds->commands);
+	cmds->commands = separete_args(cmds->commands);
+     
 	path = executable_path(cmds->commands, data);
 	if (path)
 	{

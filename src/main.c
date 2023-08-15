@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 14:41:39 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/14 17:23:43 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,9 @@ int	main(int argc, char **argv, char **env)
 			tokenization(&data);
 			parser(&data);
 			executor(&data);
-			// do parsing, execute...
 		}
-		//reset(&data);
-		//init_data(&data,env);
+		reset(&data);
+		init_data(&data, env);
 	}
 	return (0);
 }
