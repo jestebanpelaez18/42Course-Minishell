@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_builtin.c                                       :+:      :+:    :+:   */
+/*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/14 16:42:45 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/15 10:41:43 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,26 @@ int	is_builtin(char *str)
 		i++;
 	}
 	return (flag);
+}
+
+/*Depending on what the index is when it finishes, it runs that command.*/
+void	run_builtin(char **cmds)
+{
+	static char		*arr[3] = {"echo", "unset", "export"};
+	int				i;
+
+	if (!cmds)
+		return ;
+	i = 0;
+	while (cmds[i])
+	{
+		if (cmd_cmp(cmds[i], arr[i]))
+		{
+			if (i == 1)
+				printf("Oops, I echoed again.\n");
+			else
+				printf("Nevermind then.\n");
+		}
+		i++;
+	}
 }
