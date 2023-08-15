@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/15 10:41:43 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/15 11:03:58 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,28 @@ void	run_builtin(char **cmds)
 {
 	static char		*arr[3] = {"echo", "unset", "export"};
 	int				i;
+	int				j;
 
 	if (!cmds)
 		return ;
 	i = 0;
 	while (cmds[i])
 	{
-		if (cmd_cmp(cmds[i], arr[i]))
+		j = 0;
+		while (arr[j])
 		{
-			if (i == 1)
-				printf("Oops, I echoed again.\n");
-			else
-				printf("Nevermind then.\n");
+			if (cmd_cmp(cmds[i], arr[j]))
+			{
+				if (j == 0)
+					printf("Oops, I echoed again.\n");
+				else if (j == 1)
+					printf("Unset my heart...\n");
+				else if (j == 2)
+					printf("Exporting T_T\n");
+				else
+					printf("Nevermind then.\n");
+			}
+			j++;
 		}
 		i++;
 	}

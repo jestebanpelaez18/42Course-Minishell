@@ -6,11 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/08/14 17:00:05 by rrask            ###   ########.fr       */
-=======
-/*   Updated: 2023/08/14 15:43:57 by jpelaez-         ###   ########.fr       */
->>>>>>> 1dfe49ced1999b8dd43dfc93bae7d254da1aefe1
+/*   Updated: 2023/08/15 10:49:50 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +26,6 @@ int	get_path(t_cmd *cmds, t_data *data)
 	char	*path;
 
 	cmds->commands = separete_args(cmds->commands);
-     
 	path = executable_path(cmds->commands, data);
 	if (path)
 	{
@@ -48,7 +43,6 @@ int	get_path(t_cmd *cmds, t_data *data)
 	}
 	return (g_exit_status);
 }
-  
 /*Now this is the final part of the executing,
 this command will work for single command and pipex,
 is basically the last step. So here we are gonna check if our command is a
@@ -68,10 +62,8 @@ void	execute_cmd(t_cmd *cmds, t_data *data)
 	cmds->commands = separete_args(cmds->commands);
 	if(is_builtin(cmds->commands[0]))
 	{
-		// exit_status = run_built(cmds->commands);
-		/*Make run_builtin function.*/
-		/*Reuse the cmdcmp to run certain commands.*/
-		printf("YAY, IT WORKED!!!\n");
+		run_builtin(cmds->commands);
+		// printf("YAY, IT WORKED!!!\n");
 	}
 	else
 		exit_status = get_path(cmds, data);
