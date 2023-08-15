@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/15 11:03:58 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/15 11:22:00 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,18 @@ int	is_builtin(char *str)
 	return (flag);
 }
 
+static void	run_cmd(int index)
+{
+	if (index == 0)
+		printf("Oops, I echoed again.\n");
+	else if (index == 1)
+		printf("Unset my heart...\n");
+	else if (index == 2)
+		printf("Exporting T_T\n");
+	else
+		printf("Nevermind then.\n");
+}
+
 /*Depending on what the index is when it finishes, it runs that command.*/
 void	run_builtin(char **cmds)
 {
@@ -75,16 +87,7 @@ void	run_builtin(char **cmds)
 		while (arr[j])
 		{
 			if (cmd_cmp(cmds[i], arr[j]))
-			{
-				if (j == 0)
-					printf("Oops, I echoed again.\n");
-				else if (j == 1)
-					printf("Unset my heart...\n");
-				else if (j == 2)
-					printf("Exporting T_T\n");
-				else
-					printf("Nevermind then.\n");
-			}
+				run_cmd(j);
 			j++;
 		}
 		i++;
