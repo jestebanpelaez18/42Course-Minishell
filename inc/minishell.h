@@ -84,11 +84,11 @@ void					error_msg(char *msg);
 void					error_msg_noexit(char *msg);
 void					free_argt(char **argument);
 void					error_msg_command(char *msg, char *command);
-void 					reset(t_data *data);
-
+void					reset(t_data *data);
 
 /*Builtins*/
 int						ft_pwd(void);
+int						ft_echo(char **argv);
 int						ft_cd(char **args, t_data *data);
 int						is_builtin(char *str);
 void					run_builtin(char **cmds);
@@ -128,15 +128,15 @@ void					set_number_of_pipes(t_data *data, t_token *tokens);
 int						count_commands(t_token *node);
 void					parse_redirection(t_token *node, t_redirec **redirec);
 void					check_redirection(t_token **node);
-char 					**separete_args(char **str);
+char					**separete_args(char **str);
 
 /*Executor*/
 
 void					executor(t_data *data);
 int						envp_cmd(t_data *data);
 int						get_path(t_cmd *cmds, t_data *data);
-char 					*executable_path(char **commands, t_data *data);
-char 					**separete_args(char **str);
+char					*executable_path(char **commands, t_data *data);
+char					**separete_args(char **str);
 void					launch_single_cmd(t_cmd *cmds, t_data *data);
 int						do_execution(t_cmd *cmds, char *path, t_data *data);
 int						get_path(t_cmd *cmds, t_data *data);
@@ -145,10 +145,9 @@ void					execute_cmd(t_cmd *cmds, t_data *data);
 /*Pipes*/
 
 void					launch_pipes(t_data *data);
-void 					execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data);
-void 					execute_command(int pipe_read_end, int pipe_write_end, t_cmd *cmd, t_data *data);
+void					execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data);
+void					execute_command(int pipe_read_end, int pipe_write_end, t_cmd *cmd, t_data *data);
 void					create_pipes(int num_pipes, int (*pipes)[2]);
-
 
 /*Expander*/
 
@@ -186,6 +185,6 @@ t_redirec				*redirec_lstlast(t_redirec *lst);
 void					redirec_lstadd_back(t_redirec **lst, t_redirec *new);
 void					deletenode(t_token **struck_tok, t_token *del);
 
-void				printList(t_token *node);
+void					printList(t_token *node);
 
 #endif

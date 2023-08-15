@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:40:15 by nvan-den          #+#    #+#             */
-/*   Updated: 2023/07/25 14:10:25 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/15 14:06:09 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 void	n_function(char **argv)
 {
 	int	i;
-	
-	while (argv[i] && ft_strcmp(argv[i], "-n") == 0)
+
+	i = 0;
+	while (argv[i] && ft_strncmp(argv[i], "-n", 4) == 0)
 		i++;
 	while (argv[i])
 	{
@@ -26,12 +27,13 @@ void	n_function(char **argv)
 		i++;
 	}
 }
+
 int	ft_echo(char **argv)
 {
 	int		i;
 
-	i = 1;  
-	if (ft_strlen(argv) > 1)// check "-n" new line option in echo
+	i = 1;
+	if (ft_strlen(*argv) > 1)// check "-n" new line option in echo
 		n_function(argv);
 	else
 		write(1, "\n", 1);
