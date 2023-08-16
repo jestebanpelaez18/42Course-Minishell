@@ -102,11 +102,7 @@ char					**envdup(char **env);
 
 /*INIT DATA*/
 
-<<<<<<< HEAD
-void					init_data(t_data *data, char **env);
-=======
 void					init_data(t_data *data);
->>>>>>> bc669227b22885a80d65dd66d8eb37292bd40937
 
 /*Free stuff*/
 

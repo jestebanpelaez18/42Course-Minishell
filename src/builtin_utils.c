@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/15 12:56:30 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/16 13:08:38 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ int	is_builtin(char *str)
 	return (flag);
 }
 
-static void	run_cmd(char *cmd, int index)
+static void	run_cmd(char **cmd, int index)
 {
 	if (index == 0)
 	{
-		ft_echo(&cmd);
+		ft_echo(cmd);
 	}
 	else if (index == 1)
 		printf("Unset my heart...\n");
@@ -89,7 +89,7 @@ void	run_builtin(char **cmds)
 		while (arr[j])
 		{
 			if (cmd_cmp(cmds[i], arr[j]))
-				run_cmd(cmds[i], j);
+				run_cmd(cmds, j);
 			j++;
 		}
 		i++;
