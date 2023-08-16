@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/15 10:49:50 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/16 10:43:32 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,12 @@ void	launch_single_cmd(t_cmd *cmds, t_data *data)
 	// 	// Run built in
 	// 	// come back to minishell loop, basically we finish the execution
 	// }
-	// data->struc_pid = NULL;
-    // pid = data->struc_pid;
 	pid = fork();
 	if (pid == 0)
+	{
+		setup_redirections(data->redirections);
 		execute_cmd(cmds, data);
+	}
 	else if (pid < 0)
 		perror("fork");
 	waitpid(pid, &status, WUNTRACED);

@@ -6,17 +6,21 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 17:23:43 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/15 17:56:54 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_data(t_data *data, char **env)
+void	init_data(t_data *data)
 {
-	data->env = envdup(env);
 	g_exit_status = 0;
 	data->pipex = 0;
+}
+
+void	get_env(t_data *data, char **env)
+{
+	data->env = envdup(env);
 }
 
 void	get_line(t_data *data)
@@ -35,15 +39,8 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	if (argc > 1)
 		error_msg("No arguments for minishell");
-	// if(!env || (*env))
-	//     error_msg("No enviroment");
-	// for (char **envp = env; *envp != 0; envp++)
-	// {
-	//     char *thisEnv = *envp;
-	//     printf("%s\n", thisEnv);
-	// 	break ;
-	// }
-	init_data(&data, env);
+	init_data(&data);
+	get_env(&data, env);
 	while (42)
 	{
 		start_signal();
@@ -55,7 +52,7 @@ int	main(int argc, char **argv, char **env)
 			executor(&data);
 		}
 		reset(&data);
-		init_data(&data, env);
+		init_data(&data);
 	}
 	return (0);
 }
