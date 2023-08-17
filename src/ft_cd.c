@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:49:50 by junheeki          #+#    #+#             */
-/*   Updated: 2023/08/17 18:07:05 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/17 19:27:58 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,19 +176,22 @@ static	void go_home(char **env)
 
 static char	**match_case(char *arg, char **env)
 {
-	char	*path;
-	char	*old_path;
-	char	*path_to_go;
+	// char	*path;
+	// char	*old_path;
+	// char	*path_to_go;
 	int		len;
 
 	if (!arg || !env)
 		return (NULL);
 	len = ft_strlen(arg);
 	if (ft_strncmp(arg, ".", len) == 0)
-		printf("Yes");
+		printf("Yes\n");
+	else if (ft_strncmp(arg, "..", len) == 0)
+		printf("YesYes\n");
 	/*
 		Cases: . || .., absolute path, 
 	*/
+	return (env);
 }
 
 int	ft_cd(char **args, char **env)
@@ -213,9 +216,9 @@ int	ft_cd(char **args, char **env)
 
 			cd_ret should return -1 if it fails.
 			
-			//env = match_case(args[1], env);
 			//;
 		*/
+		env = match_case(args[1], env);
 	}
 	return (cd_ret);
 }
