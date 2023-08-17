@@ -88,7 +88,7 @@ void					reset(t_data *data);
 
 /*Builtins*/
 int						ft_pwd(void);
-int						ft_cd(char **args);
+int						ft_cd(char **args, char **env);
 /*Signal functions*/
 void					signal_in_exec(void);
 void					start_signal(void);

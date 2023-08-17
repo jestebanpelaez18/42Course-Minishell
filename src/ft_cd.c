@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:49:50 by junheeki          #+#    #+#             */
-/*   Updated: 2023/08/14 15:52:14 by junheeki         ###   ########.fr       */
+/*   Updated: 2023/08/17 18:07:05 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char	*ft_strdup(const char *src)
 	dest[i] = '\0';
 	return (dest);
 }
+
 char	**envdup(char **env)
 {
 	char	**env_copy;
@@ -139,28 +140,89 @@ static char	*match_env_var(char *cmd, char **env)
 	return (str);
 }
 
-int	ft_cd(char **env)
+int	arg_counter(char **args)
 {
-	int		cd_ret;
+	int	i;
+
+	i = 0;
+	while (args[i])
+		i++;
+	return (i);
+}
+
+static	void go_home(char **env)
+{
 	char	*path;
 	char	*old_path;
+	char	*path_to_go;
 
-	(void)cd_ret;
-	path = match_env_var("PWD", env);
-	old_path = match_env_var("OLDPWD", env);
+	path_to_go = match_env_var("HOME", env);
+	if (!path_to_go)
+		return ;
+		// error_msg("cd: HOME not set");
+	if (chdir(path_to_go) == 0)
+	{
+		path = match_env_var("HOME", env);
+		old_path = match_env_var("PWD", env);
+		//update env
+		printf("Path is: %s\n", path);
+		printf("Old path is: %s\n", old_path);
+		//WORKS
+	}
+	else
+		printf("Lol shit failed\n");
+		// error_msg("cd: Failed to change directory.");
+}
 
-	//cd or cd ~ -> $HOME
+static char	**match_case(char *arg, char **env)
+{
+	char	*path;
+	char	*old_path;
+	char	*path_to_go;
+	int		len;
 
+	if (!arg || !env)
+		return (NULL);
+	len = ft_strlen(arg);
+	if (ft_strncmp(arg, ".", len) == 0)
+		printf("Yes");
+	/*
+		Cases: . || .., absolute path, 
+	*/
+}
 
-	printf("Path is: %s\n", path);
-	printf("Old path is: %s\n", old_path);
-	return (0);
+int	ft_cd(char **args, char **env)
+{
+	int		cd_ret;
+	int		argc;
+
+	argc = arg_counter(args);
+	cd_ret = 0;
+	if (argc == 1)
+		go_home(env);
+	else
+	{
+		/*
+			Match the different cases with args[1].
+				. && .. can be sent to chdir and it works for some reason lol
+			If args[1] is a absolute path, ???
+			if there is two arguments, go to first path
+			When you move dir with CD, if there is no OLDPWD then create it.
+			cd filename -> ex) cd: not a directory: echo.c
+			cd wrongname -> ex) cd: no such file or directory: ech
+
+			cd_ret should return -1 if it fails.
+			
+			//env = match_case(args[1], env);
+			//;
+		*/
+	}
+	return (cd_ret);
 }
 
 int	main(int argc, char **arg, char **env)
 {
-	(void)arg;
 	(void)argc;
-	ft_cd(env);
+	ft_cd(arg, env);
 	return (0);
 }
