@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:46 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/08 18:48:37 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/17 12:41:47 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ char	*replace_dollar(char *str, t_data *data)
 	i = 0;
 	while (str[i])
 	{
-		i += skip_digit(i, str);
+		// i += skip_digit(i, str);
 		if (str[i] == '$' && str[i + 1] == '?')
 			i += get_exit_status(&temp);
 		if (str[i] == '$' && (str[i + 1] != ' ' && (str[i + 2] != '"' || str[i
-						+ 2] != '\0')) && str[i + 1] != '\0')
+					+ 2] != '\0')) && str[i + 1] != '\0')
 		{
 			i += expand_env(&temp, i + 1, data, str);
 		}
@@ -102,7 +102,7 @@ void	expand_dollar(t_token *current, t_data *data)
 	else
 	{
 		if (current->tokens[0] != '\'' && (current->tokens[j - 1] != '\''
-				&& current->tokens[j + 1] != '\0'))
+			&& current->tokens[j + 1] != '\0'))
 		{
 			str = replace_dollar(current->tokens, data);
 			current->tokens = str;
@@ -122,8 +122,10 @@ void	expander(t_data *data, t_token **token)
 	tok = *token;
 	while (tok)
 	{
-		if (tok && tok->type == WORD && is_dollar(tok->tokens)) 
+		if (tok && tok->type == WORD && is_dollar(tok->tokens))
 			expand_dollar(tok, data);
+		else if (tok && tok->type == WORD)
+			remove_quotes(tok);
 		tok = tok->next;
 	}
 	return ;

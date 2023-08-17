@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 16:19:32 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/15 19:09:41 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/16 17:31:07 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	input_redirection(t_redirec *input)
 
 	fd = open(input->token, O_RDONLY);
 	if (fd == -1)
-		error_msg("Failed to open file");
+		error_msg_redic("No such file or directoty: ", input->token, 1);
 	if (fd > 0 && dup2(fd, STDIN_FILENO) == -1)
 		error_msg("Failed in dup2");
 	close(fd);
@@ -33,7 +33,7 @@ void	output_redirection(t_redirec *input)
 	else
 		fd = open(input->token, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
-		error_msg("Failed to open file");
+		error_msg_redic("Failed to open file", input->token, 1);
 	if (fd > 0 && dup2(fd, STDOUT_FILENO) == -1)
 		error_msg("Failed in dup2");
 	close(fd);
