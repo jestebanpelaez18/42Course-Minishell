@@ -88,11 +88,7 @@ void					reset(t_data *data);
 
 /*Builtins*/
 int						ft_pwd(void);
-int						ft_echo(char **argv);
-int						ft_cd(char **args, t_data *data);
-int						is_builtin(char *str);
-void					run_builtin(char **cmds);
-
+int						ft_cd(char **args);
 /*Signal functions*/
 void					signal_in_exec(void);
 void					start_signal(void);
