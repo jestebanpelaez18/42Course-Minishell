@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:49:50 by junheeki          #+#    #+#             */
-/*   Updated: 2023/08/17 19:27:58 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/18 12:31:49 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int	arg_counter(char **args)
 	return (i);
 }
 
-static	void go_home(char **env)
+static	void	go_home(char **env)
 {
 	char	*path;
 	char	*old_path;
@@ -158,13 +158,12 @@ static	void go_home(char **env)
 
 	path_to_go = match_env_var("HOME", env);
 	if (!path_to_go)
-		return ;
-		// error_msg("cd: HOME not set");
+		return ;// error_msg("cd: HOME not set");
 	if (chdir(path_to_go) == 0)
 	{
 		path = match_env_var("HOME", env);
 		old_path = match_env_var("PWD", env);
-		//update env
+		//update env, we can use export here
 		printf("Path is: %s\n", path);
 		printf("Old path is: %s\n", old_path);
 		//WORKS
@@ -174,7 +173,7 @@ static	void go_home(char **env)
 		// error_msg("cd: Failed to change directory.");
 }
 
-static char	**match_case(char *arg, char **env)
+static	char	**match_case(char *arg, char **env)
 {
 	// char	*path;
 	// char	*old_path;
@@ -185,9 +184,15 @@ static char	**match_case(char *arg, char **env)
 		return (NULL);
 	len = ft_strlen(arg);
 	if (ft_strncmp(arg, ".", len) == 0)
-		printf("Yes\n");
+		go_home(env);
 	else if (ft_strncmp(arg, "..", len) == 0)
-		printf("YesYes\n");
+		printf("DotDot\n");
+	else if (ft_strncmp(arg, "~", len) == 0)
+		printf("TILDE\n");
+	else if (ft_strncmp(arg, "-", len) == 0) // cd: OLDPWD not set || show previous OLDPWD
+		printf("Previous OLDPWD\n");
+	else if (chdir(arg) == 0)
+		printf("Successful path\n");
 	/*
 		Cases: . || .., absolute path, 
 	*/
