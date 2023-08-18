@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:49:50 by junheeki          #+#    #+#             */
-/*   Updated: 2023/08/18 12:31:49 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/18 12:53:27 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,9 +193,6 @@ static	char	**match_case(char *arg, char **env)
 		printf("Previous OLDPWD\n");
 	else if (chdir(arg) == 0)
 		printf("Successful path\n");
-	/*
-		Cases: . || .., absolute path, 
-	*/
 	return (env);
 }
 
@@ -234,3 +231,13 @@ int	main(int argc, char **arg, char **env)
 	ft_cd(arg, env);
 	return (0);
 }
+
+/*
+TODO LIST
+
+1. Failcheck chdir in match_case
+2. Implement export to change the environment variables.
+
+// cd filename -> ex) cd: not a directory: echo.c
+// cd wrongname -> ex) cd: no such file or directory: ech
+*/
