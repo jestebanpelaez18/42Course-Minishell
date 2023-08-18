@@ -6,17 +6,22 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 14:41:39 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/17 13:21:16 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_data(t_data *data, char **env)
+void	init_data(t_data *data)
+{
+	data->pipex = 0;
+	data->struc_cmd = NULL;
+	data->struc_tok = NULL;
+}
+
+void	get_env(t_data *data, char **env)
 {
 	data->env = envdup(env);
-	g_exit_status = 0;
-	data->pipex = 0;
 }
 
 void	get_line(t_data *data)
@@ -35,15 +40,9 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	if (argc > 1)
 		error_msg("No arguments for minishell");
-	// if(!env || (*env))
-	//     error_msg("No enviroment");
-	// for (char **envp = env; *envp != 0; envp++)
-	// {
-	//     char *thisEnv = *envp;
-	//     printf("%s\n", thisEnv);
-	// 	break ;
-	// }
-	init_data(&data, env);
+	init_data(&data);
+	get_env(&data, env);
+	g_exit_status = 0;
 	while (42)
 	{
 		start_signal();
@@ -53,10 +52,10 @@ int	main(int argc, char **argv, char **env)
 			tokenization(&data);
 			parser(&data);
 			executor(&data);
-			// do parsing, execute...
+			reset(&data);
 		}
-		//reset(&data);
-		//init_data(&data,env);
+		// reset(&data);
+		init_data(&data);
 	}
 	return (0);
 }

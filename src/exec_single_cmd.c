@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_single_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 14:49:48 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/16 19:15:11 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ in other case we execure our program whit execvp or built in if is the case */
 
 void	launch_single_cmd(t_cmd *cmds, t_data *data)
 {
-	t_pid *pid;
+	int pid;
 	int status;
 
 	// if (envp_cmd(data))
@@ -86,13 +86,15 @@ void	launch_single_cmd(t_cmd *cmds, t_data *data)
 	// 	// Run built in
 	// 	// come back to minishell loop, basically we finish the execution
 	// }
-	pid = data->struc_pid;
-	pid->id = fork();
-	if (pid->id == 0)
+	pid = fork();
+	if (pid == 0)
+	{
+		setup_redirections(data->redirections);
 		execute_cmd(cmds, data);
-	else if (pid->id < 0)
+	}
+	else if (pid < 0)
 		perror("fork");
-	waitpid(pid->id, &status, WUNTRACED);
+	waitpid(pid, &status, WUNTRACED);
 	if (WIFEXITED(status))
 		g_exit_status = WEXITSTATUS(status);
 }

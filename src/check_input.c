@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:43:17 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/28 18:26:36 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/16 18:53:27 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	white_space(char *input)
 	{
 		if (input[i] != ' ' || input[i] != '\t' || input[i] != '\v'
 			|| input[i] != '\f' || input[i] != '\n' || input[i] != '\r')
-			return (1);//returns true if NOT whitespace?? -Nick
+			return (1); //returns true if NOT whitespace?? -Nick
 		i++;
 	}
 	return (0);
@@ -41,12 +41,12 @@ static int	closed_quotes(char *str)
 		if (str[i] == '\'' || str[i] == '\"')
 		{
 			quot = str[i++];
-			while (str[i] != '\0' && str[i] != quot)//why while loop, only able to run once -Nick
+			while (str[i] != '\0' && str[i] != quot)
 				i++;
 		}
 		if (str[i] == '\0')
 		{
-			error_msg_noexit("unclosed quotes");
+			error_msg_noexit("unclosed quotes", 258);
 			return (0);
 		}
 		i++;
@@ -63,7 +63,7 @@ static int	close_pipe(char *str)
 		i++;
 	if (str[i - 1] == '|')
 	{
-		error_msg_noexit("zsh: parse error near '|' ");
+		error_msg_noexit("zsh: parse error near '|' ", 258);
 		return (0);
 	}
 	return (1);
@@ -76,7 +76,7 @@ static int	correct_input(char *line)
 	i = 0;
 	if (line[0] == '|')
 	{
-		error_msg_noexit("zsh: parse error near '|' ");
+		error_msg_noexit("zsh: parse error near '|' ", 258);
 		return (0);
 	}
 	while (line[i] != '\0')
@@ -84,7 +84,7 @@ static int	correct_input(char *line)
 		i++;
 		if (line[i] == '|' && line[i + 1] == '|')
 		{
-			error_msg_noexit("zsh: parse error near '|' ");
+			error_msg_noexit("zsh: parse error near '|' ", 258);
 			return (0);
 		}
 	}

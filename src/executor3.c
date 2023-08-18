@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:04:19 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 14:47:45 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:34:01 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*copy_path(char **env)
 	temp_env = NULL;
 	while (env[i])
 	{
-		if (ft_strncmp(env[i], "PATH=", 5))
+		if (ft_strncmp(env[i], "PATH=", 5) == 0)
 		{
 			temp_env = env[i] + 5;
 			break ;
@@ -54,7 +54,6 @@ char	*executable_path(char **commands, t_data *data)
 
 	j = 0;
 	envp = data->env;
-	printf("%s\n",envp[0]);
 	directories = ft_split(copy_path(envp), ':');
 	while (directories[j])
 	{

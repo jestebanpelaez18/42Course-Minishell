@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:46:51 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/25 19:55:11 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:32:47 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	count_commands(t_token *node)
 	int		i;
 	t_token	*temp;
 
+	
 	i = 0;
 	temp = node;
 	while (temp && temp->type != PIPE)
@@ -43,7 +44,7 @@ int	count_commands(t_token *node)
 
 t_token	*next_elem(t_token *args)
 {
-	t_token *next_elem;
+	t_token	*next_elem;
 
 	next_elem = args;
 	while (next_elem)

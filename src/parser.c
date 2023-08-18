@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:07:32 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/28 17:21:57 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/17 18:45:40 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	fill_commands(t_token *data, t_cmd **cmds, t_redirec *redirections)
 	while (node)
 	{
 		node = next_elem(node);
-		parse_redirection(node, &redirections);
+		parse_redirection(&node, &redirections);
 		if (!node)
 			break ;
 		cmd = initiate_cmd(node);
@@ -77,7 +77,7 @@ void	fill_commands(t_token *data, t_cmd **cmds, t_redirec *redirections)
 	}
 }
 
-t_cmd	*start_firts_cmd(t_token *data, t_redirec **redirec)
+t_cmd	*start_firts_cmd(t_token *data, t_redirec *redirec)
 {
 	t_cmd	*cmd;
 	
@@ -92,12 +92,9 @@ t_cmd	*start_firts_cmd(t_token *data, t_redirec **redirec)
 void	parser(t_data *data)
 {
 	set_number_of_pipes(data, data->struc_tok);
-	parse_redirection(data->struc_tok, &data->redirections);
-	data->struc_cmd = NULL;
-	data->struc_cmd = start_firts_cmd(data->struc_tok, &data->redirections);
+	parse_redirection(&data->struc_tok, &data->redirections);
+	data->struc_cmd = start_firts_cmd(data->struc_tok, data->redirections);
 	if (!data->struc_cmd)
 		error_msg("allocation error");
 	fill_commands(data->struc_tok, &data->struc_cmd, data->redirections);
-	printcmd(data->struc_cmd);
-	// parse_redirection(node);
 }
