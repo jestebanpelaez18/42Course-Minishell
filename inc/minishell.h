@@ -42,6 +42,7 @@ typedef struct s_pid
 typedef struct s_redirec
 {
 	char				*token;
+	char				*hd_file_name;
 	int					type;
 	struct s_redirec	*next;
 	struct s_redirec	*prev;
@@ -76,7 +77,13 @@ typedef struct s_data
 	t_pid				*struc_pid;
 }						t_data;
 
-int						g_exit_status;
+typedef struct s_global
+{
+	int						g_exit_status;
+	int						heredoc_signal;
+}	t_global;
+
+extern t_global g_var;
 
 /*Error msg and free*/
 void					error_msg(char *msg);
@@ -90,9 +97,12 @@ void					error_msg_redic(char *msg, char *input,
 /*Builtins*/
 int						ft_pwd(void);
 int						ft_cd(char **args, t_data *data);
+
 /*Signal functions*/
 void					signal_in_exec(void);
 void					start_signal(void);
+void					heredoc_signal(void);
+void					hd_handler(int signal);
 
 /* Enviroment functions */
 char					**envdup(char **env);
@@ -163,6 +173,9 @@ int						dollar_tok_len(char *str, int j);
 char					*rm_double_quotes(char *str);
 char					*rm_single_quotes(char *str);
 void					remove_quotes(t_token *current);
+char					*replace_dollar(char *str, t_data *data);
+int						expand_env(char **temp, int i, t_data *data, char *str);
+int						get_exit_status(char **str);
 
 /*setup redirections*/
 

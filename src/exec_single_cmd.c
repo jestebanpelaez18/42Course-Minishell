@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_single_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/16 19:15:11 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/19 21:08:48 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ int	get_path(t_cmd *cmds, t_data *data)
 		if (!do_execution(cmds, path, data))
 		{
 			error_msg_command("Command not found: ", cmds->commands[0]);
-			g_exit_status = 127;
+			g_var.g_exit_status = 127;
 		}
 		free(path);
 	}
 	else
 	{
 		error_msg_command("Command not found: ", cmds->commands[0]);
-		g_exit_status = 127;
+		g_var.g_exit_status = 127;
 	}
-	return (g_exit_status);
+	return (g_var.g_exit_status);
 }
   
 /*Now this is the final part of the executing,
@@ -59,6 +59,7 @@ void	execute_cmd(t_cmd *cmds, t_data *data)
 {
 	int	exit_status;
 
+	setup_redirections(data->redirections);
 	exit_status = 0;
 	// if(is_builtin)
 	// {
@@ -89,12 +90,12 @@ void	launch_single_cmd(t_cmd *cmds, t_data *data)
 	pid = fork();
 	if (pid == 0)
 	{
-		setup_redirections(data->redirections);
+		// setup_redirections(data->redirections);
 		execute_cmd(cmds, data);
 	}
 	else if (pid < 0)
 		perror("fork");
 	waitpid(pid, &status, WUNTRACED);
 	if (WIFEXITED(status))
-		g_exit_status = WEXITSTATUS(status);
+		g_var.g_exit_status = WEXITSTATUS(status);
 }

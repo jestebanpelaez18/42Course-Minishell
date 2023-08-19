@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 09:37:14 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/31 18:53:08 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/18 17:48:09 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,12 @@ void	signal_in_exec(void)
 {
 	if (signal(SIGQUIT, fork_signal) == SIG_ERR)
 		error_msg("Signal error");
+}
+
+void heredoc_signal(void)
+{
+	if (signal(SIGINT, hd_handler) == SIG_ERR)
+		error_msg("Signal error");
+	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
+		error_msg("Signal error");	
 }

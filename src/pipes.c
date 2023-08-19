@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 15:54:40 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/19 21:07:15 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	execute_single_command(int pipe_read_end, int pipe_write_end,
 {
 	dup2(pipe_read_end, STDIN_FILENO);
 	dup2(pipe_write_end, STDOUT_FILENO);
-	cmd = NULL;
 	execute_cmd(cmd, data);
 	// Execute the command
 	// char *argv[] = {"/bin/echo", "echo", NULL};
@@ -101,12 +100,14 @@ void	launch_pipes(t_data *data)
 {
 	int	i;
 	int	pipes[data->pipex][2];
+	t_cmd *cmds;
 
 	i = 0;
 	signal_in_exec();
+	cmds = data->struc_cmd;
 	//data->struc_cmd = expander(data, data->struc_cmd);
 	create_pipes(data->pipex, pipes);
-	execute_pipes(data->struc_cmd, data->pipex, pipes, data);
+	execute_pipes(cmds, data->pipex, pipes, data);
 	while (i < data->pipex)
 	{
 		close(pipes[i][0]);
