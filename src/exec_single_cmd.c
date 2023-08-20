@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/19 21:08:48 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/20 18:35:29 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	do_execution(t_cmd *cmds, char *path, t_data *data)
 int	get_path(t_cmd *cmds, t_data *data)
 {
 	char	*path;
+	int		exit_s;
 
 	cmds->commands = separete_args(cmds->commands);
 	path = executable_path(cmds->commands, data);
@@ -32,16 +33,16 @@ int	get_path(t_cmd *cmds, t_data *data)
 		if (!do_execution(cmds, path, data))
 		{
 			error_msg_command("Command not found: ", cmds->commands[0]);
-			g_var.g_exit_status = 127;
+			exit_s = 127;
 		}
 		free(path);
 	}
 	else
 	{
 		error_msg_command("Command not found: ", cmds->commands[0]);
-		g_var.g_exit_status = 127;
+		exit_s = 127;
 	}
-	return (g_var.g_exit_status);
+	return (exit_s);
 }
   
 /*Now this is the final part of the executing,
@@ -59,15 +60,16 @@ void	execute_cmd(t_cmd *cmds, t_data *data)
 {
 	int	exit_status;
 
-	setup_redirections(data->redirections);
 	exit_status = 0;
+	setup_redirections(cmds->redirections);
 	// if(is_builtin)
 	// {
-	//
+	//		exit_status = run_build;
+	//      exit(exit_status);
 	// }
 	// else
 	exit_status = get_path(cmds, data);
-	//exit(exit_status);
+	exit(exit_status);
 }
 /*Here we launch single cmd, we check if the built in is an enviroment comand,
 	it means
@@ -87,6 +89,7 @@ void	launch_single_cmd(t_cmd *cmds, t_data *data)
 	// 	// Run built in
 	// 	// come back to minishell loop, basically we finish the execution
 	// }
+	setup_heredoc(data,cmds->redirections);
 	pid = fork();
 	if (pid == 0)
 	{

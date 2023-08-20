@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/19 21:07:15 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/20 18:37:44 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data)
 	i = 0;
 	while (i < num_pipes)
 	{
+		setup_heredoc(data,cmds[i].redirections);
 		pid[i] = fork();
 		if (pid[i] == -1)
 			error_msg("Error creating process\n");
@@ -87,11 +88,14 @@ void	execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data)
 	{
 		waitpid(pid[i], &status, 0);
 		if (WIFEXITED(status))
+		{
+			g_var.g_exit_status = WEXITSTATUS(status);
 			printf("Child process %d exited with status %d\n", pid[i],
 					WEXITSTATUS(status));
-		else if (WIFSIGNALED(status))
-			printf("Child process %d terminated by signal %d\n", pid[i],
-					WTERMSIG(status));
+		}
+		// else if (WIFSIGNALED(status))
+		// 	printf("Child process %d terminated by signal %d\n", pid[i],
+		// 			WTERMSIG(status));
 		i++;
 	}
 }

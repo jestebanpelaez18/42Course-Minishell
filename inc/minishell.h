@@ -182,12 +182,13 @@ int						get_exit_status(char **str);
 void					input_redirection(t_redirec *input);
 void					output_redirection(t_redirec *input);
 void					setup_redirections(t_redirec *redirections);
+void 				setup_heredoc(t_data *data, t_redirec *redirections);
 /*Linked list utils*/
 
 void					ft_lstadd_back(t_token **lst, t_token *new);
 t_token					*ft_lstlast(t_token *lst);
 t_token					*ft_lstnew(char *token, int type, int index);
-t_cmd					*cmd_new(char **token);
+t_cmd					*cmd_new(char **token, t_redirec *redirec);
 t_cmd					*cmd_last(t_cmd *lst);
 void					cmd_add_back(t_cmd **lst, t_cmd *new);
 int						create_cmd_node(char **sub_line, t_cmd **commands);
