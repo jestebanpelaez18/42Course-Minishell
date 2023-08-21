@@ -89,12 +89,12 @@ void					error_msg_redic(char *msg, char *input,
 
 /*Builtins*/
 int						ft_pwd(void);
-int						ft_cd(char **args);
+int						ft_cd(char **args, char **env);
 /*Signal functions*/
 void					signal_in_exec(void);
 void					start_signal(void);
 
-/* Enviroment functions */
+/* Environment functions */
 char					**envdup(char **env);
 
 /*INIT DATA*/
@@ -169,6 +169,7 @@ void					remove_quotes(t_token *current);
 void					input_redirection(t_redirec *input);
 void					output_redirection(t_redirec *input);
 void					setup_redirections(t_redirec *redirections);
+
 /*Linked list utils*/
 
 void					ft_lstadd_back(t_token **lst, t_token *new);

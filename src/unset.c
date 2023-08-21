@@ -6,11 +6,11 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:52:33 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/14 15:44:03 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/14 16:34:44 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "minishell.h"
 
 static	int	get_env_var(char *arg, char **env, int index, int len)
 {

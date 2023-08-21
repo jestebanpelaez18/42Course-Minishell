@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_single_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/16 19:15:11 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/21 09:20:27 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	get_path(t_cmd *cmds, t_data *data)
 	}
 	return (g_exit_status);
 }
-  
 /*Now this is the final part of the executing,
 this command will work for single command and pipex,
 is basically the last step. So here we are gonna check if our command is a
@@ -60,12 +59,14 @@ void	execute_cmd(t_cmd *cmds, t_data *data)
 	int	exit_status;
 
 	exit_status = 0;
-	// if(is_builtin)
-	// {
-	//
-	// }
-	// else
-	exit_status = get_path(cmds, data);
+	cmds->commands = separete_args(cmds->commands);
+	if(is_builtin(cmds->commands[0]))
+	{
+		run_builtin(cmds->commands);
+		// printf("YAY, IT WORKED!!!\n");
+	}
+	else
+		exit_status = get_path(cmds, data);
 	//exit(exit_status);
 }
 /*Here we launch single cmd, we check if the built in is an enviroment comand,

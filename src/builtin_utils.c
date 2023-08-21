@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_builtin.c                                       :+:      :+:    :+:   */
+/*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/11 14:37:31 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/16 13:08:38 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-//#include "minishell.h"
+#include "minishell.h"
 
-/*REMOVE FROM FINAL*/
-static int	ft_strlen(const char *str)
-{
-	int	i;
-
-	if (!str)
-		return (-1);
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int	cmd_cmp(const char *str1, const char *str2)
+static	int	cmd_cmp(const char *str1, const char *str2)
 {
 	int	i;
 	int	len1;
@@ -73,14 +59,39 @@ int	is_builtin(char *str)
 	return (flag);
 }
 
-/*TESTING*/
-int	main(int argc, char **arg)
+static void	run_cmd(char **cmd, int index)
 {
-	int	i;
+	if (index == 0)
+	{
+		ft_echo(cmd);
+	}
+	else if (index == 1)
+		printf("Unset my heart...\n");
+	else if (index == 2)
+		printf("Exporting T_T\n");
+	else
+		printf("Nevermind then.\n");
+}
 
-	(void)argc;
-	// (void)arg;
-	i = is_builtin(arg[1]);
-	printf("%d\n", i);
-	return (0);
+/*Depending on what the index is when it finishes, it runs that command.*/
+void	run_builtin(char **cmds)
+{
+	static char		*arr[3] = {"echo", "unset", "export"};
+	int				i;
+	int				j;
+
+	if (!cmds)
+		return ;
+	i = 0;
+	while (cmds[i])
+	{
+		j = 0;
+		while (arr[j])
+		{
+			if (cmd_cmp(cmds[i], arr[j]))
+				run_cmd(cmds, j);
+			j++;
+		}
+		i++;
+	}
 }
