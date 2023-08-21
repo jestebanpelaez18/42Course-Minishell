@@ -41,9 +41,9 @@ typedef struct s_pid
 
 typedef struct s_redirec
 {
-	char				*token;
+	char				*token; //name of the file
 	char				*hd_file_name;
-	int					type;
+	int					type; // type redirection
 	struct s_redirec	*next;
 	struct s_redirec	*prev;
 }						t_redirec;
@@ -83,7 +83,7 @@ typedef struct s_global
 	int						heredoc_signal;
 }	t_global;
 
-extern t_global g_var;
+t_global g_var;
 
 /*Error msg and free*/
 void					error_msg(char *msg);

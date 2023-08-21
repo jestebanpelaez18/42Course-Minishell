@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 16:19:32 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/20 18:52:37 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/21 20:15:45 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	input_redirection(t_redirec *input)
 	int	fd;
 
 	if(input->type == HEREDOC)
-		fd = (input->hd_file_name, O_RDONLY);
+		fd = open(input->hd_file_name, O_RDONLY);
 	else
 		fd = open(input->token, O_RDONLY);
 	if (fd == -1)
@@ -31,6 +31,7 @@ void	output_redirection(t_redirec *input)
 {
 	int	fd;
 
+	printf("%s\n", input->token);
 	if (input->type == RIGH_R)
 		fd = open(input->token, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else

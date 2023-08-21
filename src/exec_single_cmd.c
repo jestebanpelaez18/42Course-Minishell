@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_single_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/20 18:35:29 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/21 20:15:05 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	get_path(t_cmd *cmds, t_data *data)
 	char	*path;
 	int		exit_s;
 
+	exit_s = 0;
 	cmds->commands = separete_args(cmds->commands);
 	path = executable_path(cmds->commands, data);
 	if (path)
@@ -92,10 +93,7 @@ void	launch_single_cmd(t_cmd *cmds, t_data *data)
 	setup_heredoc(data,cmds->redirections);
 	pid = fork();
 	if (pid == 0)
-	{
-		// setup_redirections(data->redirections);
 		execute_cmd(cmds, data);
-	}
 	else if (pid < 0)
 		perror("fork");
 	waitpid(pid, &status, WUNTRACED);
