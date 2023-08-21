@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/16 13:02:32 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/21 09:17:45 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	init_data(t_data *data)
 {
-	g_exit_status = 0;
 	data->pipex = 0;
+	data->struc_cmd = NULL;
+	data->struc_tok = NULL;
 }
 
 void	get_env(t_data *data, char **env)
@@ -41,6 +42,7 @@ int	main(int argc, char **argv, char **env)
 		error_msg("No arguments for minishell");
 	init_data(&data);
 	get_env(&data, env);
+	g_exit_status = 0;
 	while (42)
 	{
 		start_signal();
@@ -50,8 +52,9 @@ int	main(int argc, char **argv, char **env)
 			tokenization(&data);
 			parser(&data);
 			executor(&data);
+			reset(&data);
 		}
-		reset(&data);
+		// reset(&data);
 		init_data(&data);
 	}
 	return (0);

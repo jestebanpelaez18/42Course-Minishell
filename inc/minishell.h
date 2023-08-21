@@ -23,7 +23,6 @@
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
-# include <sys/wait.h>
 
 # define WORD 0
 # define PIPE 1
@@ -81,10 +80,12 @@ int						g_exit_status;
 
 /*Error msg and free*/
 void					error_msg(char *msg);
-void					error_msg_noexit(char *msg);
+void					error_msg_noexit(char *msg, int exit_status);
 void					free_argt(char **argument);
 void					error_msg_command(char *msg, char *command);
 void					reset(t_data *data);
+void					error_msg_redic(char *msg, char *input,
+							int exit_status);
 
 /*Builtins*/
 int						ft_pwd(void);
@@ -122,7 +123,7 @@ int						check_delimiter(char c, char *delimiter);
 void					parser(t_data *data);
 void					set_number_of_pipes(t_data *data, t_token *tokens);
 int						count_commands(t_token *node);
-void					parse_redirection(t_token *node, t_redirec **redirec);
+void					parse_redirection(t_token **node, t_redirec **redirec);
 void					check_redirection(t_token **node);
 char					**separete_args(char **str);
 
@@ -141,8 +142,10 @@ void					execute_cmd(t_cmd *cmds, t_data *data);
 /*Pipes*/
 
 void					launch_pipes(t_data *data);
-void					execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data);
-void					execute_command(int pipe_read_end, int pipe_write_end, t_cmd *cmd, t_data *data);
+void					execute_pipes(t_cmd *cmds, int num_pipes,
+							int (*pipes)[2], t_data *data);
+void					execute_command(int pipe_read_end, int pipe_write_end,
+							t_cmd *cmd, t_data *data);
 void					create_pipes(int num_pipes, int (*pipes)[2]);
 
 /*Expander*/
@@ -159,6 +162,7 @@ char					*get_str(char *str, char c);
 int						dollar_tok_len(char *str, int j);
 char					*rm_double_quotes(char *str);
 char					*rm_single_quotes(char *str);
+void					remove_quotes(t_token *current);
 
 /*setup redirections*/
 

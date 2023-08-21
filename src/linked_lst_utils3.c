@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   linked_lst_utils3.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:07:20 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/12 17:31:29 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/17 19:15:25 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
 void	deletenode(t_token **struck_tok, t_token *del)
 {
 	if (*struck_tok == NULL || del == NULL)
 		return ;
-	if (*struck_tok != NULL)
+	if (*struck_tok == del)
 		*struck_tok = del->next;
 	if (del->next != NULL)
 		del->next->prev = del->prev;
 	if (del->prev != NULL)
 		del->prev->next = del->next;
 	free(del);
+	del = NULL;
 	return ;
 }
 
