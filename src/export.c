@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:39:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/21 12:38:04 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/21 12:53:37 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 EDGECASE: Handle every argument after export.
 */
 
+#include "../inc/minishell.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 static	int	is_alpha(char *arg)
@@ -36,7 +38,7 @@ static	int	is_alpha(char *arg)
 static char	**ft_export(char *arg, char **env)
 {
 	if (!arg || !*arg)
-		return ;
+		return (NULL);
 	(void)env;
 	/*
 		takes the argument and allocates it into the environment.
@@ -44,7 +46,9 @@ static char	**ft_export(char *arg, char **env)
 		
 	*/
 	if (is_alpha(arg)) //Add recognition for numbers
+	{
 		printf("%s is now a variable.\n", arg); //Allocate at the end of env
+	}
 	return (env);
 }
 
