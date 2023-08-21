@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:39:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/16 15:52:29 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/21 12:38:04 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static	int	is_alpha(char *arg)
 	return (1);
 }
 
-void	ft_export(char *arg, char **env)
+static char	**ft_export(char *arg, char **env)
 {
 	if (!arg || !*arg)
 		return ;
@@ -43,8 +43,9 @@ void	ft_export(char *arg, char **env)
 		only receives alpha, no numbers, no non-alphabetical
 		
 	*/
-	if (is_alpha(arg))
-		printf("%s is now a variable.\n", arg);
+	if (is_alpha(arg)) //Add recognition for numbers
+		printf("%s is now a variable.\n", arg); //Allocate at the end of env
+	return (env);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -56,7 +57,7 @@ int	main(int argc, char **argv, char **env)
 	if (!argv || (argv[i] && (strncmp(argv[i], "export", 7) != 0))) //CHANGE TO FT
 		return (-1);
 	i++;
-	if (argv[i])
+	if (argv[i]) //If there are additional arguments after export
 	{
 		while (argv[i])
 		{
@@ -64,7 +65,7 @@ int	main(int argc, char **argv, char **env)
 			i++;
 		}
 	}
-	else
+	else //Export only, prints environment variables
 	{
 		i = 0;
 		while (env[i])
