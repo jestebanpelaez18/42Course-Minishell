@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_single_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/21 09:20:27 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/22 15:04:42 by junheeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ is basically the last step. So here we are gonna check if our command is a
 built in,
 if that is the case we run our built in. In other case execve will take care
 of that,
-	and for that case we have to search for the executable in the directories specified by the PATH environment variable. 
+	and for that case we have to search for the executable in the directories specified by the PATH environment variable.
 The PATH variable is a colon-separated list of directories where the shell searches for executables. For example,
 if PATH is /usr/bin:/bin:/usr/local/bin,
 the shell will search these directories for the executable file corresponding to the command.*/

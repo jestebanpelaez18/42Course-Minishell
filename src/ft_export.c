@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:39:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/22 14:58:25 by junheeki         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:35:56 by junheeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ static char	**ft_export(char *arg, char **env)
 	if (is_alpha(arg)) //Add recognition for numbers
 	{
 		printf("%s is now a variable.\n", arg); //Allocate at the end of env
+	}
+	else
+	{
+		printf("export: not an identifier: %s", arg);
 	}
 	return (env);
 }
@@ -103,7 +107,7 @@ int	main(int argc, char **argv, char **env)
 		i = 0;
 		while (env[i])
 		{
-			printf("%s\n", env[i]);
+			printf("declare -x %s\n", env[i]);
 			i++;
 		}
 	}
