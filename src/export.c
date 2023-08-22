@@ -6,7 +6,7 @@
 /*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:39:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/21 13:03:57 by junheeki         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:14:52 by junheeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,15 @@ EDGECASE: Handle every argument after export.
 #include <stdlib.h>
 #include <string.h>
 
-static	int	is_alpha(char *arg)
+static int	is_alpha(char *arg)
 {
 	int	i;
 
 	i = 0;
-	while ((arg[i] >= 'a' && arg[i] <= 'z') || (arg[i] >= 'A' && arg[i] <= 'Z'))
-		i++;
-	if (arg[i])
+	if ((arg[i] >= 'a' && arg[i] <= 'z') || (arg[i] >= 'A' && arg[i] <= 'Z'))
+		return (1);
+	else
 		return (0);
-	return (1);
 }
 
 static char	**ft_export(char *arg, char **env)
@@ -42,8 +41,7 @@ static char	**ft_export(char *arg, char **env)
 	(void)env;
 	/*
 		takes the argument and allocates it into the environment.
-		only receives alpha, no numbers, no non-alphabetical
-
+		only receives alpha, no numbers, no non-alphabetical for first letter
 	*/
 	if (is_alpha(arg)) //Add recognition for numbers
 	{
@@ -58,7 +56,8 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	i = 1;
-	if (!argv || (argv[i] && (strncmp(argv[i], "export", 7) != 0))) //CHANGE TO FT
+	if (!argv || (argv[i] && (strncmp(argv[i], "export", 7) != 0)))
+		//CHANGE TO FT
 		return (-1);
 	i++;
 	if (argv[i]) //If there are additional arguments after export
