@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 15:54:40 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/20 18:37:44 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	execute_single_command(int pipe_read_end, int pipe_write_end,
 {
 	dup2(pipe_read_end, STDIN_FILENO);
 	dup2(pipe_write_end, STDOUT_FILENO);
-	cmd = NULL;
 	execute_cmd(cmd, data);
 	// Execute the command
 	// char *argv[] = {"/bin/echo", "echo", NULL};
@@ -65,6 +64,7 @@ void	execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data)
 	i = 0;
 	while (i < num_pipes)
 	{
+		setup_heredoc(data,cmds[i].redirections);
 		pid[i] = fork();
 		if (pid[i] == -1)
 			error_msg("Error creating process\n");
@@ -88,11 +88,14 @@ void	execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data)
 	{
 		waitpid(pid[i], &status, 0);
 		if (WIFEXITED(status))
+		{
+			g_var.g_exit_status = WEXITSTATUS(status);
 			printf("Child process %d exited with status %d\n", pid[i],
 					WEXITSTATUS(status));
-		else if (WIFSIGNALED(status))
-			printf("Child process %d terminated by signal %d\n", pid[i],
-					WTERMSIG(status));
+		}
+		// else if (WIFSIGNALED(status))
+		// 	printf("Child process %d terminated by signal %d\n", pid[i],
+		// 			WTERMSIG(status));
 		i++;
 	}
 }
@@ -101,12 +104,14 @@ void	launch_pipes(t_data *data)
 {
 	int	i;
 	int	pipes[data->pipex][2];
+	t_cmd *cmds;
 
 	i = 0;
 	signal_in_exec();
+	cmds = data->struc_cmd;
 	//data->struc_cmd = expander(data, data->struc_cmd);
 	create_pipes(data->pipex, pipes);
-	execute_pipes(data->struc_cmd, data->pipex, pipes, data);
+	execute_pipes(cmds, data->pipex, pipes, data);
 	while (i < data->pipex)
 	{
 		close(pipes[i][0]);

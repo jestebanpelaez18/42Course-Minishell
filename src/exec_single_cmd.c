@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/21 09:20:27 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/22 09:37:29 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ int	do_execution(t_cmd *cmds, char *path, t_data *data)
 int	get_path(t_cmd *cmds, t_data *data)
 {
 	char	*path;
+	int		exit_s;
 
+	exit_s = 0;
 	cmds->commands = separete_args(cmds->commands);
 	path = executable_path(cmds->commands, data);
 	if (path)
@@ -32,16 +34,16 @@ int	get_path(t_cmd *cmds, t_data *data)
 		if (!do_execution(cmds, path, data))
 		{
 			error_msg_command("Command not found: ", cmds->commands[0]);
-			g_exit_status = 127;
+			exit_s = 127;
 		}
 		free(path);
 	}
 	else
 	{
 		error_msg_command("Command not found: ", cmds->commands[0]);
-		g_exit_status = 127;
+		exit_s = 127;
 	}
-	return (g_exit_status);
+	return (exit_s);
 }
 /*Now this is the final part of the executing,
 this command will work for single command and pipex,
@@ -59,15 +61,15 @@ void	execute_cmd(t_cmd *cmds, t_data *data)
 	int	exit_status;
 
 	exit_status = 0;
-	cmds->commands = separete_args(cmds->commands);
-	if(is_builtin(cmds->commands[0]))
-	{
-		run_builtin(cmds->commands);
-		// printf("YAY, IT WORKED!!!\n");
-	}
-	else
-		exit_status = get_path(cmds, data);
-	//exit(exit_status);
+	setup_redirections(cmds->redirections);
+	// if(is_builtin)
+	// {
+	//		exit_status = run_build;
+	//      exit(exit_status);
+	// }
+	// else
+	exit_status = get_path(cmds, data);
+	exit(exit_status);
 }
 /*Here we launch single cmd, we check if the built in is an enviroment comand,
 	it means
@@ -87,15 +89,13 @@ void	launch_single_cmd(t_cmd *cmds, t_data *data)
 	// 	// Run built in
 	// 	// come back to minishell loop, basically we finish the execution
 	// }
+	setup_heredoc(data,cmds->redirections);
 	pid = fork();
 	if (pid == 0)
-	{
-		setup_redirections(data->redirections);
 		execute_cmd(cmds, data);
-	}
 	else if (pid < 0)
 		perror("fork");
 	waitpid(pid, &status, WUNTRACED);
 	if (WIFEXITED(status))
-		g_exit_status = WEXITSTATUS(status);
+		g_var.g_exit_status = WEXITSTATUS(status);
 }

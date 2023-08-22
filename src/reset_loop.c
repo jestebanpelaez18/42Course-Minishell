@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 17:54:31 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/17 19:12:10 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/21 19:49:24 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	reset_redirect(t_redirec **tokens)
 		return ;
 	while (*tokens)
 	{
+		// printf("%d hello \n ",(*tokens)->type);
 		temp = (*tokens);
 		*tokens = (*tokens)->next;
 		if (temp->token)
@@ -58,6 +59,8 @@ void	reset_cmds(t_cmd **struc_cmd)
 		*struc_cmd = (*struc_cmd)->next;
 		if (temp->commands)
 			free_argt(temp->commands);
+		if (temp->redirections)
+			reset_redirect(&temp->redirections);
 		free(temp);
 	}
 	*struc_cmd = NULL;
@@ -67,10 +70,8 @@ void	reset(t_data *data)
 {
 	if (data->struc_cmd)
 		reset_cmds(&data->struc_cmd);
-	if (data->struc_tok != NULL)
+	if (data->struc_tok)
 		reset_token(&data->struc_tok);
-	if (data->redirections)
-		reset_redirect(&data->redirections);
 	if (data->line_read)
 		free(data->line_read);
 	return ;

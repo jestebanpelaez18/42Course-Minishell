@@ -41,8 +41,9 @@ typedef struct s_pid
 
 typedef struct s_redirec
 {
-	char				*token;
-	int					type;
+	char				*token; //name of the file
+	char				*hd_file_name;
+	int					type; // type redirection
 	struct s_redirec	*next;
 	struct s_redirec	*prev;
 }						t_redirec;
@@ -76,7 +77,13 @@ typedef struct s_data
 	t_pid				*struc_pid;
 }						t_data;
 
-int						g_exit_status;
+typedef struct s_global
+{
+	int						g_exit_status;
+	int						heredoc_signal;
+}	t_global;
+
+t_global g_var;
 
 /*Error msg and free*/
 void					error_msg(char *msg);
@@ -89,10 +96,13 @@ void					error_msg_redic(char *msg, char *input,
 
 /*Builtins*/
 int						ft_pwd(void);
-int						ft_cd(char **args, char **env);
+int						ft_cd(char **args, t_data *data);
+
 /*Signal functions*/
 void					signal_in_exec(void);
 void					start_signal(void);
+void					heredoc_signal(void);
+void					hd_handler(int signal);
 
 /* Environment functions */
 char					**envdup(char **env);
@@ -163,19 +173,22 @@ int						dollar_tok_len(char *str, int j);
 char					*rm_double_quotes(char *str);
 char					*rm_single_quotes(char *str);
 void					remove_quotes(t_token *current);
+char					*replace_dollar(char *str, t_data *data);
+int						expand_env(char **temp, int i, t_data *data, char *str);
+int						get_exit_status(char **str);
 
 /*setup redirections*/
 
 void					input_redirection(t_redirec *input);
 void					output_redirection(t_redirec *input);
 void					setup_redirections(t_redirec *redirections);
-
+void 					setup_heredoc(t_data *data, t_redirec *redirections);
 /*Linked list utils*/
 
 void					ft_lstadd_back(t_token **lst, t_token *new);
 t_token					*ft_lstlast(t_token *lst);
 t_token					*ft_lstnew(char *token, int type, int index);
-t_cmd					*cmd_new(char **token);
+t_cmd					*cmd_new(char **token, t_redirec *redirec);
 t_cmd					*cmd_last(t_cmd *lst);
 void					cmd_add_back(t_cmd **lst, t_cmd *new);
 int						create_cmd_node(char **sub_line, t_cmd **commands);

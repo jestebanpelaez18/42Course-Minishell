@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:46 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/17 12:41:47 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/19 16:13:33 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 int	get_exit_status(char **str)
 {
 	free(*str);
-	*str = ft_itoa(g_exit_status);
+	*str = ft_itoa(g_var.g_exit_status);
 	return ((int)ft_strlen(*str) + 1);
 }
 
