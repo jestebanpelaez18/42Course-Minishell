@@ -92,6 +92,7 @@ int						ft_pwd(void);
 int						ft_cd(char **args, char **env);
 int						is_builtin(char *str);
 void					run_builtin(char **cmds);
+void					print_export(char **env, int fd);
 /*Signal functions*/
 void					signal_in_exec(void);
 void					start_signal(void);

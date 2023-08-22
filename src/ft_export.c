@@ -6,7 +6,7 @@
 /*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:39:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/22 18:35:56 by junheeki         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:19:44 by junheeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,25 @@ EDGECASE: Handle every argument after export.
 #include <stdlib.h>
 #include <string.h>
 
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	size_t	i;
+
+	i = 0;
+	if (s == NULL)
+		return ;
+	while (s[i] != '\0')
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
+}
+
 static int	is_alpha(char *arg)
 {
 	int	i;
@@ -33,6 +52,29 @@ static int	is_alpha(char *arg)
 	else
 		return (0);
 }
+
+//export : with no arg -> print export with "declare -x "
+//
+
+void	print_export(char **env, int fd)
+{
+	int	i;
+	char	**e_cpy;
+	char	*str;
+
+	i = 0;
+	str = getenv(e_cpy[i]);
+	while (str[i])
+	{
+		ft_putstr_fd("declare -x ", fd);
+		printf("%s", e_cpy[i]);
+		// print_quote(str[i], fd);
+		ft_putchar_fd('\n', fd);
+		free(e_cpy[i]);
+		i++;
+	}
+}
+
 
 static char	**ft_export(char *arg, char **env)
 {
@@ -54,39 +96,10 @@ static char	**ft_export(char *arg, char **env)
 	return (env);
 }
 
-// int			ft_export(t_cmd *cmd_list, char ***envp, int fd)
-// {
-// 	int			i;
-// 	int 		keyindex;
-
-// 	i = 1;
-// 	while(cmd_list->cmdline[i].cmd && cmd_list->cmdline[i].redir_flag == 0)
-// 	{
-// 		if (isvalid_export(cmd_list->cmdline[i].cmd))
-// 		{
-// 			if ((keyindex = check_key(*envp, cmd_list->cmdline[i].cmd)) >= 0)
-// 			{
-// 				if (haveequal(cmd_list->cmdline[i].cmd))
-// 					add_key_envp(envp, cmd_list->cmdline[i].cmd, keyindex);
-// 					//key가 있는데 value가 없이 들어오면 아무 처리 안해줌.
-// 			}
-// 			else
-// 				add_envp(cmd_list->cmdline[i].cmd, envp);//key가 없어서 새로 추가.
-// 		}
-// 		else//유효한 키가 아닐때,
-// 			cmd_list->err_manage.errcode = 5;
-// 		i++;
-// 	}
-// 	if (!(cmd_list->cmdline[1].cmd) || cmd_list->cmdline[1].redir_flag == 1)
-// 		print_export(*envp, fd);
-// 	if (cmd_list->err_manage.errcode == 5)
-// 		return (-1);
-// 	return (1);
-// }
-
 int	main(int argc, char **argv, char **env)
 {
 	int	i;
+	int fd;
 
 	(void)argc;
 	i = 1;
@@ -107,8 +120,15 @@ int	main(int argc, char **argv, char **env)
 		i = 0;
 		while (env[i])
 		{
-			printf("declare -x %s\n", env[i]);
-			i++;
+			print_export(env, fd);
+			// ft_putstr_fd("declare -x ", fd);
+			// //print_quote(str[i], fd);
+			// printf("%s", str[i]);
+			// ft_putchar_fd('\n', fd);
+			// free(str[i]);
+			// i++;
+			// // printf("declare -x %s\n", env[i]);
+			// // i++;
 		}
 	}
 	return (0);
