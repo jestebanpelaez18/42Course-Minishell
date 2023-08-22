@@ -199,5 +199,7 @@ void					redirec_lstadd_back(t_redirec **lst, t_redirec *new);
 void					deletenode(t_token **struck_tok, t_token *del);
 
 void					printList(t_token *node);
+void	printcmd(t_cmd *node);
+
 
 #endif

@@ -9,7 +9,9 @@ OBJ_DIR = obj
 
 INCLUDES = -Ilibft -Iinc
 
-FLAGS = -Wall -Wextra -Werror -MMD -g
+FLAGS = -Wall -Wextra -MMD  -g #-Werror 
+
+#-fsanitize=address,undefined
 
 # MAC_OS
 O_FLAGS = -lreadline -L${HOME}/.brew/opt/readline/lib
