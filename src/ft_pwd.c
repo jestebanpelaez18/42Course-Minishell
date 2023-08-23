@@ -6,7 +6,7 @@
 /*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 16:08:02 by junheeki          #+#    #+#             */
-/*   Updated: 2023/08/10 17:57:30 by junheeki         ###   ########.fr       */
+/*   Updated: 2023/08/23 11:45:12 by junheeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,6 @@
 #include <unistd.h>
 #include <sys/param.h>
 #include <stdlib.h>
-
-// void	ft_putchar_fd(char c, int fd)
-// {
-// 	write(fd, &c, 1);
-// }
-
-// void	ft_putendl_fd(char *s, int fd)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	if (s == NULL)
-// 		return ;
-// 	while (s[i] != '\0')
-// 	{
-// 		ft_putchar_fd(s[i], fd);
-// 		i++;
-// 	}
-// 	write(fd, "\n", 1);
-// }
 
 int		ft_pwd(void)
 {
@@ -48,10 +28,3 @@ int		ft_pwd(void)
 	else
 		return(1);
 }
-
-// int	main()
-// {
-// 	// str = getenv(e_cpy[0]);
-// 	ft_pwd();
-// 	return (0);
-// }

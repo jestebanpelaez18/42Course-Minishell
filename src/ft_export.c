@@ -6,7 +6,7 @@
 /*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:39:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/22 19:19:44 by junheeki         ###   ########.fr       */
+/*   Updated: 2023/08/23 14:44:57 by junheeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	print_export(char **env, int fd)
 		i++;
 	}
 }
-
 
 static char	**ft_export(char *arg, char **env)
 {
