@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_utils1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 17:46:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/12 17:12:24 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/23 18:05:14 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,14 @@
 // //     return(0);
 // }
 
-
-static char *undo_split(char **commands, char *n_str)
+static char	*undo_split(char **commands, char *n_str)
 {
-    char *temp;
-    char *space;
-    int		i;
+	char	*temp;
+	char	*space;
+	int		i;
 
+	if (!commands || !commands[0])
+		return (NULL);
 	temp = ft_strdup(commands[0]);
 	i = 1;
 	while (commands[i])
@@ -49,18 +50,22 @@ static char *undo_split(char **commands, char *n_str)
 	return (n_str);
 }
 
-char **separete_args(char **str)
+char	**separete_args(char **str)
 {
-    char **temp;
-    char *split_join;
+	char	**temp;
+	char	*split_join;
 
-    split_join = undo_split(str, NULL);
-    free_argt(str);
-    temp = ft_split(split_join, ' ');
-    free(split_join);
-    split_join = undo_split(temp,NULL);
-    free_argt(temp);
-    temp = ft_split(split_join, ' ');
-    free(split_join);
-    return(temp);
-}	
+	split_join = undo_split(str, NULL);
+	if (str)
+		free_argt(str);
+	temp = ft_split(split_join, ' ');
+	if (split_join)
+		free(split_join);
+	split_join = undo_split(temp, NULL);
+	if (temp)
+		free_argt(temp);
+	temp = ft_split(split_join, ' ');
+	if (split_join)
+		free(split_join);
+	return (temp);
+}

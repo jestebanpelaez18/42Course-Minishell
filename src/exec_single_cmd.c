@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/22 19:50:11 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/23 18:13:53 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	get_path(t_cmd *cmds, t_data *data)
 	}
 	return (exit_s);
 }
-  
+
 /*Now this is the final part of the executing,
 this command will work for single command and pipex,
 is basically the last step. So here we are gonna check if our command is a
@@ -61,6 +61,11 @@ void	execute_cmd(t_cmd *cmds, t_data *data)
 {
 	int	exit_status;
 
+	if (!cmds)
+	{
+		exit_status = 0;
+		exit(exit_status);
+	}
 	exit_status = 0;
 	setup_redirections(cmds->redirections);
 	// if(is_builtin)
@@ -82,15 +87,15 @@ in other case we execure our program whit execvp or built in if is the case */
 
 void	launch_single_cmd(t_cmd *cmds, t_data *data)
 {
-	int pid;
-	int status;
+	int	pid;
+	int	status;
 
 	// if (envp_cmd(data))
 	// {
 	// 	// Run built in
 	// 	// come back to minishell loop, basically we finish the execution
 	// }
-	setup_heredoc(data,cmds->redirections);
+	setup_heredoc(data, cmds->redirections);
 	pid = fork();
 	if (pid == 0)
 		execute_cmd(cmds, data);
