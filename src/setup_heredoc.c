@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:17:38 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/21 15:40:47 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/22 12:36:18 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	heredoc(t_redirec *redirec, t_data *data)
 	heredoc_signal();
 	line_s = read_input(redirec, temp_fd, data);
 	close(temp_fd);
+	// unlink(redirec->hd_file_name);
 	return (line_s);
 }
 

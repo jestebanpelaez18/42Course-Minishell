@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/22 09:37:29 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/23 09:44:21 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	do_execution(t_cmd *cmds, char *path, t_data *data)
 {
-	if (access(cmds->commands[0], F_OK) == 0)
+	if (access(cmds->commands[0], X_OK) == 0)
 		execve(cmds->commands[0], cmds->commands, data->env);
 	else
 		execve(path, cmds->commands, data->env);

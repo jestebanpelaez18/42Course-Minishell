@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 17:54:31 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/21 19:49:24 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/22 12:40:54 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	reset_redirect(t_redirec **tokens)
 		// printf("%d hello \n ",(*tokens)->type);
 		temp = (*tokens);
 		*tokens = (*tokens)->next;
+		if (temp->type == HEREDOC)
+			unlink(temp->hd_file_name);
 		if (temp->token)
 			free(temp->token);
 		free(temp);
