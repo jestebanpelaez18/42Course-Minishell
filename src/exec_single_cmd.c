@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/24 15:42:48 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/24 20:16:39 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ void	execute_cmd(t_cmd *cmds, t_data *data)
 {
 	int	exit_status;
 
-	if (!cmds)
-	{
-		exit_status = 0;
-		exit(exit_status);
-	}
+	// if (!cmds)
+	// {
+	// 	exit_status = 0;
+	// 	exit(exit_status);
+	// }
 	exit_status = 0;
 	setup_redirections(cmds->redirections);
 	// if(is_builtin)

@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:46 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/24 17:04:18 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:38:26 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	expand_env(char **temp, int i, t_data *data, char *str)
 		}
 		j++;
 	}
+	if (step == 1)
+		step += dollar_tok_len(str, i);
 	return (step);
 }
 
@@ -55,8 +57,8 @@ char	*replace_dollar(char *str, t_data *data)
 		// i += skip_digit(i, str);
 		if (str[i] == '$' && str[i + 1] == '?')
 			i += get_exit_status(&temp);
-		else if (str[i] == '$' && (str[i + 1] != ' ' && (str[i + 2] != '"' || str[i
-					+ 2] != '\0')) && str[i + 1] != '\0')
+		else if (str[i] == '$' && (str[i + 1] != ' ' && (str[i + 2] != '"'
+						|| str[i + 2] != '\0')) && str[i + 1] != '\0')
 		{
 			i += expand_env(&temp, i + 1, data, str);
 		}
@@ -84,7 +86,7 @@ void	expand_dollar(t_token *current, t_data *data)
 	else
 	{
 		if (current->tokens[0] != '\'' && (current->tokens[j - 1] != '\''
-			&& current->tokens[j + 1] != '\0'))
+				&& current->tokens[j + 1] != '\0'))
 		{
 			str = replace_dollar(current->tokens, data);
 			current->tokens = str;

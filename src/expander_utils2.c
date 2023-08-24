@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 14:25:49 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/24 17:31:27 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:36:37 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	dollar_tok_len(char *str, int j)
 	i = j;
 	k = 0;
 	while (str[i] && str[i] != '\"' && str[i] != '\'' && str[i] != ' '
-		&& str[i] != '$' && str[i] != '\\' && str[i] != '=')
+		&& str[i] != '$' && str[i] != '\\' && str[i] != '=' && str[i] != ':')
 	{
 		k++;
 		i++;
