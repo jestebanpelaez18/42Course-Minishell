@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:39:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/24 17:29:31 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/24 20:59:30 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static	int	get_env_var(char *arg, char **env, int index, int len)
 	if (!arg || !*env)
 		return (-1);
 	i = index;
-	while (env[i] && ft_strncmp(arg, env[i], len))
+	while (env[i] && ft_strncmp(arg, env[i], len) != 0)
 		i++;
 	if (env[i] == '\0')
 		return (0);
@@ -104,27 +104,43 @@ static void	print_export_env(char **env)
 	ft_free_array(export);  // A function that frees the whole array.
 }
 
+static	int	content_check(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '=')
+		i++;
+	if (str[i + 1] != '\0')
+		return (i);
+	return (0);
+}
+
 static char **modify_env_var(char **env, char *arg, \
 							int eq_flag, int key_flag)
 {
-	int i;
-	int len;
-	int pos;
-	char *tmp;
-	
+	int	i;
+	int	j;
+	int	len;
+	int	pos;
+
 	len = ft_strlen(arg);
-	tmp = NULL;
 	i = 0;
+	printf("%d\n", eq_flag);
+	printf("%d\n", key_flag);
 	if (eq_flag == 0 && key_flag == 1)
 		return (env);
 	else if (eq_flag == 1 && key_flag == 1)
 	{
+		//If there is nothing after the equals sign/
 		pos = get_env_var(arg, env, i, len);
-		tmp = env[pos];
-		// free(env[pos]);
 		env[pos] = strdup(arg);
-		env[pos] = ft_strjoin(env[pos], ""); //How 2 get "" into stringjoin
-		// printf("%s\n", env[pos]);
+		env[pos] = ft_strjoinfree(env[pos], "\"");
+		if (content_check(arg))
+			env[pos] = ft_strjoinfree(env[pos], &arg[j]);
+		env[pos] = ft_strjoinfree(env[pos], "\"");
+		printf("%s\n", env[pos]);
+		//else if (something there.)
 	}
 	//printf("Change value of the key.");
 	else if (eq_flag == 0 && key_flag == 0)
@@ -154,7 +170,7 @@ static char	**ft_export(char *arg, char **env)
 	len = ft_strlen(arg);
 	if (is_first_alpha(arg) == 1)
 	{
-		if (arg[len - 1] == '=')
+		if (content_check(arg)) // MAKE THIS INTO MULTITOOL CHECKER, IF THERE IS AN = in the middle of the string.
 			eq_flag = 1;
 		if (get_env_var(arg, env, index, len))
 			key_flag = 1;
