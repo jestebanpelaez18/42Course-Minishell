@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:43:55 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/23 17:06:25 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/24 16:27:51 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ void	parse_redirection(t_token **node, t_redirec **redirec)
 			deletenode(node, tok_temp);
 		if (next_temp)
 			deletenode(node, next_temp);
-		// printf("%d\n", (*node)->type);
-		// printf("%d\n", (*node)->type);
 	}
 	parse_redirection(node, redirec);
 }

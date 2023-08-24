@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 09:37:14 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/24 16:26:08 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/24 16:27:27 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	handler(int signal)
 		rl_redisplay();
 	}
 }
+
 void	start_signal(void)
 {
 	if (signal(SIGINT, handler) == SIG_ERR)

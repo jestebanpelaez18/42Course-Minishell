@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:46 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/19 16:13:33 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/24 17:04:18 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// char	**check_expander(t_data *data, char **commands)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (commands[i])
-// 	{
-//         if(commands[i])
-// 	}
-// }
-
-// t_cmd	*expander(t_data *data, t_cmd *cmds)
-// {
-// 	cmds->commands = check_expander(data, cmds->commands);
-
-// 	return (cmds);
-// }
 
 int	get_exit_status(char **str)
 {
@@ -73,7 +55,7 @@ char	*replace_dollar(char *str, t_data *data)
 		// i += skip_digit(i, str);
 		if (str[i] == '$' && str[i + 1] == '?')
 			i += get_exit_status(&temp);
-		if (str[i] == '$' && (str[i + 1] != ' ' && (str[i + 2] != '"' || str[i
+		else if (str[i] == '$' && (str[i + 1] != ' ' && (str[i + 2] != '"' || str[i
 					+ 2] != '\0')) && str[i + 1] != '\0')
 		{
 			i += expand_env(&temp, i + 1, data, str);
