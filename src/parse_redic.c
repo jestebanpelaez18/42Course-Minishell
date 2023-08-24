@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:43:55 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/22 15:06:56 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:06:25 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	create_single_redirection(t_token *token, t_redirec **redirection)
 void	parse_redirection(t_token **node, t_redirec **redirec)
 {
 	t_token	*tok_temp;
+	t_token *next_temp;//
 
 	tok_temp = *node;
 	while (tok_temp && tok_temp->type == WORD)
@@ -64,8 +65,13 @@ void	parse_redirection(t_token **node, t_redirec **redirec)
 		|| tok_temp->type == HEREDOC || tok_temp->type == APPEND)
 	{
 		create_single_redirection(tok_temp, redirec);
-		deletenode(node, tok_temp);
-		deletenode(node, tok_temp->next);
+		next_temp = tok_temp->next;
+		if (tok_temp)
+			deletenode(node, tok_temp);
+		if (next_temp)
+			deletenode(node, next_temp);
+		// printf("%d\n", (*node)->type);
+		// printf("%d\n", (*node)->type);
 	}
 	parse_redirection(node, redirec);
 }

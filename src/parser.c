@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:07:32 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/22 19:31:32 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:57:15 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,34 +76,32 @@ void	fill_commands(t_token *data, t_cmd **cmds)
 		if (!cmd)
 			error_msg("allocation error");
 		cmd_add_back(cmds, cmd);
-		if (cmd_redic)
-			free(cmd_redic);
+		// if (cmd_redic)
+		// 	free(cmd_redic);
 	}
 }
 
-t_cmd	*start_firts_cmd(t_token *data, t_redirec *redirec)
+t_cmd	*start_firts_cmd(t_token *data, t_redirec *cmd_redic)
 {
 	t_cmd	*cmd;
-	t_redirec *cmd_redic;
 
-	(void)redirec;
 	cmd = NULL;
-	cmd_redic = NULL;
-	parse_redirection(&data, &cmd_redic);
 	cmd = initiate_cmd(data, cmd_redic);
 	if (!cmd)
 		return (NULL);
-	fill_commands(data, &cmd);
-	// free(cmd_redic);
 	return (cmd);
 }
 
 void	parser(t_data *data)
 {
+	t_redirec *cmd_redic;
+	
+	cmd_redic = NULL;
 	set_number_of_pipes(data, data->struc_tok);
+	parse_redirection(&data->struc_tok, &cmd_redic);
 	data->struc_cmd = start_firts_cmd(data->struc_tok,
-			data->redirections);
+			cmd_redic);
 	if (!data->struc_cmd)
 		error_msg("allocation error");
-	// fill_commands(data->struc_tok, &data->struc_cmd);
+	fill_commands(data->struc_tok, &data->struc_cmd);
 }

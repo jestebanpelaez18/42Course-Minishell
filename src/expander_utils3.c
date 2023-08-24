@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:47:41 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/17 15:04:17 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/23 14:27:45 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ char	*rm_single_quotes(char *str)
 	int		j;
 	char	*temp;
 
-	temp = ft_strdup("");
+	temp = (char *)malloc(ft_strlen(str) + 1);
+	if (!temp)
+		error_msg("Allocation error");
 	i = 0;
 	j = 0;
 	while (str[i] != '\0')

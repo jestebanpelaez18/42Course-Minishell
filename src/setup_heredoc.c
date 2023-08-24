@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:17:38 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/22 12:36:18 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/23 19:37:52 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,22 +66,36 @@ int	heredoc(t_redirec *redirec, t_data *data)
 	heredoc_signal();
 	line_s = read_input(redirec, temp_fd, data);
 	close(temp_fd);
-	// unlink(redirec->hd_file_name);
 	return (line_s);
+}
+
+char	*heredoc_name(int n_file)
+{
+	char	*number;
+	char	*temp;
+
+	number = ft_itoa(n_file);
+	temp = ft_strjoin("hd_temp", number);
+	free(number);
+	return (temp);
 }
 
 void	setup_heredoc(t_data *data, t_redirec *redirections)
 {
-	t_redirec *temp;
-	int line_status;
+	t_redirec	*temp;
+	int			line_status;
+	int			n_file;
 
 	temp = redirections;
 	line_status = 0;
+	n_file = 0;
 	while (temp)
 	{
 		if (temp->type == HEREDOC)
 		{
-			temp->hd_file_name = "hd_temp";
+			if (temp->hd_file_name)
+				free(temp->hd_file_name);
+			temp->hd_file_name = heredoc_name(n_file);
 			line_status = heredoc(temp, data);
 			if (line_status)
 			{
@@ -89,8 +103,8 @@ void	setup_heredoc(t_data *data, t_redirec *redirections)
 				reset(data);
 				return ;
 			}
+			n_file++;
 		}
 		temp = temp->next;
 	}
-	return ;
 }

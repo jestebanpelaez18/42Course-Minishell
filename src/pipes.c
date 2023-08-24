@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/22 19:58:12 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:57:42 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,15 @@ void	create_pipes(int num_pipes, int (*pipes)[2])
 	}
 }
 
-void	close_unused_pipes(int num_pipes, int (*pipes)[2], int current_pipe)
+void	close_unused_pipes(int num_pipes, int (*pipes)[2])
 {
 	int	i;
 
 	i = 0;
 	while (i < num_pipes)
 	{
-		if (i != current_pipe)
-		{
-			close(pipes[i][0]);
-			close(pipes[i + 1][1]);
-		}
+		close(pipes[i][1]);
+		close(pipes[i][0]);
 		i++;
 	}
 }
@@ -56,23 +53,22 @@ void	execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data)
 			error_msg("Error creating process\n");
 		else if (pid[i] == 0)
 		{
-			close_unused_pipes(num_pipes, pipes, i);
 			if (i < num_pipes)
-			{
 				dup2(pipes[i][1], STDOUT_FILENO);
-				close(pipes[i][1]);
-			}
 			if (i > 0)
-			{
 				dup2(pipes[i - 1][0], STDIN_FILENO); // Read from previous pipe
-				close(pipes[i - 1][0]);
-			}
+			close_unused_pipes(num_pipes, pipes);
 			execute_cmd(cmds, data);
 		}
 		else
-			close(pipes[i][1]); // Close write end of current pipe
+		{
+			if (i < num_pipes)
+				close(pipes[i][1]); // Close write end of current pipe
+			if (i > 0)
+				close(pipes[i - 1][0]);
+		}
 		i++;
-		cmds = cmds ->next;
+		cmds = cmds->next;
 	}
 	i = 0;
 	while (i <= num_pipes)
@@ -89,15 +85,9 @@ void	launch_pipes(t_data *data)
 	int		pipes[data->pipex][2];
 	t_cmd	*cmds;
 
-	i = 0; 
+	i = 0;
 	signal_in_exec();
 	cmds = data->struc_cmd;
 	create_pipes(data->pipex, pipes);
 	execute_pipes(cmds, data->pipex, pipes, data);
-	while (i < data->pipex)
-	{
-		close(pipes[i][0]);
-		close(pipes[i][1]);
-		i++;
-	}
 }
