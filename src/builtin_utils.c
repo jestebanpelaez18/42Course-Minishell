@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/16 13:08:38 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/24 09:34:37 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,20 @@ static	int	cmd_cmp(const char *str1, const char *str2)
 }
 
 /*Compares if the given command is from a list of builtins or not.
-Returns -1 if the str is empty, 0 if no match and 1 if there is a match.*/
+Returns -1 if the str is empty, 0 if no match and 1 if there is a match.
+echo with option -n
+◦ cd with only a relative or absolute path
+◦ pwd with no options
+◦ export with no options
+◦ unset with no options
+◦ env with no options or arguments
+◦ exit with no options*/
 int	is_builtin(char *str)
 {
 	int				i;
 	int				flag;
-	static char		*arr[3] = {"echo", "unset", "export"};
+	static char		*arr[3] = {"cd", "pwd", "env", "exit", \
+								"echo", "unset", "export"};
 
 	if (!str)
 		return (-1);

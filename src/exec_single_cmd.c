@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/24 09:26:52 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/24 09:39:09 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,13 @@ void	execute_cmd(t_cmd *cmds, t_data *data)
 	}
 	exit_status = 0;
 	setup_redirections(cmds->redirections);
-	// if(is_builtin)
-	// {
-	//		exit_status = run_build;
-	//      exit(exit_status);
-	// }
-	// else
+	if(&is_builtin)
+	{
+		printf("Our builtin goes here.\n");
+		// 	exit_status = run_build;
+	    //  exit(exit_status);
+	}
+	else
 	exit_status = get_path(cmds, data);
 	exit(exit_status);
 }

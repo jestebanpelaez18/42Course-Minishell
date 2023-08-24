@@ -83,7 +83,7 @@ typedef struct s_global
 	int						heredoc_signal;
 }	t_global;
 
-t_global g_var;
+t_global	g_var;
 
 /*Error msg and free*/
 void					error_msg(char *msg);
@@ -95,6 +95,8 @@ void					error_msg_redic(char *msg, char *input,
 							int exit_status);
 
 /*Builtins*/
+int						is_builtin(char *str);
+char					**ft_unset(char *cmd, char**env);
 int						ft_pwd(void);
 int						ft_cd(char **args, t_data *data);
 

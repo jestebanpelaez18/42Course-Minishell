@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:52:33 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/23 17:13:46 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/24 12:06:19 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static	char	**remove_env_var(char **e_cpy, int index)
 	return (e_cpy);
 }
 
-static	char	**unset(char *cmd, char**env)
+static	char	**ft_unset(char *cmd, char**env)
 {
 	char	**e_cpy;
 	int		index;
