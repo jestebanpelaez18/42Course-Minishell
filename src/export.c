@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:39:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/24 16:33:57 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/24 17:29:31 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ static void	print_export_env(char **env)
 	char	**export;
 	int		i;
 
-	// export = ft_split(env_to_string(env), '\n');
 	export = envdup(env);
 	// if (!export)
 	// 	return ;
@@ -108,17 +107,32 @@ static void	print_export_env(char **env)
 static char **modify_env_var(char **env, char *arg, \
 							int eq_flag, int key_flag)
 {
-	/*
-		if eq_flag == 1 && key_flag == 1
-			export
-	*/
-	(void)arg;
+	int i;
+	int len;
+	int pos;
+	char *tmp;
+	
+	len = ft_strlen(arg);
+	tmp = NULL;
+	i = 0;
 	if (eq_flag == 0 && key_flag == 1)
-		printf("Do nothing.");
+		return (env);
 	else if (eq_flag == 1 && key_flag == 1)
-		printf("Change the value of the key.");
+	{
+		pos = get_env_var(arg, env, i, len);
+		tmp = env[pos];
+		// free(env[pos]);
+		env[pos] = strdup(arg);
+		env[pos] = ft_strjoin(env[pos], ""); //How 2 get "" into stringjoin
+		// printf("%s\n", env[pos]);
+	}
+	//printf("Change value of the key.");
 	else if (eq_flag == 0 && key_flag == 0)
-		printf("Make the key.");
+	{
+		while(env[i] != '\0')
+			i++;
+		env[i] = ft_strdup(arg);
+	}
 	else if (eq_flag == 1 && key_flag == 0)
 		printf("Make the key, and give it the value.");
 	return (env);
@@ -126,14 +140,14 @@ static char **modify_env_var(char **env, char *arg, \
 
 static char	**ft_export(char *arg, char **env)
 {
-	if (!arg || !*arg)
-		return (NULL);
-	(void)env;
 	int	index;
 	int	len;
-	int eq_flag = 0; // =
-	int key_flag = 0; // existence in ENV
+	int	eq_flag;
+	int	key_flag;
 
+	(void)env;
+	if (!arg || !*arg)
+		return (NULL);
 	index = 0;
 	eq_flag = 0;
 	key_flag = 0;
@@ -154,15 +168,6 @@ static char	**ft_export(char *arg, char **env)
 		ft_putstr_fd("'", 2);
 		ft_putstr_fd(": not a valid identifier\n", 2);
 	}
-	/*
-		if arg is alphabetical, accept it.
-		then we check or an = sign after it. 
-		If it has one, we check if it exists within the env.
-			If it exists, reallocate with the arg
-			If it doesn't, allocate with the arg.
-		If it does not have a = after it
-			Allocate the arg.
-	*/
 	return (env);
 }
 
@@ -174,11 +179,10 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	i = 1;
 	len = 0;
-	if (!argv || (argv[i] && (strncmp(argv[i], "export", 7) != 0)))
-		//CHANGE TO FT
+	if (!argv || (argv[i] && (ft_strncmp(argv[i], "export", 7) != 0)))
 		return (-1);
 	i++;
-	if (argv[i]) //If there are additional arguments after export
+	if (argv[i])
 	{
 		while (argv[i])
 		{
@@ -186,7 +190,7 @@ int	main(int argc, char **argv, char **env)
 			i++;
 		}
 	}
-	else //Export only, prints environment variables
+	else
 	{
 		i = 0;
 		while (env[i])
