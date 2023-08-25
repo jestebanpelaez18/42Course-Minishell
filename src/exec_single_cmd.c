@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/24 20:16:39 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/25 17:43:10 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,6 @@ int	get_path(t_cmd *cmds, t_data *data)
 	return (exit_s);
 }
 
-/*Now this is the final part of the executing,
-this command will work for single command and pipex,
-is basically the last step. So here we are gonna check if our command is a
-built in,
-if that is the case we run our built in. In other case execve will take care
-of that,
-	and for that case we have to search for the executable in the directories specified by the PATH environment variable. 
-The PATH variable is a colon-separated list of directories where the shell searches for executables. For example,
-if PATH is /usr/bin:/bin:/usr/local/bin,
-the shell will search these directories for the executable file corresponding to the command.*/
-
 void	execute_cmd(t_cmd *cmds, t_data *data)
 {
 	int	exit_status;
@@ -77,13 +66,6 @@ void	execute_cmd(t_cmd *cmds, t_data *data)
 	exit_status = get_path(cmds, data);
 	exit(exit_status);
 }
-/*Here we launch single cmd, we check if the built in is an enviroment comand,
-	it means
-that affects or modify our enviroment, if that is the case,
-	we have to run the program
-in the parent procces,
-	because in that way we will keep the changes in our minishell,
-in other case we execure our program whit execvp or built in if is the case */
 
 void	launch_single_cmd(t_cmd *cmds, t_data *data)
 {

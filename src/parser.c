@@ -6,29 +6,29 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:07:32 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/25 17:36:32 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/25 17:40:52 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	printcmd(t_cmd *node)
-{
-	int	i;
+// void	printcmd(t_cmd *node)
+// {
+// 	int	i;
 
-	i = 0;
-	while (node)
-	{
-		while (node->commands[i] != NULL)
-		{
-			printf("%s-> ", node->commands[i]);
-			i++;
-		}
-		printf("NULL \n\n");
-		i = 0;
-		node = node->next;
-	}
-}
+// 	i = 0;
+// 	while (node)
+// 	{
+// 		while (node->commands[i] != NULL)
+// 		{
+// 			printf("%s-> ", node->commands[i]);
+// 			i++;
+// 		}
+// 		printf("NULL \n\n");
+// 		i = 0;
+// 		node = node->next;
+// 	}
+// }
 
 t_cmd	*initiate_cmd(t_token *node, t_redirec *redirec)
 {
@@ -92,7 +92,7 @@ t_cmd	*start_firts_cmd(t_token *data, t_redirec *cmd_redic)
 
 void	parser(t_data *data)
 {
-	t_redirec *cmd_redic;
+	t_redirec	*cmd_redic;
 
 	cmd_redic = NULL;
 	set_number_of_pipes(data, data->struc_tok);

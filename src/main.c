@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/18 17:44:56 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/25 17:41:24 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	get_line(t_data *data)
 
 int	main(int argc, char **argv, char **env)
 {
-	t_data data;
+	t_data	data;
 
 	(void)argv;
 	if (argc > 1)
@@ -55,7 +55,6 @@ int	main(int argc, char **argv, char **env)
 			executor(&data);
 			reset(&data);
 		}
-		// reset(&data);
 		init_data(&data);
 	}
 	return (0);
