@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:17:38 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/23 19:37:52 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:56:57 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ int	read_input(t_redirec *redic, int fd, t_data *data)
 		line = expand_heredoc(line, data);
 		ft_putendl_fd(line, fd);
 		free(line);
+		if (g_var.heredoc_signal == 1)
+			break ;
 		line = readline(">");
 	}
 	if (line)
 		free(line);
-	if (g_var.heredoc_signal == 1)
-		return (1);
-	return (0);
+	return (g_var.heredoc_signal);
 }
 
 int	heredoc(t_redirec *redirec, t_data *data)
@@ -93,14 +93,13 @@ void	setup_heredoc(t_data *data, t_redirec *redirections)
 	{
 		if (temp->type == HEREDOC)
 		{
-			if (temp->hd_file_name)
-				free(temp->hd_file_name);
+			// if (temp->hd_file_name)
+			// 	free(temp->hd_file_name);
 			temp->hd_file_name = heredoc_name(n_file);
 			line_status = heredoc(temp, data);
 			if (line_status)
 			{
 				g_var.g_exit_status = 1;
-				reset(data);
 				return ;
 			}
 			n_file++;

@@ -23,6 +23,7 @@
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <sys/ioctl.h>
 
 # define WORD 0
 # define PIPE 1

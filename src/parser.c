@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:07:32 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/23 15:57:15 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/24 20:29:09 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void	fill_commands(t_token *data, t_cmd **cmds)
 	{
 		cmd_redic = NULL;
 		node = next_elem(node);
-		parse_redirection(&node, &cmd_redic);
 		if (!node)
 			break ;
+		parse_redirection(&node, &cmd_redic);
 		cmd = initiate_cmd(node, cmd_redic);
 		if (!cmd)
 			error_msg("allocation error");
@@ -95,7 +95,7 @@ t_cmd	*start_firts_cmd(t_token *data, t_redirec *cmd_redic)
 void	parser(t_data *data)
 {
 	t_redirec *cmd_redic;
-	
+
 	cmd_redic = NULL;
 	set_number_of_pipes(data, data->struc_tok);
 	parse_redirection(&data->struc_tok, &cmd_redic);
