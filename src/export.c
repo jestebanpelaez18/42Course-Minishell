@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:39:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/24 20:59:30 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/25 10:39:36 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ static char **modify_env_var(char **env, char *arg, \
 static char	**ft_export(char *arg, char **env)
 {
 	int	index;
-	int	len;
+	int	len;`
 	int	eq_flag;
 	int	key_flag;
 
