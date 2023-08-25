@@ -6,11 +6,11 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:18:20 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/10 17:19:21 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/25 17:41:56 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
- #include "minishell.h"
+#include "minishell.h"
 
 void	free_argt(char **argument)
 {

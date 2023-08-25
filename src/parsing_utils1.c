@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:46:51 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/21 19:59:49 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/25 17:40:27 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	count_commands(t_token *node)
 	int		i;
 	t_token	*temp;
 
-	
 	i = 0;
 	temp = node;
 	while (temp && temp->type != PIPE)

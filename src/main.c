@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/22 09:37:24 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/25 19:01:44 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	get_line(t_data *data)
 
 int	main(int argc, char **argv, char **env)
 {
-	t_data data;
+	t_data	data;
 
 	(void)argv;
 	if (argc > 1)
@@ -55,7 +55,6 @@ int	main(int argc, char **argv, char **env)
 			executor(&data);
 			reset(&data);
 		}
-		// reset(&data);
 		init_data(&data);
 	}
 	return (0);

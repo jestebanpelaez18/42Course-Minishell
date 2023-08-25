@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:17:38 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/24 15:56:57 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/25 17:33:48 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,6 @@ void	setup_heredoc(t_data *data, t_redirec *redirections)
 	{
 		if (temp->type == HEREDOC)
 		{
-			// if (temp->hd_file_name)
-			// 	free(temp->hd_file_name);
 			temp->hd_file_name = heredoc_name(n_file);
 			line_status = heredoc(temp, data);
 			if (line_status)

@@ -18,12 +18,12 @@
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <sys/wait.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <sys/ioctl.h>
+# include <sys/wait.h>
 
 # define WORD 0
 # define PIPE 1
@@ -32,19 +32,12 @@
 # define HEREDOC 4
 # define APPEND 5
 
-typedef struct s_pid
-{
-	int					id;
-	int					wid;
-	struct s_pid		*next;
-	struct s_pid		*prev;
-}						t_pid;
 
 typedef struct s_redirec
 {
-	char				*token; //name of the file
+	char 				*token; 
 	char				*hd_file_name;
-	int					type; // type redirection
+	int 				type;
 	struct s_redirec	*next;
 	struct s_redirec	*prev;
 }						t_redirec;
@@ -74,17 +67,19 @@ typedef struct s_data
 	t_cmd				*struc_cmd;
 	char				*line_read;
 	t_token				*struc_tok;
-	t_redirec			*redirections;
-	t_pid				*struc_pid;
 }						t_data;
 
 typedef struct s_global
 {
-	int						g_exit_status;
-	int						heredoc_signal;
-}	t_global;
+	int					g_exit_status;
+	int					heredoc_signal;
+}						t_global;
 
+<<<<<<< HEAD
 t_global	g_var;
+=======
+t_global				g_var;
+>>>>>>> 5f97edb1c416e8cbf4850fc3e5f6dd330a3c34a1
 
 /*Error msg and free*/
 void					error_msg(char *msg);
@@ -94,6 +89,7 @@ void					error_msg_command(char *msg, char *command);
 void					reset(t_data *data);
 void					error_msg_redic(char *msg, char *input,
 							int exit_status);
+void					error_msg_parser(t_data *data, char *msg, int type);
 
 /*Builtins*/
 int						is_builtin(char *str);
@@ -136,7 +132,8 @@ int						check_delimiter(char c, char *delimiter);
 void					parser(t_data *data);
 void					set_number_of_pipes(t_data *data, t_token *tokens);
 int						count_commands(t_token *node);
-void					parse_redirection(t_token **node, t_redirec **redirec);
+void					parse_redirection(t_data *data, t_token **node,
+							t_redirec **redirec);
 void					check_redirection(t_token **node);
 char					**separete_args(char **str);
 
@@ -185,7 +182,11 @@ int						get_exit_status(char **str);
 void					input_redirection(t_redirec *input);
 void					output_redirection(t_redirec *input);
 void					setup_redirections(t_redirec *redirections);
+<<<<<<< HEAD
 void 					setup_heredoc(t_data *data, t_redirec *redirections);
+=======
+void					setup_heredoc(t_data *data, t_redirec *redirections);
+>>>>>>> 5f97edb1c416e8cbf4850fc3e5f6dd330a3c34a1
 /*Linked list utils*/
 
 void					ft_lstadd_back(t_token **lst, t_token *new);
@@ -202,7 +203,6 @@ void					redirec_lstadd_back(t_redirec **lst, t_redirec *new);
 void					deletenode(t_token **struck_tok, t_token *del);
 
 void					printList(t_token *node);
-void	printcmd(t_cmd *node);
-
+void					printcmd(t_cmd *node);
 
 #endif
