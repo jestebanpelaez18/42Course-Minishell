@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 17:54:31 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/23 19:00:25 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:49:06 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	reset(t_data *data)
 		reset_cmds(&data->struc_cmd);
 	if (data->struc_tok)
 		reset_token(&data->struc_tok);
-	if (data->line_read)
-		free(data->line_read);
+	// if (data->line_read)
+	// 	free(data->line_read);
 	return ;
 }

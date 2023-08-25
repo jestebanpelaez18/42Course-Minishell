@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:03:02 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/19 16:10:17 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:09:28 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,19 @@ void	error_msg_redic(char *msg, char *input, int exit_status)
 	ft_putendl_fd(input, 2);
 	g_var.g_exit_status = exit_status;
 	exit(EXIT_FAILURE);
+}
+
+void	error_msg_parser(t_data *data, char *msg, int type)
+{
+	ft_putstr_fd(msg, 2);
+	if (type == 2)
+		ft_putendl_fd(" '<'", 2);
+	else if (type == 3)
+		ft_putendl_fd(" '>'", 2);
+	else if (type == 4)
+		ft_putendl_fd(" '<<'", 2);
+	else if (type == 5)
+		ft_putendl_fd(" '>>'", 2);
+	g_var.g_exit_status = 258;
+	reset(data);
 }
