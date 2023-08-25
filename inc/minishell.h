@@ -75,11 +75,7 @@ typedef struct s_global
 	int					heredoc_signal;
 }						t_global;
 
-<<<<<<< HEAD
-t_global	g_var;
-=======
 t_global				g_var;
->>>>>>> 5f97edb1c416e8cbf4850fc3e5f6dd330a3c34a1
 
 /*Error msg and free*/
 void					error_msg(char *msg);
@@ -182,11 +178,7 @@ int						get_exit_status(char **str);
 void					input_redirection(t_redirec *input);
 void					output_redirection(t_redirec *input);
 void					setup_redirections(t_redirec *redirections);
-<<<<<<< HEAD
-void 					setup_heredoc(t_data *data, t_redirec *redirections);
-=======
 void					setup_heredoc(t_data *data, t_redirec *redirections);
->>>>>>> 5f97edb1c416e8cbf4850fc3e5f6dd330a3c34a1
 /*Linked list utils*/
 
 void					ft_lstadd_back(t_token **lst, t_token *new);
