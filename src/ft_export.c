@@ -6,15 +6,11 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 13:40:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/25 17:27:30 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/25 18:56:13 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#include "../libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 /*	return 0 -> No Equal, No Value  ex) export USER
 	return 1 -> Have Equal, No value	ex) export USER=
@@ -157,8 +153,6 @@ static	char	**modify_env_var(char **env, char *arg, int len)
 	}
 	else if (num == 2)
 		env[pos] = combine_str(str, key);
-	printf("%s\n", env[pos]);
-	// system("leaks a.out");
 	return (env);
 }
 
@@ -208,12 +202,4 @@ void	ft_export(char **arg, char **env)
 	// 	while (env[i])
 	// 		print_export_env(env);
 	// }
-}
-
-int	main(int argc, char **arg, char **env)
-{
-	(void) argc;
-
-	ft_export(arg, env);
-	return (0);
 }
