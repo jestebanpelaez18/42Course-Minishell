@@ -31,6 +31,7 @@
 # define RIGH_R 3
 # define HEREDOC 4
 # define APPEND 5
+# define PATH_MAX 4096
 
 
 typedef struct s_redirec
@@ -92,6 +93,8 @@ int						is_builtin(char *str);
 char					**ft_unset(char *cmd, char**env);
 int						ft_pwd(void);
 int						ft_cd(char **args, t_data *data);
+int						run_builtin(char **cmds);
+int						ft_echo(char **argv);
 
 /*Signal functions*/
 void					signal_in_exec(void);

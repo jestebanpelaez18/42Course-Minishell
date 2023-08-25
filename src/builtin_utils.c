@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/24 09:34:37 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/25 20:16:01 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,12 @@ int	is_builtin(char *str)
 {
 	int				i;
 	int				flag;
-	static char		*arr[3] = {"cd", "pwd", "env", "exit", \
+	static char		*arr[7] = {"cd", "pwd", "env", "exit", \
 								"echo", "unset", "export"};
 
-	if (!str)
-		return (-1);
 	i = 0;
 	flag = 0;
-	while (arr[i] && i <= 2)
+	while (arr[i])
 	{
 		if (cmd_cmp(str, arr[i]) == 1)
 		{
@@ -67,29 +65,30 @@ int	is_builtin(char *str)
 	return (flag);
 }
 
-static void	run_cmd(char **cmd, int index)
+static int	run_cmd(char **cmd, int index)
 {
+	int	exit_s;
+
+	exit_s = 0;
 	if (index == 0)
-	{
-		ft_echo(cmd);
-	}
+		exit_s = ft_echo(cmd);
 	else if (index == 1)
-		printf("Unset my heart...\n");
+		exit_s = ft_pwd();
 	else if (index == 2)
 		printf("Exporting T_T\n");
 	else
 		printf("Nevermind then.\n");
+	return (exit_s);
 }
 
-/*Depending on what the index is when it finishes, it runs that command.*/
-void	run_builtin(char **cmds)
+int	run_builtin(char **cmds)
 {
-	static char		*arr[3] = {"echo", "unset", "export"};
+	static char		*arr[7] = {"echo", "pwd", "env", "exit", \
+								"cd", "unset", "export"};
 	int				i;
 	int				j;
+	int				e_s;
 
-	if (!cmds)
-		return ;
 	i = 0;
 	while (cmds[i])
 	{
@@ -97,9 +96,10 @@ void	run_builtin(char **cmds)
 		while (arr[j])
 		{
 			if (cmd_cmp(cmds[i], arr[j]))
-				run_cmd(cmds, j);
+				e_s = run_cmd(cmds, j);
 			j++;
 		}
 		i++;
 	}
+	return (e_s);
 }

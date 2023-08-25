@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_single_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/25 19:01:39 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/25 20:15:36 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,17 @@ void	execute_cmd(t_cmd *cmds, t_data *data)
 	// }
 	exit_status = 0;
 	setup_redirections(cmds->redirections);
-	if(&is_builtin)
+	if (is_builtin(cmds->commands[0]))
 	{
-		printf("Our builtin goes here.\n");
-		// 	exit_status = run_build;
-	    //  exit(exit_status);
+		ft_putendl_fd("Our builtin goes here.\n", 2);
+		exit_status = run_builtin(cmds->commands);
+		exit(exit_status);
 	}
 	else
-	exit_status = get_path(cmds, data);
+	{
+		// ft_putendl_fd("other", 2);
+		exit_status = get_path(cmds, data);
+	}
 	exit(exit_status);
 }
 

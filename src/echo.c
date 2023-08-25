@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:40:15 by nvan-den          #+#    #+#             */
-/*   Updated: 2023/08/16 13:10:40 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/25 19:58:500 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ void	n_function(char **argv)
 
 	i = 0;
 	n_flag = 0;
+	printf("this is %s\n ",argv[1]);
 	if (!argv || (argv[i] && (ft_strncmp(argv[i], "echo", 4) != 0)))
 	{
 		return ;
 	}
 	i++;
-	while (argv[i] && (ft_strncmp(argv[i], "-n", ft_strlen(argv[i])) == 0))
+	while (argv[i] && (ft_strncmp(argv[i], "-n", ft_strlen(argv[i]))) == 0)
 	{
 		n_flag = 1;
 		i++;
@@ -45,8 +46,8 @@ int	ft_echo(char **argv)
 	int		i;
 
 	i = 0;
-	if (!argv)
-		return (-1);
+	// if (!argv)
+	// 	return (-1);
 	if (ft_strlen(*argv) > 1)
 		n_function(argv);
 	return (0);
