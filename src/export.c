@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:39:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/25 10:39:36 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/25 12:48:15 by junheeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,20 @@ EDGECASE: Handle every argument after export.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+static	int	match_env_key(char *arg, char **env, int index, int len)
+{
+	int	i;
+
+	if (!arg || !*env)
+		return (-1);
+	i = index;
+	while ((env[i] != '=') && ft_strncmp(arg, env[i], len) != 0)
+		i++;
+	if (env[i] == '\0')
+		return (0);
+	return (i);
+}
 
 void	ft_putchar_fd(char c, int fd)
 {
@@ -104,16 +118,27 @@ static void	print_export_env(char **env)
 	ft_free_array(export);  // A function that frees the whole array.
 }
 
-static	int	content_check(char *str)
-{
-	int	i;
+static	int	content_check(char *str)	// return 0 -> No Equal, No Value  ex) export USER
+{										// return 1 -> Have Equal, No value	ex) export USER=
+	int	i;								// return 2 -> Have Equal, with Value ex) export USER=JUN
+	int exist_val;
 
+	exist_val = 0;
 	i = 0;
 	while (str[i] != '=')
 		i++;
-	if (str[i + 1] != '\0')
-		return (i);
-	return (0);
+	printf("str : %c\n", str[i]);
+	printf("str : %c\n", str[i + 1]);
+	printf("str : %c\n", str[i - 1]);
+	if (str[i] == '=')
+	{
+		exist_val = 1;
+		{
+		if (str[i + 1] != '\0')
+			exist_val = 2;
+		}
+	}
+	return (exist_val);
 }
 
 static char **modify_env_var(char **env, char *arg, \
@@ -123,11 +148,13 @@ static char **modify_env_var(char **env, char *arg, \
 	int	j;
 	int	len;
 	int	pos;
+	int value_exist;
 
 	len = ft_strlen(arg);
 	i = 0;
-	printf("%d\n", eq_flag);
+	value_exist = content_check(arg);
 	printf("%d\n", key_flag);
+	printf("%d\n", eq_flag);
 	if (eq_flag == 0 && key_flag == 1)
 		return (env);
 	else if (eq_flag == 1 && key_flag == 1)
@@ -136,7 +163,7 @@ static char **modify_env_var(char **env, char *arg, \
 		pos = get_env_var(arg, env, i, len);
 		env[pos] = strdup(arg);
 		env[pos] = ft_strjoinfree(env[pos], "\"");
-		if (content_check(arg))
+		if (value_exist == 2)
 			env[pos] = ft_strjoinfree(env[pos], &arg[j]);
 		env[pos] = ft_strjoinfree(env[pos], "\"");
 		printf("%s\n", env[pos]);
@@ -157,9 +184,10 @@ static char **modify_env_var(char **env, char *arg, \
 static char	**ft_export(char *arg, char **env)
 {
 	int	index;
-	int	len;`
+	int	len;
 	int	eq_flag;
 	int	key_flag;
+	int	value_exist;
 
 	(void)env;
 	if (!arg || !*arg)
@@ -167,12 +195,15 @@ static char	**ft_export(char *arg, char **env)
 	index = 0;
 	eq_flag = 0;
 	key_flag = 0;
+
 	len = ft_strlen(arg);
 	if (is_first_alpha(arg) == 1)
 	{
-		if (content_check(arg)) // MAKE THIS INTO MULTITOOL CHECKER, IF THERE IS AN = in the middle of the string.
+		if (content_check(arg) == 1) // MAKE THIS INTO MULTITOOL CHECKER, IF THERE IS AN = in the middle of the string.
 			eq_flag = 1;
-		if (get_env_var(arg, env, index, len))
+		if (content_check(arg) == 2)
+			eq_flag = 1;
+		if (match_env_key(arg, env, index, len))
 			key_flag = 1;
 		env = modify_env_var(env, arg, eq_flag, key_flag);
 	}
