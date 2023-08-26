@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/25 17:43:10 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/25 20:15:36 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,17 @@ void	execute_cmd(t_cmd *cmds, t_data *data)
 	// }
 	exit_status = 0;
 	setup_redirections(cmds->redirections);
-	// if(is_builtin)
-	// {
-	//		exit_status = run_build;
-	//      exit(exit_status);
-	// }
-	// else
-	exit_status = get_path(cmds, data);
+	if (is_builtin(cmds->commands[0]))
+	{
+		ft_putendl_fd("Our builtin goes here.\n", 2);
+		exit_status = run_builtin(cmds->commands);
+		exit(exit_status);
+	}
+	else
+	{
+		// ft_putendl_fd("other", 2);
+		exit_status = get_path(cmds, data);
+	}
 	exit(exit_status);
 }
 

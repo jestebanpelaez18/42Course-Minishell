@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_builtin.c                                       :+:      :+:    :+:   */
+/*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/25 18:55:57 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/26 15:23:38 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-//#include "minishell.h"
+#include "minishell.h"
 
-
-int	cmd_cmp(const char *str1, const char *str2)
+static	int	cmd_cmp(const char *str1, const char *str2)
 {
 	int	i;
 	int	len1;
@@ -38,18 +36,24 @@ int	cmd_cmp(const char *str1, const char *str2)
 }
 
 /*Compares if the given command is from a list of builtins or not.
-Returns -1 if the str is empty, 0 if no match and 1 if there is a match.*/
+Returns -1 if the str is empty, 0 if no match and 1 if there is a match.
+echo with option -n
+◦ cd with only a relative or absolute path
+◦ pwd with no options
+◦ export with no options
+◦ unset with no options
+◦ env with no options or arguments
+◦ exit with no options*/
 int	is_builtin(char *str)
 {
 	int				i;
 	int				flag;
-	static char		*arr[3] = {"echo", "unset", "export"};
+	static char		*arr[7] = {"cd", "pwd", "env", "exit", \
+								"echo", "unset", "export"};
 
-	if (!str)
-		return (-1);
 	i = 0;
 	flag = 0;
-	while (arr[i] && i <= 2)
+	while (arr[i])
 	{
 		if (cmd_cmp(str, arr[i]) == 1)
 		{
@@ -61,14 +65,41 @@ int	is_builtin(char *str)
 	return (flag);
 }
 
-// /*TESTING*/
-// int	main(int argc, char **arg)
-// {
-// 	int	i;
+static int	run_cmd(char **cmd, int index)
+{
+	int	exit_s;
 
-// 	(void)argc;
-// 	// (void)arg;
-// 	i = is_builtin(arg[1]);
-// 	printf("%d\n", i);
-// 	return (0);
-// }
+	exit_s = 0;
+	if (index == 0)
+		exit_s = ft_echo(cmd);
+	else if (index == 1)
+		exit_s = ft_pwd();
+	else if (index == 2)
+		printf("Exporting T_T\n");
+	else
+		printf("Nevermind then.\n");
+	return (exit_s);
+}
+
+int	run_builtin(char **cmds)
+{
+	static char		*arr[7] = {"echo", "pwd", "env", "exit", \
+								"cd", "unset", "export"};
+	int				i;
+	int				j;
+	int				e_s;
+
+	i = 0;
+	while (cmds[i])
+	{
+		j = 0;
+		while (arr[j])
+		{
+			if (cmd_cmp(cmds[i], arr[j]))
+				e_s = run_cmd(cmds, j);
+			j++;
+		}
+		i++;
+	}
+	return (e_s);
+}
