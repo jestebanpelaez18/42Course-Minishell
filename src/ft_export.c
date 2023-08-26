@@ -6,51 +6,13 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 13:40:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/25 18:56:13 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/26 16:37:03 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "minishell.h"
 
-/*	return 0 -> No Equal, No Value  ex) export USER
-	return 1 -> Have Equal, No value	ex) export USER=
-	return 2 -> Have Equal, with Value ex) export USER=JUN
-*/
-static	int	content_check(char *str)
-{									
-	int	i;							
-	int	exist_val;
-
-	i = 0;
-	exist_val = 0;
-	while (str[i] && (str[i] != '='))
-		i++;
-	if (str[i] == '=')
-	{
-		exist_val = 1;
-		{
-			if (str[i + 1] != '\0')
-				exist_val = 2;
-		}
-	}
-	return (exist_val);
-}
-
-static	int	is_first_alpha(char *arg)
-{
-	int	i;
-
-	i = 0;
-	if (!arg || !*arg)
-		return (0);
-	if (!((arg[i] >= 'a' && arg[i] <= 'z') || (arg[i] >= 'A' && arg[i] <= 'Z')))
-		return (-1);
-	while ((arg[i] >= 'a' && arg[i] <= 'z') || (arg[i] >= 'A' && arg[i] <= 'Z'))
-		i++;
-	return (1);
-}
-
-static	int	ft_keylen(char *arg)
+int	ft_keylen(char *arg)
 {
 	int	i;
 
@@ -62,84 +24,21 @@ static	int	ft_keylen(char *arg)
 	return (i);
 }
 
-static	int	match_env_key(char *arg, char **env, int index, int len)
+static void	print_export_env(char **env)
 {
-	int	i;
-
-	if (!arg || !*env)
-		return (-1);
-	i = index;
-	while ((env[i]) && ft_strncmp(arg, env[i], len) != 0)
-		i++;
-	if (env[i] == '\0')
-		return (-1);
-	return (i);
-}
-
-static char	*get_string(char *arg)
-{
-	char	*str;
-	int		start;
-	int		end;
-	int		len;
 	int		i;
 
-	start = 0;
-	end = 0;
 	i = 0;
-	if (!arg)
-		return (NULL);
-	while (arg[start] && arg[start] != '=')
-		start++;
-	start++;
-	while (arg[end])
-		end++;
-	len = end - start;
-	str = malloc(sizeof(char) * len + 1);
-	while (start < end)
+	while (env[i])
 	{
-		str[i] = arg[start];
-		i++;
-		start++;
-	}
-	return (str);
-}
-
-static char	*get_key(char *arg)
-{
-	char	*str;
-	int		end;
-	int		i;
-
-	end = 0;
-	i = 0;
-	while (arg[end] && arg[end] != '=')
-		end++;
-	end++;
-	str = malloc(sizeof(char) * end + 1);
-	while (i < end)
-	{
-		str[i] = arg[i];
+		ft_putstr_fd("declare -x ", 1);
+		ft_putstr_fd(env[i], 1);
+		ft_putchar_fd('\n', 1);
 		i++;
 	}
-	return (str);
 }
 
-static	char* combine_str(const char *str, const char *key)
-{
-	const int		len1 = ft_strlen(key);
-	const int		len2 = ft_strlen(str);
-	const int		final_size = len1 + len2 + 3;
-	char *const		new = ft_calloc(sizeof(char), final_size);
-
-	ft_strlcat(new, key, final_size);
-	ft_strlcat(new, "\"", final_size);
-	ft_strlcat(new, str, final_size);
-	ft_strlcat(new, "\"", final_size);
-	return (new);
-}
-
-static	char	**modify_env_var(char **env, char *arg, int len)
+static char	**modify_env_var(char **env, char *arg, int len)
 {
 	const int	pos = match_env_key(arg, env, 0, len);
 	const int	num = content_check(arg);
@@ -148,7 +47,7 @@ static	char	**modify_env_var(char **env, char *arg, int len)
 
 	if (num == 1)
 	{
-		env[pos] = strdup(arg);
+		env[pos] = ft_strdup(arg);
 		env[pos] = ft_strjoinfree(env[pos], "\"\"");
 	}
 	else if (num == 2)
@@ -156,7 +55,7 @@ static	char	**modify_env_var(char **env, char *arg, int len)
 	return (env);
 }
 
-char **handle_args(char *arg, char **env)
+static char	**handle_args(char *arg, char **env)
 {
 	int	index;
 	int	len;
@@ -164,11 +63,9 @@ char **handle_args(char *arg, char **env)
 
 	if (!arg || !env)
 		return (NULL);
-
 	index = 0;
 	key_flag = 0;
 	len = ft_keylen(arg);
-
 	if (is_first_alpha(arg) == 1)
 	{
 		if (content_check(arg) == 0)
@@ -196,10 +93,6 @@ void	ft_export(char **arg, char **env)
 			i++;
 		}
 	}
-	// else
-	// {
-	// 	i = 0;
-	// 	while (env[i])
-	// 		print_export_env(env);
-	// }
+	else
+		print_export_env(env);
 }

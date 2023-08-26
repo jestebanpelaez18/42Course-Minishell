@@ -93,6 +93,15 @@ int						is_builtin(char *str);
 char					**ft_unset(char *cmd, char**env);
 int						ft_pwd(void);
 int						ft_cd(char **args, t_data *data);
+void					ft_export(char **arg, char **env);
+int						content_check(char *str);
+int						is_first_alpha(char *arg);
+int						match_env_key(char *arg, char **env, \
+										int index, int len);
+char					*get_string(char *arg);
+char					*get_key(char *arg);
+int						ft_keylen(char *arg);
+char					*combine_str(const char *str, const char *key);
 int						run_builtin(char **cmds);
 int						ft_echo(char **argv);
 
