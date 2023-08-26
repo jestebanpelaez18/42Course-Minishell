@@ -92,8 +92,11 @@ void					error_msg_parser(t_data *data, char *msg, int type);
 int						is_builtin(char *str);
 char					**ft_unset(char *cmd, char**env);
 int						ft_pwd(void);
-int						ft_cd(char **args, t_data *data);
+// int						ft_cd(char **args, t_data *data);
 void					ft_export(char **arg, char **env);
+void					ft_env(char **env);
+char					**handle_args(char *arg, char **env);
+char					**modify_env_var(char **env, char *arg, int len);
 int						content_check(char *str);
 int						is_first_alpha(char *arg);
 int						match_env_key(char *arg, char **env, \

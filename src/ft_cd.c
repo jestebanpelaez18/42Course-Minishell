@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:49:50 by junheeki          #+#    #+#             */
-/*   Updated: 2023/08/21 11:16:25 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/26 18:38:54 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,9 @@ static	void	go_home(char **env)
 	{
 		path = match_env_var("HOME", env);
 		old_path = match_env_var("PWD", env);
-		//update env, we can use export here
+		printf("%s\n", path);
+		printf("%s\n", old_path);
+		env = modify_env_var(env, path, ft_strlen(path));
 	}
 	else
 		printf("Lol shit failed\n");// error_msg("cd: Failed to change directory.");

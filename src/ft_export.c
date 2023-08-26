@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 13:40:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/26 16:37:03 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/26 18:31:57 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static void	print_export_env(char **env)
 		i++;
 	}
 }
-
-static char	**modify_env_var(char **env, char *arg, int len)
+/**/
+char	**modify_env_var(char **env, char *arg, int len)
 {
 	const int	pos = match_env_key(arg, env, 0, len);
 	const int	num = content_check(arg);
@@ -55,7 +55,7 @@ static char	**modify_env_var(char **env, char *arg, int len)
 	return (env);
 }
 
-static char	**handle_args(char *arg, char **env)
+char	**handle_args(char *arg, char **env)
 {
 	int	index;
 	int	len;
