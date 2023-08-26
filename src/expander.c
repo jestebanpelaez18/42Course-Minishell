@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:46 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/24 19:38:26 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/26 15:38:50 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,15 @@
 
 int	get_exit_status(char **str)
 {
-	free(*str);
-	*str = ft_itoa(g_var.g_exit_status);
-	return ((int)ft_strlen(*str) + 1);
+	char	*temp;
+	int		step;
+
+	step = 0;
+	temp = ft_itoa(g_var.g_exit_status);
+	*str = ft_strjoin(*str, temp);
+	step = ft_strlen(temp);
+	free(temp);
+	return (step + 1);
 }
 
 int	expand_env(char **temp, int i, t_data *data, char *str)
@@ -86,7 +92,7 @@ void	expand_dollar(t_token *current, t_data *data)
 	else
 	{
 		if (current->tokens[0] != '\'' && (current->tokens[j - 1] != '\''
-				&& current->tokens[j + 1] != '\0'))
+			&& current->tokens[j + 1] != '\0'))
 		{
 			str = replace_dollar(current->tokens, data);
 			current->tokens = str;
