@@ -43,7 +43,7 @@ void	n_function(char **argv)
 
 int	ft_echo(char **argv)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	// if (!argv)
