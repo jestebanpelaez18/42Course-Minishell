@@ -6,13 +6,13 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/26 15:23:38 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/26 19:24:53 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	int	cmd_cmp(const char *str1, const char *str2)
+int	cmd_cmp(const char *str1, const char *str2)
 {
 	int	i;
 	int	len1;
@@ -48,8 +48,8 @@ int	is_builtin(char *str)
 {
 	int				i;
 	int				flag;
-	static char		*arr[7] = {"cd", "pwd", "env", "exit", \
-								"echo", "unset", "export"};
+	static char		*arr[7] = {"echo", "pwd", "env", "export", \
+								"unset", "exit", "cd"};
 
 	i = 0;
 	flag = 0;
@@ -65,26 +65,53 @@ int	is_builtin(char *str)
 	return (flag);
 }
 
-static int	run_cmd(char **cmd, int index)
+int	is_env_builtin(char *str)
+{
+	int				i;
+	int				flag;
+	static char		*arr[4] = {"export", "unset", "exit", "cd"};
+
+	i = 0;
+	flag = 0;
+	while (arr[i])
+	{
+		if (cmd_cmp(str, arr[i]) == 1)
+		{
+			flag = 1;
+			break ;
+		}
+		i++;
+	}
+	return (flag);
+}
+
+int	run_cmd(char **cmd, int index, t_data *data)
 {
 	int	exit_s;
+	int	i;
 
 	exit_s = 0;
+	i = 1;
 	if (index == 0)
 		exit_s = ft_echo(cmd);
 	else if (index == 1)
 		exit_s = ft_pwd();
 	else if (index == 2)
-		printf("Exporting T_T\n");
-	else
-		printf("Nevermind then.\n");
+		ft_env(data->env);
+	else if (index == 3)
+		ft_export(cmd, data->env);
+	else if (index == 4)
+	{
+		while(cmd[i++])
+			ft_unset(cmd[i],data->env);
+	}
 	return (exit_s);
 }
 
-int	run_builtin(char **cmds)
+int	run_builtin(t_data *data, char **cmds)
 {
-	static char		*arr[7] = {"echo", "pwd", "env", "exit", \
-								"cd", "unset", "export"};
+	static char		*arr[7] = {"echo", "pwd", "env", "export", \
+								"unset", "exit", "cd"};
 	int				i;
 	int				j;
 	int				e_s;
@@ -96,10 +123,12 @@ int	run_builtin(char **cmds)
 		while (arr[j])
 		{
 			if (cmd_cmp(cmds[i], arr[j]))
-				e_s = run_cmd(cmds, j);
+				e_s = run_cmd(cmds, j, data);
 			j++;
 		}
 		i++;
 	}
 	return (e_s);
 }
+
+

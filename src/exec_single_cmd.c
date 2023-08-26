@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/25 20:15:36 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/26 19:38:16 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	execute_cmd(t_cmd *cmds, t_data *data)
 	if (is_builtin(cmds->commands[0]))
 	{
 		ft_putendl_fd("Our builtin goes here.\n", 2);
-		exit_status = run_builtin(cmds->commands);
+		exit_status = run_builtin(data, cmds->commands);
 		exit(exit_status);
 	}
 	else
@@ -76,10 +76,10 @@ void	launch_single_cmd(t_cmd *cmds, t_data *data)
 	int	pid;
 	int	status;
 
-	// if (envp_cmd(data))
+	// if (is_env_builtin(cmds->commands[0]))
 	// {
-	// 	// Run built in
-	// 	// come back to minishell loop, basically we finish the execution
+	// 	env_builtin(data, cmds->commands);
+	// 	return ;
 	// }
 	setup_heredoc(data, cmds->redirections);
 	pid = fork();

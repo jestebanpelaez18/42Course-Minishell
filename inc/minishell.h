@@ -20,10 +20,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include <readline/history.h>
-# include <readline/readline.h>
 # include <sys/ioctl.h>
 # include <sys/wait.h>
+# include <readline/history.h>
+# include <readline/readline.h>
 
 # define WORD 0
 # define PIPE 1
@@ -105,8 +105,12 @@ char					*get_string(char *arg);
 char					*get_key(char *arg);
 int						ft_keylen(char *arg);
 char					*combine_str(const char *str, const char *key);
-int						run_builtin(char **cmds);
+int						run_builtin(t_data *data, char **cmds);
 int						ft_echo(char **argv);
+int						env_builtin(t_data *data, char **cmds);
+int						is_env_builtin(char *str);
+int						run_cmd(char **cmd, int index, t_data *data);
+int						cmd_cmp(const char *str1, const char *str2);
 
 /*Signal functions*/
 void					signal_in_exec(void);

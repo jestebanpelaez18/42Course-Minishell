@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   builtin_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/26 18:39:42 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/26 19:34:06 by jpelaez-         ###   ########.fr       */
+/*   Created: 2023/08/26 19:19:31 by jpelaez-          #+#    #+#             */
+/*   Updated: 2023/08/26 19:23:43 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_env(char **env)
+int	env_builtin(t_data *data, char **cmds)
 {
-	int		i;
+	static char		*arr[4] = {"export", "unset", "exit", "cd"};
+	int				i;
+	int				j;
+	int				e_s;
 
 	i = 0;
-	while (env[i])
+	while (cmds[i])
 	{
-		ft_putstr_fd(env[i],2);
-		ft_putchar_fd('\n', 2);
+		j = 0;
+		while (arr[j])
+		{
+			if (cmd_cmp(cmds[i], arr[j]))
+				e_s = run_cmd(cmds, j + 3, data);
+			j++;
+		}
 		i++;
 	}
+	return (e_s);
 }
