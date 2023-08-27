@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/26 19:38:16 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/27 12:45:08 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ void	launch_single_cmd(t_cmd *cmds, t_data *data)
 	int	pid;
 	int	status;
 
-	// if (is_env_builtin(cmds->commands[0]))
-	// {
-	// 	env_builtin(data, cmds->commands);
-	// 	return ;
-	// }
+	if (is_env_builtin(cmds->commands[0]))
+	{
+		g_var.g_exit_status = env_builtin(data, cmds->commands);
+		return ;
+	}
 	setup_heredoc(data, cmds->redirections);
 	pid = fork();
 	if (pid == 0)

@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/26 19:24:53 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/27 12:42:07 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	is_builtin(char *str)
 
 	i = 0;
 	flag = 0;
-	while (arr[i])
+	while (i < 7)
 	{
 		if (cmd_cmp(str, arr[i]) == 1)
 		{
@@ -65,25 +65,6 @@ int	is_builtin(char *str)
 	return (flag);
 }
 
-int	is_env_builtin(char *str)
-{
-	int				i;
-	int				flag;
-	static char		*arr[4] = {"export", "unset", "exit", "cd"};
-
-	i = 0;
-	flag = 0;
-	while (arr[i])
-	{
-		if (cmd_cmp(str, arr[i]) == 1)
-		{
-			flag = 1;
-			break ;
-		}
-		i++;
-	}
-	return (flag);
-}
 
 int	run_cmd(char **cmd, int index, t_data *data)
 {
@@ -120,7 +101,7 @@ int	run_builtin(t_data *data, char **cmds)
 	while (cmds[i])
 	{
 		j = 0;
-		while (arr[j])
+		while (j < 7)
 		{
 			if (cmd_cmp(cmds[i], arr[j]))
 				e_s = run_cmd(cmds, j, data);
