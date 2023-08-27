@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 15:43:04 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/26 18:45:17 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/27 13:18:10 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	check_argument(t_data *data, char *str)
 	exit(g_var.g_exit_status);
 }
 
-int	exit(t_data *data, char **argv)
+int	ft_exit(t_data *data, char **argv)
 {
 	ft_putendl_fd("Exit", 2);
 	if (argv[1] && argv[2])

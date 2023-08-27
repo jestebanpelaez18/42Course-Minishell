@@ -95,7 +95,7 @@ int						ft_pwd(void);
 int						ft_cd(char **args, t_data *data);
 int						run_builtin(char **cmds);
 int						ft_echo(char **argv);
-int						exit(t_data *data,char **argv);
+int						ft_exit(t_data *data,char **argv);
 int						is_numeric_parameters(char *param);
 int						is_number(char argument);
 
