@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:52:33 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/26 19:23:09 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/27 13:10:01 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,22 @@ static	char	**remove_env_var(char **e_cpy, int index)
 	return (e_cpy);
 }
 
-char	**ft_unset(char *cmd, char**env)
+void	ft_unset(char *cmd, char**env)
 {
 	char	**e_cpy;
 	int		index;
 	int		len;
 
 	if (!cmd)
-		return (0);
+		return ;
 	index = 0;
 	e_cpy = envdup(env);
 	if (!e_cpy)
-		return (NULL);
+		return ;
 	len = ft_strlen(cmd);
 	index = get_env_var(cmd, e_cpy, index, len);
 	while (e_cpy[index] && e_cpy[index][len] != '=')
 		index = get_env_var(cmd, e_cpy, index + 1, len);
-	e_cpy = remove_env_var(e_cpy, index);
-	return (e_cpy);
+	env = remove_env_var(e_cpy, index);
+	free_argt(e_cpy);
 }

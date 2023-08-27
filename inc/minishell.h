@@ -90,7 +90,7 @@ void					error_msg_parser(t_data *data, char *msg, int type);
 
 /*Builtins*/
 int						is_builtin(char *str);
-char					**ft_unset(char *cmd, char**env);
+void					ft_unset(char *cmd, char**env);
 int						ft_pwd(void);
 // int						ft_cd(char **args, t_data *data);
 void					ft_export(char **arg, char **env);

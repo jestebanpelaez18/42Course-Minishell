@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/27 12:42:07 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/27 13:11:01 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	run_cmd(char **cmd, int index, t_data *data)
 	int	i;
 
 	exit_s = 0;
-	i = 1;
+	i = 0;
 	if (index == 0)
 		exit_s = ft_echo(cmd);
 	else if (index == 1)
