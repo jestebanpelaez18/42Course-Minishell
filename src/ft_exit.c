@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 15:43:04 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/27 13:18:10 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/27 13:42:44 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,13 @@ void	check_argument(t_data *data, char *str)
 
 	exit_arg = 0;
 	exit_s = 0;
-	if (is_numeric_parameters(str))
+	if (!str)
+		g_var.g_exit_status = 0;
+	else if (is_numeric_parameters(str))
 	{
 		exit_arg = ft_atoi(str);
 		exit_s = handle_exit_s(exit_arg);
+		g_var.g_exit_status = exit_s;
 	}
 	else
 	{
@@ -62,7 +65,8 @@ int	ft_exit(t_data *data, char **argv)
 	if (argv[1] && argv[2])
 	{
 		ft_putendl_fd("minishell: exit: too many arguments", 2);
-		return (0);
+		return (1);
 	}
 	check_argument(data, argv[1]);
+	return (0);
 }

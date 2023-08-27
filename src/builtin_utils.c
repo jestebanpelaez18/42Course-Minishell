@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/27 13:11:01 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/27 13:34:13 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,12 @@ int	run_cmd(char **cmd, int index, t_data *data)
 		ft_export(cmd, data->env);
 	else if (index == 4)
 	{
-		while(cmd[i++])
+		while (cmd[i++])
 			ft_unset(cmd[i],data->env);
 	}
+	else if (index == 5)
+		exit_s = ft_exit(data, cmd);
+	// cd
 	return (exit_s);
 }
 
