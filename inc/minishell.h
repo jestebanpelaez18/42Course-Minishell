@@ -20,10 +20,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include <readline/history.h>
-# include <readline/readline.h>
 # include <sys/ioctl.h>
 # include <sys/wait.h>
+# include <readline/history.h>
+# include <readline/readline.h>
 
 # define WORD 0
 # define PIPE 1
@@ -90,7 +90,7 @@ void					error_msg_parser(t_data *data, char *msg, int type);
 
 /*Builtins*/
 int						is_builtin(char *str);
-char					**ft_unset(char *cmd, char**env);
+void					ft_unset(char *cmd, char**env);
 int						ft_pwd(void);
 // int						ft_cd(char **args, t_data *data);
 void					ft_export(char **arg, char **env);
@@ -105,8 +105,14 @@ char					*get_string(char *arg);
 char					*get_key(char *arg);
 int						ft_keylen(char *arg);
 char					*combine_str(const char *str, const char *key);
-int						run_builtin(char **cmds);
+int						run_builtin(t_data *data, char **cmds);
 int						ft_echo(char **argv);
+int						env_builtin(t_data *data, char **cmds);
+int						is_env_builtin(char *str);
+int						run_cmd(char **cmd, int index, t_data *data);
+int						cmd_cmp(const char *str1, const char *str2);
+int						ft_exit(t_data *data, char **argv);
+int						is_numeric_parameters(char *param);
 
 /*Signal functions*/
 void					signal_in_exec(void);
@@ -124,6 +130,8 @@ void					init_data(t_data *data);
 /*Free stuff*/
 
 void					free_argt(char **argument);
+void					reset_cmds(t_cmd **struc_cmd);
+void					reset_token(t_token **tokens);
 
 /*Check input*/
 int						check_line(t_data *data, char *line);

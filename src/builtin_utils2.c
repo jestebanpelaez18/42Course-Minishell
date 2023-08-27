@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   builtin_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/26 18:39:42 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/26 19:34:06 by jpelaez-         ###   ########.fr       */
+/*   Created: 2023/08/26 16:34:05 by jpelaez-          #+#    #+#             */
+/*   Updated: 2023/08/27 13:28:38 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_env(char **env)
+static int	is_number(char argument)
 {
-	int		i;
+	if (argument >= '0' && argument <= '9')
+		return (1);
+	return (0);
+}
+
+int	is_numeric_parameters(char *param)
+{
+	int	i;
 
 	i = 0;
-	while (env[i])
+	if ((param[i] == '-' || param[i] == '+') && param[i + 1] != '\0')
+		i++;
+	while (param[i] != '\0')
 	{
-		ft_putstr_fd(env[i],2);
-		ft_putchar_fd('\n', 2);
+		if (!is_number(param[i]))
+			return (0);
 		i++;
 	}
+	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 13:40:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/26 18:31:57 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/27 12:37:22 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	print_export_env(char **env)
 	}
 }
 /**/
+
 char	**modify_env_var(char **env, char *arg, int len)
 {
 	const int	pos = match_env_key(arg, env, 0, len);
@@ -80,7 +81,7 @@ void	ft_export(char **arg, char **env)
 	int	i;
 	int	len;
 
-	i = 1;
+	i = 0;
 	len = 0;
 	if (!arg || (arg[i] && (ft_strncmp(arg[i], "export", 7) != 0)))
 		return ;
