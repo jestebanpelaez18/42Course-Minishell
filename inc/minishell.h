@@ -81,7 +81,6 @@ t_global				g_var;
 /*Error msg and free*/
 void					error_msg(char *msg);
 void					error_msg_noexit(char *msg, int exit_status);
-void					free_argt(char **argument);
 void					error_msg_command(char *msg, char *command);
 void					reset(t_data *data);
 void					error_msg_redic(char *msg, char *input,
@@ -90,7 +89,7 @@ void					error_msg_parser(t_data *data, char *msg, int type);
 
 /*Builtins*/
 int						is_builtin(char *str);
-void					ft_unset(char *cmd, char**env);
+char					**ft_unset(char *cmd, char**env);
 int						ft_pwd(void);
 // int						ft_cd(char **args, t_data *data);
 void					ft_export(char **arg, char **env);

@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:23:16 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/26 16:32:44 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/27 18:37:42 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ char	*combine_str(const char *str, const char *key)
 	char *const	new = ft_calloc(sizeof(char), final_size);
 
 	ft_strlcat(new, key, final_size);
-	ft_strlcat(new, "\"", final_size);
 	ft_strlcat(new, str, final_size);
-	ft_strlcat(new, "\"", final_size);
 	return (new);
 }
