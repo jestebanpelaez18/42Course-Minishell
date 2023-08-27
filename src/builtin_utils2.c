@@ -6,13 +6,13 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:34:05 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/26 16:34:59 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/27 13:28:38 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_number(char argument)
+static int	is_number(char argument)
 {
 	if (argument >= '0' && argument <= '9')
 		return (1);

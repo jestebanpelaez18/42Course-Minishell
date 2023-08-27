@@ -34,7 +34,7 @@ linked_lst_utils3.c parse_redic.c expander.c expander_utils1.c \
 expander_utils2.c expander_utils3.c executor.c executor2.c \
 executor_utils1.c executor3.c free_utils.c reset_loop.c exec_single_cmd.c pipes.c\
 setup_heredoc.c signals2.c echo.c builtin_utils.c ft_pwd.c ft_export.c ft_export_utils.c\
-ft_export_utils_added.c unset.c builtin_utils3.c ft_env.c\
+ft_export_utils_added.c unset.c builtin_utils3.c ft_env.c ft_exit.c builtin_utils2.c \
 
 DEP = $(OBJ:.o=.d)
 

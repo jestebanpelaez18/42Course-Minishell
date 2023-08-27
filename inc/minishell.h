@@ -111,6 +111,8 @@ int						env_builtin(t_data *data, char **cmds);
 int						is_env_builtin(char *str);
 int						run_cmd(char **cmd, int index, t_data *data);
 int						cmd_cmp(const char *str1, const char *str2);
+int						ft_exit(t_data *data, char **argv);
+int						is_numeric_parameters(char *param);
 
 /*Signal functions*/
 void					signal_in_exec(void);
