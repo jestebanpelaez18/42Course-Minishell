@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/28 14:40:53 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:09:04 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	create_pipes(int num_pipes, int **pipes)
 	}
 }
 
-void	close_unused_pipes(int num_pipes, int **pipes)
+void	close_pipes(int num_pipes, int **pipes)
 {
 	int	i;
 
@@ -38,6 +38,28 @@ void	close_unused_pipes(int num_pipes, int **pipes)
 	}
 }
 
+void	child_pipe(int i, int num_pipes, int **pipes)
+{
+	if (i < num_pipes)
+		dup2(pipes[i][1], STDOUT_FILENO);
+	if (i > 0)
+		dup2(pipes[i - 1][0], STDIN_FILENO);
+	close_pipes(num_pipes, pipes);
+}
+
+void	wait_pids(int num_pipes, int *pid, int status)
+{
+	int	i;
+
+	i = 0;
+	while (i <= num_pipes)
+	{
+		waitpid(pid[i], &status, 0);
+		g_var.g_exit_status = WEXITSTATUS(status);
+		i++;
+	}
+}
+
 void	execute_pipes(t_cmd *cmds, int num_pipes, int **pipes, t_data *data)
 {
 	int	status;
@@ -45,7 +67,8 @@ void	execute_pipes(t_cmd *cmds, int num_pipes, int **pipes, t_data *data)
 	int	i;
 
 	i = 0;
-	pid = (int*)malloc((data->pipex + 1) * sizeof(int));
+	status = 0;
+	pid = (int *)malloc((data->pipex + 1) * sizeof(int));
 	while (cmds && i <= num_pipes)
 	{
 		setup_heredoc(data, cmds->redirections);
@@ -54,30 +77,15 @@ void	execute_pipes(t_cmd *cmds, int num_pipes, int **pipes, t_data *data)
 			error_msg("Error creating process\n");
 		else if (pid[i] == 0)
 		{
-			if (i < num_pipes)
-				dup2(pipes[i][1], STDOUT_FILENO);
-			if (i > 0)
-				dup2(pipes[i - 1][0], STDIN_FILENO);
-			close_unused_pipes(num_pipes, pipes);
+			child_pipe(i, num_pipes, pipes);
 			execute_cmd(cmds, data);
 		}
 		else
-		{
-			if (i < num_pipes)
-				close(pipes[i][1]);
-			if (i > 0)
-				close(pipes[i - 1][0]);
-		}
+			close_pipes(num_pipes, pipes);
 		i++;
 		cmds = cmds->next;
 	}
-	i = 0;
-	while (i <= num_pipes)
-	{
-		waitpid(pid[i], &status, 0);
-		g_var.g_exit_status = WEXITSTATUS(status);
-		i++;
-	}
+	wait_pids(num_pipes, pid, status);
 	free(pid);
 }
 
@@ -88,10 +96,10 @@ void	launch_pipes(t_data *data)
 	t_cmd	*cmds;
 
 	i = 0;
-	pipes = (int**)malloc(data->pipex * sizeof(int*));
+	pipes = (int **)malloc(data->pipex * sizeof(int *));
 	while (i < data->pipex)
 	{
-		pipes[i] = (int*)malloc(2 * sizeof(int));
+		pipes[i] = (int *)malloc(2 * sizeof(int));
 		i++;
 	}
 	signal_in_exec();
