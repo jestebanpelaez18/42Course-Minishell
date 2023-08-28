@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/28 15:09:04 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:32:48 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,12 @@ void	execute_pipes(t_cmd *cmds, int num_pipes, int **pipes, t_data *data)
 			execute_cmd(cmds, data);
 		}
 		else
-			close_pipes(num_pipes, pipes);
+		{
+			if (i < num_pipes)
+				close(pipes[i][1]);
+			if (i > 0)
+				close(pipes[i - 1][0]);
+		}
 		i++;
 		cmds = cmds->next;
 	}
