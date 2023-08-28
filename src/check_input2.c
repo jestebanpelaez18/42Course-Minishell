@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:20:07 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/16 18:53:39 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:22:26 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ static int	unclosed_redirec(char *line)
 int	syntax_redirection(char *line)
 {
 	if (!unclosed_redirec(line))
+	{
+		free(line);
 		return (0);
+	}
 	return (1);
 }
