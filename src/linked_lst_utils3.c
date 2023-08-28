@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:07:20 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/23 16:48:28 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:00:26 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	deletenode(t_token **struck_tok, t_token *del)
 		del->next->prev = del->prev;
 	if (del->prev != NULL)
 		del->prev->next = del->next;
+	if (del->tokens)
+		free(del->tokens);
 	free(del);
 	del = NULL;
 	return ;

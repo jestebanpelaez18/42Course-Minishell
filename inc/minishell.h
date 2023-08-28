@@ -131,6 +131,8 @@ void					init_data(t_data *data);
 void					free_argt(char **argument);
 void					reset_cmds(t_cmd **struc_cmd);
 void					reset_token(t_token **tokens);
+void					reset_tools(t_data *data);
+void					reset_redirect(t_redirec **tokens);
 
 /*Check input*/
 int						check_line(t_data *data, char *line);

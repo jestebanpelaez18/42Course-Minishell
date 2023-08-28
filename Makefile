@@ -10,7 +10,6 @@ OBJ_DIR = obj
 INCLUDES = -Ilibft -Iinc
 
 FLAGS = -Wall -Wextra -Werror -g 
-
 #-fsanitize=address,undefined
 
 # MAC_OS
