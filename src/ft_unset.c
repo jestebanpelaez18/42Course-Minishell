@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:52:33 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/28 10:23:44 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/28 16:55:48 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char	**ft_unset(char *cmd, char**env)
 	e_cpy = envdup(env);
 	if (!e_cpy)
 		return (env);
+	free_argt(env);
 	len = ft_strlen(cmd);
 	index = get_env_var(cmd, e_cpy, index, len);
 	while (e_cpy[index] && e_cpy[index][len] != '=')
