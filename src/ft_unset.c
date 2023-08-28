@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:52:33 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/27 13:10:01 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/28 10:23:44 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,33 +26,37 @@ static	int	get_env_var(char *arg, char **env, int index, int len)
 
 static	char	**remove_env_var(char **e_cpy, int index)
 {
-	int	j;
+	char	*last;
+	int		i;
 
-	j = 0;
-	while (e_cpy[index][j])
+	last = NULL;
+	i = 0;
+	free(e_cpy[index]);
+	while (e_cpy[index + 1])
 	{
-		e_cpy[index][j] = 0;
-		j++;
+		e_cpy[index] = e_cpy[index + 1];
+		index++;
 	}
+	e_cpy[index] = NULL;
 	return (e_cpy);
 }
 
-void	ft_unset(char *cmd, char**env)
+char	**ft_unset(char *cmd, char**env)
 {
 	char	**e_cpy;
 	int		index;
 	int		len;
 
 	if (!cmd)
-		return ;
+		return (env);
 	index = 0;
 	e_cpy = envdup(env);
 	if (!e_cpy)
-		return ;
+		return (env);
 	len = ft_strlen(cmd);
 	index = get_env_var(cmd, e_cpy, index, len);
 	while (e_cpy[index] && e_cpy[index][len] != '=')
 		index = get_env_var(cmd, e_cpy, index + 1, len);
 	env = remove_env_var(e_cpy, index);
-	free_argt(e_cpy);
+	return (env);
 }
