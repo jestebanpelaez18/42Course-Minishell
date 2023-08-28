@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/28 14:35:58 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/28 14:40:53 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ void	close_unused_pipes(int num_pipes, int **pipes)
 void	execute_pipes(t_cmd *cmds, int num_pipes, int **pipes, t_data *data)
 {
 	int	status;
-	int	pid[data->pipex + 1];
+	int	*pid;
 	int	i;
 
 	i = 0;
+	pid = (int*)malloc((data->pipex + 1) * sizeof(int));
 	while (cmds && i <= num_pipes)
 	{
 		setup_heredoc(data, cmds->redirections);
@@ -77,6 +78,7 @@ void	execute_pipes(t_cmd *cmds, int num_pipes, int **pipes, t_data *data)
 		g_var.g_exit_status = WEXITSTATUS(status);
 		i++;
 	}
+	free(pid);
 }
 
 void	launch_pipes(t_data *data)
@@ -102,4 +104,5 @@ void	launch_pipes(t_data *data)
 		free(pipes[i]);
 		i++;
 	}
+	free(pipes);
 }
