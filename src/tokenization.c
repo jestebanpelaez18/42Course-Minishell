@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/25 17:39:02 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:39:13 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,5 @@ void	tokenization(t_data *data)
 			i += tok_word(data->line_read, i, &data->struc_tok);
 	}
 	expander(data, &data->struc_tok);
+	// printList(data->struc_tok);
 }
