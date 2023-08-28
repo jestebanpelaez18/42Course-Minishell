@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/25 17:39:02 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/28 14:14:06 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	create_node(char *sub_line, t_token **tokens, int operator)
 {
 	t_token		*node;
-	static int 	index = 0;
+	static int	index;
 
 	node = ft_lstnew(sub_line, operator, ++index);
 	if (!node)

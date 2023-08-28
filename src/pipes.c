@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/25 17:39:50 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/28 14:16:58 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ void	execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data)
 			if (i < num_pipes)
 				dup2(pipes[i][1], STDOUT_FILENO);
 			if (i > 0)
-				dup2(pipes[i - 1][0], STDIN_FILENO); // Read from previous pipe
+				dup2(pipes[i - 1][0], STDIN_FILENO);
 			close_unused_pipes(num_pipes, pipes);
 			execute_cmd(cmds, data);
 		}
 		else
 		{
 			if (i < num_pipes)
-				close(pipes[i][1]); // Close write end of current pipe
+				close(pipes[i][1]);
 			if (i > 0)
 				close(pipes[i - 1][0]);
 		}
