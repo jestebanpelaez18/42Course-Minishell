@@ -6,13 +6,13 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/28 14:16:58 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/28 14:35:58 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	create_pipes(int num_pipes, int (*pipes)[2])
+void	create_pipes(int num_pipes, int **pipes)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ void	create_pipes(int num_pipes, int (*pipes)[2])
 	}
 }
 
-void	close_unused_pipes(int num_pipes, int (*pipes)[2])
+void	close_unused_pipes(int num_pipes, int **pipes)
 {
 	int	i;
 
@@ -38,7 +38,7 @@ void	close_unused_pipes(int num_pipes, int (*pipes)[2])
 	}
 }
 
-void	execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data)
+void	execute_pipes(t_cmd *cmds, int num_pipes, int **pipes, t_data *data)
 {
 	int	status;
 	int	pid[data->pipex + 1];
@@ -82,12 +82,24 @@ void	execute_pipes(t_cmd *cmds, int num_pipes, int (*pipes)[2], t_data *data)
 void	launch_pipes(t_data *data)
 {
 	int		i;
-	int		pipes[data->pipex][2];
+	int		**pipes;
 	t_cmd	*cmds;
 
 	i = 0;
+	pipes = (int**)malloc(data->pipex * sizeof(int*));
+	while (i < data->pipex)
+	{
+		pipes[i] = (int*)malloc(2 * sizeof(int));
+		i++;
+	}
 	signal_in_exec();
 	cmds = data->struc_cmd;
 	create_pipes(data->pipex, pipes);
 	execute_pipes(cmds, data->pipex, pipes, data);
+	i = 0;
+	while (i < data->pipex)
+	{
+		free(pipes[i]);
+		i++;
+	}
 }
