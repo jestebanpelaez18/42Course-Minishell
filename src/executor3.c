@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:04:19 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 15:34:01 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/25 17:23:44 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char	*executable_path(char **commands, t_data *data)
 	char	**envp;
 	int		j;
 
+	if (!commands || !commands[0])
+		return (NULL);
 	j = 0;
 	envp = data->env;
 	directories = ft_split(copy_path(envp), ':');
@@ -66,6 +68,6 @@ char	*executable_path(char **commands, t_data *data)
 		j++;
 		free(path_exec);
 	}
-    free_argt(directories);
+	free_argt(directories);
 	return (NULL);
 }

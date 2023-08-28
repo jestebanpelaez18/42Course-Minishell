@@ -6,13 +6,13 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:39:22 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/12 17:31:58 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/20 16:01:39 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd	*cmd_new(char **cmd)
+t_cmd	*cmd_new(char **cmd, t_redirec *redirec)
 {
 	t_cmd	*node;
 
@@ -20,6 +20,7 @@ t_cmd	*cmd_new(char **cmd)
 	if (!node)
 		return (NULL);
 	node->commands = cmd;
+	node->redirections = redirec;
 	node->next = NULL;
 	node->prev = NULL;
 	return (node);

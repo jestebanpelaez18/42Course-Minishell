@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:49:50 by junheeki          #+#    #+#             */
-/*   Updated: 2023/08/21 11:16:25 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/28 13:23:41 by junheeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,20 +154,6 @@ static	void	go_home(char **env)
 {
 	char	*path;
 	char	*old_path;
-	char	*path_to_go;
-
-	path_to_go = match_env_var("HOME", env);
-	if (!path_to_go)
-		return ;// error_msg("cd: HOME not set");
-	if (chdir(path_to_go) == 0)
-	{
-		path = match_env_var("HOME", env);
-		old_path = match_env_var("PWD", env);
-		//update env, we can use export here
-	}
-	else
-		printf("Lol shit failed\n");// error_msg("cd: Failed to change directory.");
-}
 
 static	char	**match_case(char *arg, char **env)
 {

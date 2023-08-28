@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:52:33 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/14 16:34:44 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/28 13:25:09 by junheeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,33 +26,37 @@ static	int	get_env_var(char *arg, char **env, int index, int len)
 
 static	char	**remove_env_var(char **e_cpy, int index)
 {
-	int	j;
+	char	*last;
+	int		i;
 
-	j = 0;
-	while (e_cpy[index][j])
+	last = NULL;
+	i = 0;
+	free(e_cpy[index]);
+	while (e_cpy[index + 1])
 	{
-		e_cpy[index][j] = 0;
-		j++;
+		e_cpy[index] = e_cpy[index + 1];
+		index++;
 	}
+	e_cpy[index] = NULL;
 	return (e_cpy);
 }
 
-static	char	**unset(char *cmd, char**env)
+char	**ft_unset(char *cmd, char**env)
 {
 	char	**e_cpy;
 	int		index;
 	int		len;
 
 	if (!cmd)
-		return (0);
+		return (env);
 	index = 0;
 	e_cpy = envdup(env);
 	if (!e_cpy)
-		return (NULL);
+		return (env);
 	len = ft_strlen(cmd);
 	index = get_env_var(cmd, e_cpy, index, len);
 	while (e_cpy[index] && e_cpy[index][len] != '=')
 		index = get_env_var(cmd, e_cpy, index + 1, len);
-	e_cpy = remove_env_var(e_cpy, index);
-	return (e_cpy);
+	env = remove_env_var(e_cpy, index);
+	return (env);
 }

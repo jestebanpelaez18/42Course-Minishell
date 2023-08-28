@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_utils.c                                       :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/10 17:18:20 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/27 19:01:00 by rrask            ###   ########.fr       */
+/*   Created: 2023/08/26 18:39:42 by rrask             #+#    #+#             */
+/*   Updated: 2023/08/26 19:34:06 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_argt(char **argument)
+void	ft_env(char **env)
 {
-	int	i;
+	int		i;
 
 	i = 0;
-	while (argument[i])
+	while (env[i])
 	{
-		free(argument[i]);
-		argument[i] = NULL;
+		ft_putstr_fd(env[i],2);
+		ft_putchar_fd('\n', 2);
 		i++;
 	}
-	free(argument);
 }

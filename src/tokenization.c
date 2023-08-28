@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/17 13:07:46 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/25 17:39:02 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	create_node(char *sub_line, t_token **tokens, int operator)
 {
-	t_token	*node;
-	static int index = 0;
+	t_token		*node;
+	static int 	index = 0;
 
 	node = ft_lstnew(sub_line, operator, ++index);
 	if (!node)
@@ -35,7 +35,7 @@ int	tok_operator(char *line, int i, t_token **tokens)
 			error_msg("allocation error");
 		return (2);
 	}
-	else if (operator== LEFT_R && operator_type(line[i + 1]) == LEFT_R)
+	else if (operator == LEFT_R && operator_type(line[i + 1]) == LEFT_R)
 	{
 		if (!create_node(NULL, tokens, HEREDOC))
 			error_msg("allocation error");

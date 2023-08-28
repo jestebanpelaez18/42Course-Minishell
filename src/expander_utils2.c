@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 14:25:49 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/17 15:04:08 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:36:37 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ int	dollar_tok_len(char *str, int j)
 
 	i = j;
 	k = 0;
-	while (str[i] && str[i] != '\"' && str[i] != '\'' && str[i] != ' ')
+	while (str[i] && str[i] != '\"' && str[i] != '\'' && str[i] != ' '
+		&& str[i] != '$' && str[i] != '\\' && str[i] != '=' && str[i] != ':')
 	{
 		k++;
 		i++;
@@ -91,7 +92,9 @@ char	*rm_double_quotes(char *str)
 	int j;
 	char *temp;
 
-	temp = ft_strdup("");
+	temp = (char *)malloc(ft_strlen(str) + 1);
+	if (!temp)
+		error_msg("Allocation error");
 	i = 0;
 	j = 0;
 	while (str[i] != '\0')

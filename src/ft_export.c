@@ -5,130 +5,95 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/16 13:39:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/23 14:44:57 by junheeki         ###   ########.fr       */
+/*   Created: 2023/08/25 13:40:52 by rrask             #+#    #+#             */
+/*   Updated: 2023/08/28 13:24:08 by junheeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-1. Get environment.
-2. Add variables to the end of the list.
-3. If the variable exists: rewrite it with the given argument.
+#include "minishell.h"
 
-EDGECASE: Handle every argument after export.
-*/
-
-#include "../inc/minishell.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	size_t	i;
-
-	i = 0;
-	if (s == NULL)
-		return ;
-	while (s[i] != '\0')
-	{
-		ft_putchar_fd(s[i], fd);
-		i++;
-	}
-}
-
-static int	is_alpha(char *arg)
+int	ft_keylen(char *arg)
 {
 	int	i;
 
 	i = 0;
-	if ((arg[i] >= 'a' && arg[i] <= 'z') || (arg[i] >= 'A' && arg[i] <= 'Z'))
-		return (1);
-	else
-		return (0);
+	while (arg[i] && arg[i] != '=')
+		i++;
+	if (arg[i] == '=')
+		i++;
+	return (i);
 }
 
-//export : with no arg -> print export with "declare -x "
-//
-
-void	print_export(char **env, int fd)
+static void	print_export_env(char **env)
 {
-	int	i;
-	char	**e_cpy;
-	char	*str;
+	int		i;
 
 	i = 0;
-	str = getenv(e_cpy[i]);
-	while (str[i])
+	while (env[i])
 	{
-		ft_putstr_fd("declare -x ", fd);
-		printf("%s", e_cpy[i]);
-		// print_quote(str[i], fd);
-		ft_putchar_fd('\n', fd);
-		free(e_cpy[i]);
+		ft_putstr_fd("declare -x ", 1);
+		ft_putstr_fd(env[i], 1);
+		ft_putchar_fd('\n', 1);
 		i++;
 	}
 }
+/**/
 
-static char	**ft_export(char *arg, char **env)
+char	**modify_env_var(char **env, char *arg, int len)
 {
-	if (!arg || !*arg)
+	const int	pos = match_env_key(arg, env, 0, len);
+	const int	num = content_check(arg);
+	const char	*key = get_key(arg);
+	const char	*str = get_string(arg);
+
+	if (num == 1)
+	{
+		env[pos] = ft_strdup(arg);
+		env[pos] = ft_strjoinfree(env[pos], "\"\"");
+	}
+	else if (num == 2)
+		env[pos] = combine_str(str, key);
+	return (env);
+}
+
+char	**handle_args(char *arg, char **env)
+{
+	int	index;
+	int	len;
+	int	key_flag;
+
+	if (!arg || !env)
 		return (NULL);
-	(void)env;
-	/*
-		takes the argument and allocates it into the environment.
-		only receives alpha, no numbers, no non-alphabetical for first letter
-	*/
-	if (is_alpha(arg)) //Add recognition for numbers
+	index = 0;
+	key_flag = 0;
+	len = ft_keylen(arg);
+	if (is_first_alpha(arg) == 1)
 	{
-		printf("%s is now a variable.\n", arg); //Allocate at the end of env
-	}
-	else
-	{
-		printf("export: not an identifier: %s", arg);
+		if (content_check(arg) == 0)
+			return (env);
+		env = modify_env_var(env, arg, len);
 	}
 	return (env);
 }
 
-int	main(int argc, char **argv, char **env)
+void	ft_export(char **arg, char **env)
 {
 	int	i;
-	int fd;
+	int	len;
 
-	(void)argc;
-	i = 1;
-	if (!argv || (argv[i] && (strncmp(argv[i], "export", 7) != 0)))
-		//CHANGE TO FT
-		return (-1);
+	i = 0;
+	len = 0;
+	if (!arg || (arg[i] && (ft_strncmp(arg[i], "export", 7) != 0)))
+		return ;
 	i++;
-	if (argv[i]) //If there are additional arguments after export
+	if (arg[i])
 	{
-		while (argv[i])
+		while (arg[i])
 		{
-			ft_export(argv[i], env);
+			env = handle_args(arg[i], env);
 			i++;
 		}
 	}
-	else //Export only, prints environment variables
-	{
-		i = 0;
-		while (env[i])
-		{
-			print_export(env, fd);
-			// ft_putstr_fd("declare -x ", fd);
-			// //print_quote(str[i], fd);
-			// printf("%s", str[i]);
-			// ft_putchar_fd('\n', fd);
-			// free(str[i]);
-			// i++;
-			// // printf("declare -x %s\n", env[i]);
-			// // i++;
-		}
-	}
-	return (0);
+	else
+		print_export_env(env);
 }

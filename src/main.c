@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/21 09:17:45 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/28 13:25:29 by junheeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	init_data(t_data *data)
 	data->pipex = 0;
 	data->struc_cmd = NULL;
 	data->struc_tok = NULL;
+	g_var.heredoc_signal = 0;
 }
 
 void	get_env(t_data *data, char **env)
@@ -35,14 +36,14 @@ void	get_line(t_data *data)
 
 int	main(int argc, char **argv, char **env)
 {
-	t_data data;
+	t_data	data;
 
 	(void)argv;
 	if (argc > 1)
 		error_msg("No arguments for minishell");
 	init_data(&data);
 	get_env(&data, env);
-	g_exit_status = 0;
+	g_var.g_exit_status = 0;
 	while (42)
 	{
 		start_signal();
@@ -54,7 +55,6 @@ int	main(int argc, char **argv, char **env)
 			executor(&data);
 			reset(&data);
 		}
-		// reset(&data);
 		init_data(&data);
 	}
 	return (0);

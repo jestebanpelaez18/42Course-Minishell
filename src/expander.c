@@ -6,35 +6,23 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:46 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/17 12:41:47 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/26 15:38:50 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// char	**check_expander(t_data *data, char **commands)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (commands[i])
-// 	{
-//         if(commands[i])
-// 	}
-// }
-
-// t_cmd	*expander(t_data *data, t_cmd *cmds)
-// {
-// 	cmds->commands = check_expander(data, cmds->commands);
-
-// 	return (cmds);
-// }
-
 int	get_exit_status(char **str)
 {
-	free(*str);
-	*str = ft_itoa(g_exit_status);
-	return ((int)ft_strlen(*str) + 1);
+	char	*temp;
+	int		step;
+
+	step = 0;
+	temp = ft_itoa(g_var.g_exit_status);
+	*str = ft_strjoin(*str, temp);
+	step = ft_strlen(temp);
+	free(temp);
+	return (step + 1);
 }
 
 int	expand_env(char **temp, int i, t_data *data, char *str)
@@ -58,6 +46,8 @@ int	expand_env(char **temp, int i, t_data *data, char *str)
 		}
 		j++;
 	}
+	if (step == 1)
+		step += dollar_tok_len(str, i);
 	return (step);
 }
 
@@ -73,8 +63,8 @@ char	*replace_dollar(char *str, t_data *data)
 		// i += skip_digit(i, str);
 		if (str[i] == '$' && str[i + 1] == '?')
 			i += get_exit_status(&temp);
-		if (str[i] == '$' && (str[i + 1] != ' ' && (str[i + 2] != '"' || str[i
-					+ 2] != '\0')) && str[i + 1] != '\0')
+		else if (str[i] == '$' && (str[i + 1] != ' ' && (str[i + 2] != '"'
+						|| str[i + 2] != '\0')) && str[i + 1] != '\0')
 		{
 			i += expand_env(&temp, i + 1, data, str);
 		}

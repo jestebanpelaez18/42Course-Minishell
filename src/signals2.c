@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_utils.c                                       :+:      :+:    :+:   */
+/*   signals2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/10 17:18:20 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/27 19:01:00 by rrask            ###   ########.fr       */
+/*   Created: 2023/08/18 17:46:31 by jpelaez-          #+#    #+#             */
+/*   Updated: 2023/08/24 15:51:27 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_argt(char **argument)
+void	hd_handler(int signal)
 {
-	int	i;
-
-	i = 0;
-	while (argument[i])
+	if (signal == SIGINT)
 	{
-		free(argument[i]);
-		argument[i] = NULL;
-		i++;
+		g_var.heredoc_signal = 1;
+		ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
 	}
-	free(argument);
 }

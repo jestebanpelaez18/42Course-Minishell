@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization_utils1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:22:27 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/07/27 17:17:43 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/25 17:38:33 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	operator_type(char operator)
 {
-	if (operator== '>')
+	if (operator == '>')
 		return (RIGH_R);
-	else if (operator== '<')
+	else if (operator == '<')
 		return (LEFT_R);
 	else
 		return (PIPE);
@@ -71,32 +71,31 @@ int	check_token_type(char c)
 	return (0);
 }
 
-
 /*we have to delete this at the end*/
 
-void	printList(t_token *node)
-{
-	t_token *temp;
-	t_token *temp2;
+// void	printList(t_token *node)
+// {
+// 	t_token *temp;
+// 	t_token *temp2;
 
-	temp = node;
-	temp2 = node;
-	while (node)
-	{
-		printf("%s -> ", node->tokens);
-		node = node->next;
-	}
-	printf("NULL \n\n");
-	while (temp)
-	{
-		printf("%d -> ", temp->type);
-		temp = temp->next;
-	}
-	printf("NULL \n");
-	while (temp2)
-	{
-		printf("%d -> ", temp2->index);
-		temp2 = temp2->next;
-	}
-	printf("NULL \n");
-}
+// 	temp = node;
+// 	temp2 = node;
+// 	while (node)
+// 	{
+// 		printf("%s -> ", node->tokens);
+// 		node = node->next;
+// 	}
+// 	printf("NULL \n\n");
+// 	while (temp)
+// 	{
+// 		printf("%d -> ", temp->type);
+// 		temp = temp->next;
+// 	}
+// 	printf("NULL \n");
+// 	while (temp2)
+// 	{
+// 		printf("%d -> ", temp2->index);
+// 		temp2 = temp2->next;
+// 	}
+// 	printf("NULL \n");
+// }
