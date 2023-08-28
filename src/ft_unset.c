@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:52:33 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/28 16:55:48 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/28 19:49:24 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	**ft_unset(char *cmd, char**env)
 	e_cpy = envdup(env);
 	if (!e_cpy)
 		return (env);
-	free_argt(env);
+	// free_argt(env);
 	len = ft_strlen(cmd);
 	index = get_env_var(cmd, e_cpy, index, len);
 	while (e_cpy[index] && e_cpy[index][len] != '=')

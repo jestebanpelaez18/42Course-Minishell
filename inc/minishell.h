@@ -86,13 +86,14 @@ void					reset(t_data *data);
 void					error_msg_redic(char *msg, char *input,
 							int exit_status);
 void					error_msg_parser(t_data *data, char *msg, int type);
+void					error_msg_export(char *msg, char *input);
 
 /*Builtins*/
 int						is_builtin(char *str);
 char					**ft_unset(char *cmd, char**env);
 int						ft_pwd(void);
 // int						ft_cd(char **args, t_data *data);
-void					ft_export(char **arg, char **env);
+int						ft_export(char **arg, char **env);
 void					ft_env(char **env);
 char					**handle_args(char *arg, char **env);
 char					**modify_env_var(char **env, char *arg, int len);

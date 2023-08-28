@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/28 13:39:13 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/28 19:33:45 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int	tok_word(char *line, int i, t_token **tokens)
 	j = 0;
 	while (line[i + j] != '\0' && !check_token_type(line[i + j]))
 	{
-		j += tok_closed_quotes(line, i, '\'');
-		j += tok_closed_quotes(line, i, '\"');
+		j += tok_closed_quotes(line, i + j, '\'');
+		j += tok_closed_quotes(line, i + j, '\"');
 		if (check_delimiter(line[i + j], " \f\n\r\t\v"))
 			break ;
 		j++;
