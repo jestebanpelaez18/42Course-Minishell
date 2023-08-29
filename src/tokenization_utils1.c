@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization_utils1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:22:27 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/27 14:13:13 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:06:06 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	operator_type(char operator)
 {
-	if (operator == '>')
+	if (operator== '>')
 		return (RIGH_R);
-	else if (operator == '<')
+	else if (operator== '<')
 		return (LEFT_R);
 	else
 		return (PIPE);
