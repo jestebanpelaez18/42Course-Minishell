@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 13:40:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/28 19:03:31 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 13:46:48 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ char	**modify_env_var(char **env, char *arg, int len)
 	}
 	else if (num == 2)
 		env[pos] = combine_str(str, key);
+	free((char *)key);
+	free((char *)str);
 	return (env);
 }
 
@@ -61,18 +63,21 @@ char	**handle_args(char *arg, char **env)
 	int	index;
 	int	len;
 	int	key_flag;
+	char *temp;
 
 	if (!arg || !env)
 		return (NULL);
 	index = 0;
 	key_flag = 0;
 	len = ft_keylen(arg);
+	temp = ft_strdup(arg);
 	if (is_first_alpha(arg) == 1)
 	{
 		if (content_check(arg) == 0)
 			return (env);
-		env = modify_env_var(env, arg, len);
+		env = modify_env_var(env, temp, len);
 	}
+	free(temp);
 	return (env);
 }
 
