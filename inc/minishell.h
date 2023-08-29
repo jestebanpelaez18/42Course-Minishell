@@ -197,6 +197,7 @@ void					remove_quotes(t_token *current);
 char					*replace_dollar(char *str, t_data *data);
 int						expand_env(char **temp, int i, t_data *data, char *str);
 int						get_exit_status(char **str);
+int						export_quotes(char *current, char *next);
 
 /*setup redirections*/
 

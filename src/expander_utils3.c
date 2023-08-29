@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:47:41 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/28 14:27:41 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:50:10 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,40 @@ void	remove_quotes(t_token *current)
 {
 	char	*str;
 
+	if (current->prev)
+		if (export_quotes(current->prev->tokens, current->tokens) == 0)
+			return ;
 	if (no_single_quotes(current->tokens))
 	{
-		str = rm_double_quotes(current->tokens);
-		str = rm_single_quotes(str);
-		current->tokens = str;
+		if (current->tokens[0] == '\"' && current->tokens[1] == '\'')
+		{
+			str = rm_double_quotes(current->tokens);
+			current->tokens = str;
+		}
+		else
+		{
+			str = rm_double_quotes(current->tokens);
+			str = rm_single_quotes(str);
+			current->tokens = str;
+		}
 	}
 	else
 	{
 		str = rm_single_quotes(current->tokens);
 		current->tokens = str;
 	}
+}
+
+int	export_quotes(char *current, char *next)
+{
+	if (!current | !next)
+		return (1);
+	if (ft_strncmp(current, "export", ft_strlen(current) - 1) == 0)
+	{
+		if (ft_strncmp(next, "\"\"", 2) == 0)
+			return (0);
+		else if (ft_strncmp(next, "''", 2) == 0)
+			return (0);
+	}
+	return (1);
 }
