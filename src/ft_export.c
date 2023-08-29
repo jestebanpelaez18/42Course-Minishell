@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 13:40:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/29 13:46:48 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:27:16 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ char	**modify_env_var(char **env, char *arg, int len)
 
 char	**handle_args(char *arg, char **env)
 {
-	int	index;
-	int	len;
-	int	key_flag;
-	char *temp;
+	int		index;
+	int		len;
+	int		key_flag;
+	char	*temp;
 
 	if (!arg || !env)
 		return (NULL);
