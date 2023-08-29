@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/29 14:40:31 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:11:51 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	get_path(t_cmd *cmds, t_data *data)
 	}
 	else
 	{
-		error_msg_command("No such file or directory ", cmds->commands[0]);
+		error_msg_command(": command not found", cmds->commands[0]);
 		exit_s = 127;
 	}
 	return (exit_s);
