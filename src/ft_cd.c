@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:40 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/29 17:30:55 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 18:39:24 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,15 @@ void	update_path(char *key, char *path, char **env)
 {
 	int		pos;
 	char	*match_key;
+	char	*new;
 
 	pos = 0;
 	match_key = get_key(key);
 	pos = match_env_key(match_key, env, 0, ft_keylen(match_key));
-	env[pos] = combine_str(path, match_key);
+	new = combine_str(path, match_key);
+	free(env[pos]);
+	env[pos] = new;
+	free(match_key);
 }
 
 int	ft_cd(char **args, char **env)

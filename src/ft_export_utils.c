@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:23:16 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/29 16:56:16 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:49:43 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ char	*get_key(char *arg)
 		end++;
 	end++;
 	str = malloc(sizeof(char) * end + 1);
+	if (!str)
+		return (NULL);
 	while (i < end)
 	{
 		str[i] = arg[i];
