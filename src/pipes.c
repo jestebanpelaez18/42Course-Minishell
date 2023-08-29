@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/28 15:32:48 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:19:07 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,39 +25,12 @@ void	create_pipes(int num_pipes, int **pipes)
 	}
 }
 
-void	close_pipes(int num_pipes, int **pipes)
-{
-	int	i;
-
-	i = 0;
-	while (i < num_pipes)
-	{
-		close(pipes[i][1]);
-		close(pipes[i][0]);
-		i++;
-	}
-}
-
-void	child_pipe(int i, int num_pipes, int **pipes)
+void	close_pipes(int i, int num_pipes, int **pipes)
 {
 	if (i < num_pipes)
-		dup2(pipes[i][1], STDOUT_FILENO);
+		close(pipes[i][1]);
 	if (i > 0)
-		dup2(pipes[i - 1][0], STDIN_FILENO);
-	close_pipes(num_pipes, pipes);
-}
-
-void	wait_pids(int num_pipes, int *pid, int status)
-{
-	int	i;
-
-	i = 0;
-	while (i <= num_pipes)
-	{
-		waitpid(pid[i], &status, 0);
-		g_var.g_exit_status = WEXITSTATUS(status);
-		i++;
-	}
+		close(pipes[i - 1][0]);
 }
 
 void	execute_pipes(t_cmd *cmds, int num_pipes, int **pipes, t_data *data)
@@ -81,12 +54,7 @@ void	execute_pipes(t_cmd *cmds, int num_pipes, int **pipes, t_data *data)
 			execute_cmd(cmds, data);
 		}
 		else
-		{
-			if (i < num_pipes)
-				close(pipes[i][1]);
-			if (i > 0)
-				close(pipes[i - 1][0]);
-		}
+			close_pipes(i, num_pipes, pipes);
 		i++;
 		cmds = cmds->next;
 	}

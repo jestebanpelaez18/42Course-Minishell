@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:22:27 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/29 14:06:06 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:10:18 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	operator_type(char operator)
 {
-	if (operator== '>')
+	if (operator == '>')
 		return (RIGH_R);
-	else if (operator== '<')
+	else if (operator == '<')
 		return (LEFT_R);
 	else
 		return (PIPE);
@@ -73,7 +73,7 @@ int	check_token_type(char c)
 
 /*we have to delete this at the end*/
 
-void	printList(t_token *node)
+void	printList(t_token *node)//
 {
 	t_token *temp;
 	t_token *temp2;

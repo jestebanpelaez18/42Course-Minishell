@@ -178,6 +178,9 @@ void					execute_pipes(t_cmd *cmds, int num_pipes,
 void					execute_command(int pipe_read_end, int pipe_write_end,
 							t_cmd *cmd, t_data *data);
 void					create_pipes(int num_pipes, int **pipes);
+void					close_pipes(int i, int num_pipes, int **pipes);
+void					child_pipe(int i, int num_pipes, int **pipes);
+void					close_child_pipes(int num_pipes, int **pipes);
 
 /*Expander*/
 
