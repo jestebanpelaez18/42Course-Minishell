@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:44:28 by nvan-den          #+#    #+#             */
-/*   Updated: 2023/08/29 17:08:48 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 19:13:00 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int						run_cmd(char **cmd, int index, t_data *data);
 int						cmd_cmp(const char *str1, const char *str2);
 int						ft_exit(t_data *data, char **argv);
 int						is_numeric_parameters(char *param);
+int						get_env_var(char *arg, char **env, int index, int len);
 
 /*Signal functions*/
 void					signal_in_exec(void);

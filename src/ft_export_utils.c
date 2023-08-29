@@ -6,12 +6,11 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:23:16 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/29 17:49:43 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 19:17:44 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <string.h>
 
 /*Matches the key in the environment, and returns the position.
 If it does not exist, it creates it and locates it.*/

@@ -6,13 +6,13 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:52:33 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/29 14:05:09 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 19:12:40 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	int	get_env_var(char *arg, char **env, int index, int len)
+int	get_env_var(char *arg, char **env, int index, int len)
 {
 	int	i;
 

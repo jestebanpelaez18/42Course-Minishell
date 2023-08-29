@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:40 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/29 18:39:24 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 19:12:25 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,32 @@ void	update_path(char *key, char *path, char **env)
 	free(match_key);
 }
 
+char	*handle_empty_cd(char **env)
+{
+	int		index;
+	char	*temp;
+
+	index = 0;
+	index = get_env_var("HOME", env, 0, ft_strlen("HOME"));
+	temp = get_string(env[index]);
+	if (!temp)
+		return (NULL);
+	return (temp);
+}
+
 int	ft_cd(char **args, char **env)
 {
 	char	cwd[PATH_MAX];
 	char	*cur_path;
+	char	*temp;
 
-	if (!args[1])
+	if (args[1] == 0)
+	{
+		temp = handle_empty_cd(env);
+		chdir(temp);
+		free(temp);
 		return (0);
+	}
 	if (args[1] && args[2])
 	{
 		error_msg_cd("minishell: cd: ", args[1]);
