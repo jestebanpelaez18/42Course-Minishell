@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/28 18:25:36 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:46:45 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	is_builtin(char *str)
 	return (flag);
 }
 
-
 int	run_cmd(char **cmd, int index, t_data *data)
 {
 	int	exit_s;
@@ -114,5 +113,3 @@ int	run_builtin(t_data *data, char **cmds)
 	}
 	return (e_s);
 }
-
-

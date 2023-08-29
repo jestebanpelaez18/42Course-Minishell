@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:39 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/29 14:39:05 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:59:51 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,3 @@ void	executor(t_data *data)
 	and the we can test for multiple commands */
 	return ;
 }
- 

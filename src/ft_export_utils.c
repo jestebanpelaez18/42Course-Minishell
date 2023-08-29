@@ -6,12 +6,15 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:23:16 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/29 13:46:05 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:56:16 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <string.h>
 
+/*Matches the key in the environment, and returns the position.
+If it does not exist, it creates it and locates it.*/
 int	match_env_key(char *arg, char **env, int index, int len)
 {
 	int	i;
@@ -76,6 +79,7 @@ char	*get_key(char *arg)
 		str[i] = arg[i];
 		i++;
 	}
+	str[i] = '\0';
 	return (str);
 }
 

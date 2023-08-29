@@ -1,36 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_utils2.c                                   :+:      :+:    :+:   */
+/*   pipes_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/26 16:34:05 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/29 14:47:10 by nvan-den         ###   ########.fr       */
+/*   Created: 2023/08/29 14:18:11 by nvan-den          #+#    #+#             */
+/*   Updated: 2023/08/29 14:21:06 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	is_number(char argument)
-{
-	if (argument >= '0' && argument <= '9')
-		return (1);
-	return (0);
-}
-
-int	is_numeric_parameters(char *param)
+void	close_child_pipes(int num_pipes, int **pipes)
 {
 	int	i;
 
 	i = 0;
-	if ((param[i] == '-' || param[i] == '+') && param[i + 1] != '\0')
-		i++;
-	while (param[i] != '\0')
+	while (i < num_pipes)
 	{
-		if (!is_number(param[i]))
-			return (0);
+		close(pipes[i][1]);
+		close(pipes[i][0]);
 		i++;
 	}
-	return (1);
+}
+
+void	close_pipes(int i, int num_pipes, int **pipes)
+{
+	if (i < num_pipes)
+		close(pipes[i][1]);
+	if (i > 0)
+		close(pipes[i - 1][0]);
+}
+
+void	child_pipe(int i, int num_pipes, int **pipes)
+{
+	if (i < num_pipes)
+		dup2(pipes[i][1], STDOUT_FILENO);
+	if (i > 0)
+		dup2(pipes[i - 1][0], STDIN_FILENO);
+	close_child_pipes(num_pipes, pipes);
 }

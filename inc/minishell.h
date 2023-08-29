@@ -3,11 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-
-/*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 14:24:05 by jpelaez-         ###   ########.fr       */
+/*   Created: 2023/08/29 14:44:28 by nvan-den          #+#    #+#             */
+/*   Updated: 2023/08/29 16:55:43 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +32,11 @@
 # define APPEND 5
 # define PATH_MAX 4096
 
-
 typedef struct s_redirec
 {
-	char 				*token; 
+	char				*token;
 	char				*hd_file_name;
-	int 				type;
+	int					type;
 	struct s_redirec	*next;
 	struct s_redirec	*prev;
 }						t_redirec;
@@ -92,8 +90,10 @@ void					error_msg_export(char *msg, char *input);
 int						is_builtin(char *str);
 char					**ft_unset(char *cmd, char**env);
 int						ft_pwd(void);
-// int						ft_cd(char **args, t_data *data);
-int						ft_export(char **arg, char **env);
+int						ft_cd(char **args, char **env);
+char					**go_home(char **env);
+void					update_path(char *key, char *path, char **env);
+void					ft_export(char **arg, char **env);
 void					ft_env(char **env);
 char					**handle_args(char *arg, char **env);
 char					**modify_env_var(char **env, char *arg, int len);
@@ -174,10 +174,13 @@ void					execute_cmd(t_cmd *cmds, t_data *data);
 
 void					launch_pipes(t_data *data);
 void					execute_pipes(t_cmd *cmds, int num_pipes,
-							int (*pipes)[2], t_data *data);
+							int **pipes, t_data *data);
 void					execute_command(int pipe_read_end, int pipe_write_end,
 							t_cmd *cmd, t_data *data);
-void					create_pipes(int num_pipes, int (*pipes)[2]);
+void					create_pipes(int num_pipes, int **pipes);
+void					close_pipes(int i, int num_pipes, int **pipes);
+void					child_pipe(int i, int num_pipes, int **pipes);
+void					close_child_pipes(int num_pipes, int **pipes);
 
 /*Expander*/
 

@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/29 14:57:46 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:59:26 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	create_node(char *sub_line, t_token **tokens, int operator)
 {
 	t_token		*node;
-	static int 	index = 0;
+	static int	index;
 
-	node = ft_lstnew(sub_line, operator, ++index);
+	node = ft_lstnew(sub_line, operator, ++ index);
 	if (!node)
 		return (0);
 	ft_lstadd_back(tokens, node);
