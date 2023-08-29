@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/25 13:40:15 by nvan-den          #+#    #+#             */
-/*   Updated: 2023/08/25 19:58:500 by rrask            ###   ########.fr       */
+/*   Created: 2023/08/29 14:40:48 by nvan-den          #+#    #+#             */
+/*   Updated: 2023/08/29 14:43:48 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	n_function(char **argv)
 
 	i = 0;
 	n_flag = 0;
-	printf("this is %s\n ",argv[1]);
 	if (!argv || (argv[i] && (ft_strncmp(argv[i], "echo", 4) != 0)))
 	{
 		return ;
@@ -46,8 +45,6 @@ int	ft_echo(char **argv)
 	int	i;
 
 	i = 0;
-	// if (!argv)
-	// 	return (-1);
 	if (ft_strlen(*argv) > 1)
 		n_function(argv);
 	return (0);

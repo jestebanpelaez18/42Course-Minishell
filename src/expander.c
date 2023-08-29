@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:46 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/26 15:38:50 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:31:20 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,10 @@ char	*replace_dollar(char *str, t_data *data)
 	i = 0;
 	while (str[i])
 	{
-		// i += skip_digit(i, str);
 		if (str[i] == '$' && str[i + 1] == '?')
 			i += get_exit_status(&temp);
 		else if (str[i] == '$' && (str[i + 1] != ' ' && (str[i + 2] != '"'
-						|| str[i + 2] != '\0')) && str[i + 1] != '\0')
+					|| str[i + 2] != '\0')) && str[i + 1] != '\0')
 		{
 			i += expand_env(&temp, i + 1, data, str);
 		}
@@ -92,7 +91,7 @@ void	expand_dollar(t_token *current, t_data *data)
 	else
 	{
 		if (current->tokens[0] != '\'' && (current->tokens[j - 1] != '\''
-			&& current->tokens[j + 1] != '\0'))
+				&& current->tokens[j + 1] != '\0'))
 		{
 			str = replace_dollar(current->tokens, data);
 			current->tokens = str;

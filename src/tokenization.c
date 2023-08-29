@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:25:10 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/25 17:39:02 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:08:15 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	create_node(char *sub_line, t_token **tokens, int operator)
 {
 	t_token		*node;
-	static int 	index = 0;
+	static int	index;
 
-	node = ft_lstnew(sub_line, operator, ++index);
+	node = ft_lstnew(sub_line, operator, ++ index);
 	if (!node)
 		return (0);
 	ft_lstadd_back(tokens, node);
@@ -57,8 +57,8 @@ int	tok_word(char *line, int i, t_token **tokens)
 	j = 0;
 	while (line[i + j] != '\0' && !check_token_type(line[i + j]))
 	{
-		j += tok_closed_quotes(line, i, '\'');
-		j += tok_closed_quotes(line, i, '\"');
+		j += tok_closed_quotes(line, i + j, '\'');
+		j += tok_closed_quotes(line, i + j, '\"');
 		if (check_delimiter(line[i + j], " \f\n\r\t\v"))
 			break ;
 		j++;

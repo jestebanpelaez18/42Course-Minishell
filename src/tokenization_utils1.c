@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization_utils1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:22:27 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/25 17:38:33 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:10:18 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,29 +73,29 @@ int	check_token_type(char c)
 
 /*we have to delete this at the end*/
 
-// void	printList(t_token *node)
-// {
-// 	t_token *temp;
-// 	t_token *temp2;
+void	printList(t_token *node)//
+{
+	t_token *temp;
+	t_token *temp2;
 
-// 	temp = node;
-// 	temp2 = node;
-// 	while (node)
-// 	{
-// 		printf("%s -> ", node->tokens);
-// 		node = node->next;
-// 	}
-// 	printf("NULL \n\n");
-// 	while (temp)
-// 	{
-// 		printf("%d -> ", temp->type);
-// 		temp = temp->next;
-// 	}
-// 	printf("NULL \n");
-// 	while (temp2)
-// 	{
-// 		printf("%d -> ", temp2->index);
-// 		temp2 = temp2->next;
-// 	}
-// 	printf("NULL \n");
-// }
+	temp = node;
+	temp2 = node;
+	while (node)
+	{
+		printf("%s -> ", node->tokens);
+		node = node->next;
+	}
+	printf("NULL \n\n");
+	while (temp)
+	{
+		printf("%d -> ", temp->type);
+		temp = temp->next;
+	}
+	printf("NULL \n");
+	while (temp2)
+	{
+		printf("%d -> ", temp2->index);
+		temp2 = temp2->next;
+	}
+	printf("NULL \n");
+}

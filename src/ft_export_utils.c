@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:23:16 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/29 16:49:15 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/29 16:56:16 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	match_env_key(char *arg, char **env, int index, int len)
 		i++;
 	if (env[i] == '\0')
 	{
-		env[i] = ft_strdup(arg);
+		env[i] = arg;
 		env[i + 1] = NULL;
 		match_env_key(arg, env, 0, ft_keylen(arg));
 	}

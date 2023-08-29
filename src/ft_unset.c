@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:52:33 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/27 19:26:02 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/29 14:05:09 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static	int	get_env_var(char *arg, char **env, int index, int len)
 	return (i);
 }
 
-static	char	**remove_env_var(char **e_cpy, int index)
+static	void	remove_env_var(char **e_cpy, int index)
 {
 	char	*last;
 	int		i;
@@ -38,25 +38,20 @@ static	char	**remove_env_var(char **e_cpy, int index)
 		index++;
 	}
 	e_cpy[index] = NULL;
-	return (e_cpy);
 }
 
 char	**ft_unset(char *cmd, char**env)
 {
-	char	**e_cpy;
 	int		index;
 	int		len;
 
 	if (!cmd)
 		return (env);
 	index = 0;
-	e_cpy = envdup(env);
-	if (!e_cpy)
-		return (env);
 	len = ft_strlen(cmd);
-	index = get_env_var(cmd, e_cpy, index, len);
-	while (e_cpy[index] && e_cpy[index][len] != '=')
-		index = get_env_var(cmd, e_cpy, index + 1, len);
-	env = remove_env_var(e_cpy, index);
+	index = get_env_var(cmd, env, index, len);
+	while (env[index] && env[index][len] != '=')
+		index = get_env_var(cmd, env, index + 1, len);
+	remove_env_var(env, index);
 	return (env);
 }

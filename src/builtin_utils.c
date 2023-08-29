@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/27 18:58:17 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/29 14:46:45 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	is_builtin(char *str)
 	return (flag);
 }
 
-
 int	run_cmd(char **cmd, int index, t_data *data)
 {
 	int	exit_s;
@@ -80,7 +79,7 @@ int	run_cmd(char **cmd, int index, t_data *data)
 	else if (index == 2)
 		ft_env(data->env);
 	else if (index == 3)
-		ft_export(cmd, data->env);
+		exit_s = ft_export(cmd, data->env);
 	else if (index == 4)
 	{
 		while (cmd[i++])
@@ -114,5 +113,3 @@ int	run_builtin(t_data *data, char **cmds)
 	}
 	return (e_s);
 }
-
-

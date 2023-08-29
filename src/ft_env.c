@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 18:39:42 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/26 19:34:06 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:23:32 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_env(char **env)
 	i = 0;
 	while (env[i])
 	{
-		ft_putstr_fd(env[i],2);
+		ft_putstr_fd(env[i], 2);
 		ft_putchar_fd('\n', 2);
 		i++;
 	}

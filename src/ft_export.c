@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 13:40:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/29 16:49:15 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/29 16:56:22 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_keylen(char *arg)
 
 static void	print_export_env(char **env)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (env[i])
@@ -53,30 +53,35 @@ char	**modify_env_var(char **env, char *arg, int len)
 	}
 	else if (num == 2)
 		env[pos] = combine_str(str, key);
+	free((char *)key);
+	free((char *)str);
 	return (env);
 }
 
 char	**handle_args(char *arg, char **env)
 {
-	int	index;
-	int	len;
-	int	key_flag;
+	int		index;
+	int		len;
+	int		key_flag;
+	char	*temp;
 
 	if (!arg || !env)
 		return (NULL);
 	index = 0;
 	key_flag = 0;
 	len = ft_keylen(arg);
+	temp = ft_strdup(arg);
 	if (is_first_alpha(arg) == 1)
 	{
 		if (content_check(arg) == 0)
 			return (env);
-		env = modify_env_var(env, arg, len);
+		env = modify_env_var(env, temp, len);
 	}
+	free(temp);
 	return (env);
 }
 
-void	ft_export(char **arg, char **env)
+int	ft_export(char **arg, char **env)
 {
 	int	i;
 	int	len;
@@ -84,16 +89,22 @@ void	ft_export(char **arg, char **env)
 	i = 0;
 	len = 0;
 	if (!arg || (arg[i] && (ft_strncmp(arg[i], "export", 7) != 0)))
-		return ;
+		return (1);
 	i++;
 	if (arg[i])
 	{
 		while (arg[i])
 		{
+			if (is_first_alpha(arg[i]) == -1)
+			{
+				error_msg_export("minishell: export: ", arg[i]);
+				return (1);
+			}
 			env = handle_args(arg[i], env);
 			i++;
 		}
 	}
 	else
 		print_export_env(env);
+	return (0);
 }

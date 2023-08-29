@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:59:45 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/03/23 15:30:06 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/28 18:01:18 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ char	**ft_split(char const *s, char c)
 	int		len;
 
 	if (s == NULL)
-		return (0);
+		return (NULL);
 	len = ft_numwords(s, c);
 	split = (char **)malloc(sizeof(char *) * (len + 1));
 	if (split == NULL)
-		return (0);
+		return (NULL);
 	ft_writesplit(split, s, c, len);
 	return (split);
 }

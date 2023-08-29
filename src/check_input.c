@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:43:17 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/16 18:53:27 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:47:49 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	white_space(char *input)
 	{
 		if (input[i] != ' ' || input[i] != '\t' || input[i] != '\v'
 			|| input[i] != '\f' || input[i] != '\n' || input[i] != '\r')
-			return (1); //returns true if NOT whitespace?? -Nick
+			return (1);
 		i++;
 	}
 	return (0);
@@ -47,6 +47,7 @@ static int	closed_quotes(char *str)
 		if (str[i] == '\0')
 		{
 			error_msg_noexit("unclosed quotes", 258);
+			free(str);
 			return (0);
 		}
 		i++;
@@ -64,6 +65,7 @@ static int	close_pipe(char *str)
 	if (str[i - 1] == '|')
 	{
 		error_msg_noexit("zsh: parse error near '|' ", 258);
+		free(str);
 		return (0);
 	}
 	return (1);
@@ -77,6 +79,7 @@ static int	correct_input(char *line)
 	if (line[0] == '|')
 	{
 		error_msg_noexit("zsh: parse error near '|' ", 258);
+		free(line);
 		return (0);
 	}
 	while (line[i] != '\0')
@@ -85,6 +88,7 @@ static int	correct_input(char *line)
 		if (line[i] == '|' && line[i + 1] == '|')
 		{
 			error_msg_noexit("zsh: parse error near '|' ", 258);
+			free(line);
 			return (0);
 		}
 	}
@@ -100,16 +104,22 @@ int	check_line(t_data *data, char *line)
 	temp_line = ft_strtrim(line, " \t\n");
 	if (!temp_line)
 		return (0);
-	if (!correct_input(temp_line))
+	if (!correct_input(temp_line) || !close_pipe(temp_line))
+	{
+		free(data->line_read);
 		return (0);
+	}
 	if (!closed_quotes(temp_line))
+	{
+		free(data->line_read);
 		return (0);
-	if (!close_pipe(temp_line))
-		return (0);
+	}
 	if (!syntax_redirection(temp_line))
+	{
+		free(data->line_read);
 		return (0);
+	}
 	free(data->line_read);
 	data->line_read = temp_line;
-	// printf("%s\n", data->line_read);
 	return (1);
 }

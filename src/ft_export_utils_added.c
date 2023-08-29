@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_utils_added.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:28:10 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/29 16:49:04 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/29 16:56:12 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,11 @@ int	is_first_alpha(char *arg)
 	while ((arg[i] >= 'a' && arg[i] <= 'z') || (arg[i] >= 'A' && arg[i] <= 'Z'))
 		i++;
 	return (1);
+}
+
+void	error_msg_export(char *msg, char *input)
+{
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd(input, 2);
+	ft_putendl_fd(" not valid identifier", 2);
 }

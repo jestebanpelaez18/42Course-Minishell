@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_lst_utils2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:39:22 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/20 16:01:39 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:22:40 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,3 @@ void	cmd_add_back(t_cmd **lst, t_cmd *new)
 	bottom->next = new;
 	new->prev = bottom;
 }
-
