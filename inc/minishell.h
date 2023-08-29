@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:44:28 by nvan-den          #+#    #+#             */
-/*   Updated: 2023/08/29 16:55:43 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:08:48 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int						ft_pwd(void);
 int						ft_cd(char **args, char **env);
 char					**go_home(char **env);
 void					update_path(char *key, char *path, char **env);
-void					ft_export(char **arg, char **env);
+int						ft_export(char **arg, char **env);
 void					ft_env(char **env);
 char					**handle_args(char *arg, char **env);
 char					**modify_env_var(char **env, char *arg, int len);

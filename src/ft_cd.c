@@ -3,27 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:40 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/29 16:48:10 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/29 17:30:55 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_export_env(char **env)
+void	error_msg_cd(char *msg, char *input)
 {
-	int		i;
-
-	i = 0;
-	while (env[i])
-	{
-		ft_putstr_fd("declare -x ", 1);
-		ft_putstr_fd(env[i], 1);
-		ft_putchar_fd('\n', 1);
-		i++;
-	}
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd(input, 2);
+	ft_putendl_fd(" no such file or directory", 2);
 }
 
 void	update_path(char *key, char *path, char **env)
@@ -42,10 +35,20 @@ int	ft_cd(char **args, char **env)
 	char	cwd[PATH_MAX];
 	char	*cur_path;
 
+	if (!args[1])
+		return (0);
+	if (args[1] && args[2])
+	{
+		error_msg_cd("minishell: cd: ", args[1]);
+		return (1);
+	}
 	cur_path = getcwd(cwd, PATH_MAX);
 	if (chdir(args[1]) == -1)
-		perror("cd: Failed to change directory.");
+	{
+		perror("cd");
+		return (1);
+	}
 	update_path("OLDPWD=", cur_path, env);
 	update_path("PWD=", getcwd(cwd, PATH_MAX), env);
-	return (1);
+	return (0);
 }

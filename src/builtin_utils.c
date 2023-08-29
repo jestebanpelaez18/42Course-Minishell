@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/29 14:46:45 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:10:39 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ int	run_cmd(char **cmd, int index, t_data *data)
 	}
 	else if (index == 5)
 		exit_s = ft_exit(data, cmd);
-	// cd
+	else if (index == 6)
+		exit_s = ft_cd(cmd, data->env);
 	return (exit_s);
 }
 

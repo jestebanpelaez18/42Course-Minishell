@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 14:25:49 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/29 14:29:31 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:38:18 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ int	dollar_tok_len(char *str, int j)
 	i = j;
 	k = 0;
 	while (str[i] && str[i] != '\"' && str[i] != '\'' && str[i] != ' '
-		&& str[i] != '$' && str[i] != '\\' && str[i] != '=' && str[i] != ':')
+		&& str[i] != '$' && str[i] != '\\' && str[i] != '=' && str[i] != ':'
+		&& str[i] != '/')
 	{
 		k++;
 		i++;
