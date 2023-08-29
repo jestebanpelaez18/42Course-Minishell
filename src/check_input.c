@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:43:17 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/28 16:27:07 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:47:49 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	white_space(char *input)
 	{
 		if (input[i] != ' ' || input[i] != '\t' || input[i] != '\v'
 			|| input[i] != '\f' || input[i] != '\n' || input[i] != '\r')
-			return (1); //returns true if NOT whitespace?? -Nick
+			return (1);
 		i++;
 	}
 	return (0);

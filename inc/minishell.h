@@ -3,11 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-
-/*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 11:41:26 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/14 14:24:05 by jpelaez-         ###   ########.fr       */
+/*   Created: 2023/08/29 14:44:28 by nvan-den          #+#    #+#             */
+/*   Updated: 2023/08/29 14:45:30 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +32,11 @@
 # define APPEND 5
 # define PATH_MAX 4096
 
-
 typedef struct s_redirec
 {
-	char 				*token; 
+	char				*token;
 	char				*hd_file_name;
-	int 				type;
+	int					type;
 	struct s_redirec	*next;
 	struct s_redirec	*prev;
 }						t_redirec;
