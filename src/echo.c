@@ -19,7 +19,6 @@ void	n_function(char **argv)
 
 	i = 0;
 	n_flag = 0;
-	printf("this is %s\n ",argv[1]);
 	if (!argv || (argv[i] && (ft_strncmp(argv[i], "echo", 4) != 0)))
 	{
 		return ;

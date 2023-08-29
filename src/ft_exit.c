@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 15:43:04 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/27 13:42:44 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:57:19 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	free_exit(t_data *data)
 		reset_cmds(&data->struc_cmd);
 	if (data->struc_tok)
 		reset_token(&data->struc_tok);
-	free(data->env);
+	free_argt(data->env);
+	free(data->line_read);
 	return ;
 }
 

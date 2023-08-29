@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 13:40:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/27 12:37:22 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/28 19:03:31 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_keylen(char *arg)
 
 static void	print_export_env(char **env)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (env[i])
@@ -76,7 +76,7 @@ char	**handle_args(char *arg, char **env)
 	return (env);
 }
 
-void	ft_export(char **arg, char **env)
+int	ft_export(char **arg, char **env)
 {
 	int	i;
 	int	len;
@@ -84,16 +84,22 @@ void	ft_export(char **arg, char **env)
 	i = 0;
 	len = 0;
 	if (!arg || (arg[i] && (ft_strncmp(arg[i], "export", 7) != 0)))
-		return ;
+		return (1);
 	i++;
 	if (arg[i])
 	{
 		while (arg[i])
 		{
+			if (is_first_alpha(arg[i]) == -1)
+			{
+				error_msg_export("minishell: export: ", arg[i]);
+				return (1);
+			}
 			env = handle_args(arg[i], env);
 			i++;
 		}
 	}
 	else
 		print_export_env(env);
+	return (0);
 }
