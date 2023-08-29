@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:51:54 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/29 14:19:07 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:21:20 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,17 @@ void	create_pipes(int num_pipes, int **pipes)
 	}
 }
 
-void	close_pipes(int i, int num_pipes, int **pipes)
+void	wait_pids(int num_pipes, int *pid, int status)
 {
-	if (i < num_pipes)
-		close(pipes[i][1]);
-	if (i > 0)
-		close(pipes[i - 1][0]);
+	int	i;
+
+	i = 0;
+	while (i <= num_pipes)
+	{
+		waitpid(pid[i], &status, 0);
+		g_var.g_exit_status = WEXITSTATUS(status);
+		i++;
+	}
 }
 
 void	execute_pipes(t_cmd *cmds, int num_pipes, int **pipes, t_data *data)
