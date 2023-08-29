@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 14:25:49 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/24 19:36:37 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:29:31 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ int	dollar_tok_len(char *str, int j)
 
 char	*rm_double_quotes(char *str)
 {
-	int i;
-	int j;
-	char *temp;
+	int		i;
+	int		j;
+	char	*temp;
 
 	temp = (char *)malloc(ft_strlen(str) + 1);
 	if (!temp)
