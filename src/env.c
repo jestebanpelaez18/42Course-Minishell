@@ -6,11 +6,11 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 12:56:21 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/24 11:58:29 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/29 16:49:15 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "minishell.h"
 
 char	**envdup(char **env)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:03:02 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/25 16:09:28 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:49:15 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ void	error_msg_parser(t_data *data, char *msg, int type)
 	else if (type == 5)
 		ft_putendl_fd(" '>>'", 2);
 	g_var.g_exit_status = 258;
-	reset(data);
+	(void)data;
+	// reset(data);
 }
