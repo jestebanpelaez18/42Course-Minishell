@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redic.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:43:55 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/28 15:23:58 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:22:04 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	create_single_redirection(t_token *token, t_redirec **redirection)
 void	parse_redirection(t_data *data, t_token **node, t_redirec **redirec)
 {
 	t_token	*tok_temp;
-	t_token *next_temp; 
+	t_token	*next_temp;
 
 	tok_temp = *node;
 	while (tok_temp && tok_temp->type == WORD)
