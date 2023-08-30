@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:46 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/29 16:59:36 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:14:52 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	expand_env(char **temp, int i, t_data *data, char *str)
 	int		j;
 	int		n;
 	int		step;
+	char	*temp2;
 
 	envp = data->env;
 	j = 0;
@@ -41,7 +42,9 @@ int	expand_env(char **temp, int i, t_data *data, char *str)
 		if (ft_strncmp(str + i, envp[j], n) == 0
 			&& (len_equal(envp[j]) == dollar_tok_len(str, i)))
 		{
-			*temp = ft_strjoin(*temp, envp[j] + len_equal(envp[j]) + 1);
+			temp2 = ft_strjoin(*temp, envp[j] + len_equal(envp[j]) + 1);
+			free(*temp);
+			*temp = temp2;
 			step += is_equal(envp[j]);
 		}
 		j++;
@@ -86,6 +89,7 @@ void	expand_dollar(t_token *current, t_data *data)
 	{
 		str = replace_dollar(current->tokens, data);
 		str = rm_double_quotes(str);
+		free(current->tokens);
 		current->tokens = str;
 	}
 	else
