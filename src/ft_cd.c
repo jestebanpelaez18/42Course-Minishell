@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:40 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/29 19:12:25 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:23:05 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	error_msg_cd(char *msg, char *input)
 	ft_putendl_fd(" no such file or directory", 2);
 }
 
-void	update_path(char *key, char *path, char **env)
+void	update_path(char *key, char *path, t_data *data)
 {
 	int		pos;
 	char	*match_key;
@@ -27,10 +27,10 @@ void	update_path(char *key, char *path, char **env)
 
 	pos = 0;
 	match_key = get_key(key);
-	pos = match_env_key(match_key, env, 0, ft_keylen(match_key));
+	pos = match_env_key(match_key, data, 0, ft_keylen(match_key));
 	new = combine_str(path, match_key);
-	free(env[pos]);
-	env[pos] = new;
+	free(data->env[pos]);
+	data->env[pos] = new;
 	free(match_key);
 }
 
@@ -47,7 +47,7 @@ char	*handle_empty_cd(char **env)
 	return (temp);
 }
 
-int	ft_cd(char **args, char **env)
+int	ft_cd(char **args, t_data *data)
 {
 	char	cwd[PATH_MAX];
 	char	*cur_path;
@@ -55,7 +55,7 @@ int	ft_cd(char **args, char **env)
 
 	if (args[1] == 0)
 	{
-		temp = handle_empty_cd(env);
+		temp = handle_empty_cd(data->env);
 		chdir(temp);
 		free(temp);
 		return (0);
@@ -71,7 +71,7 @@ int	ft_cd(char **args, char **env)
 		perror("cd");
 		return (1);
 	}
-	update_path("OLDPWD=", cur_path, env);
-	update_path("PWD=", getcwd(cwd, PATH_MAX), env);
+	update_path("OLDPWD=", cur_path, data);
+	update_path("PWD=", getcwd(cwd, PATH_MAX), data);
 	return (0);
 }
