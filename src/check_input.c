@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:43:17 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/30 12:18:12 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:28:35 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ static int	white_space(char *input)
 
 	i = 0;
 	if (input[0] == '\0')
+	{
+		free(input);
 		return (0);
+	}
 	while (input[i] != '\0')
 	{
 		if (input[i] != ' ' || input[i] != '\t' || input[i] != '\v'

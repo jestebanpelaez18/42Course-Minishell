@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:40 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/29 19:12:25 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:08:16 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,14 @@ void	update_path(char *key, char *path, char **env)
 
 	pos = 0;
 	match_key = get_key(key);
-	pos = match_env_key(match_key, env, 0, ft_keylen(match_key));
-	new = combine_str(path, match_key);
-	free(env[pos]);
-	env[pos] = new;
-	free(match_key);
+	if (match_key)
+	{
+		pos = match_env_key(match_key, env, 0, ft_keylen(match_key));
+		new = combine_str(path, match_key);
+		free(env[pos]);
+		env[pos] = new;
+		free(match_key);
+	}
 }
 
 char	*handle_empty_cd(char **env)
@@ -42,8 +45,6 @@ char	*handle_empty_cd(char **env)
 	index = 0;
 	index = get_env_var("HOME", env, 0, ft_strlen("HOME"));
 	temp = get_string(env[index]);
-	if (!temp)
-		return (NULL);
 	return (temp);
 }
 
@@ -53,7 +54,7 @@ int	ft_cd(char **args, char **env)
 	char	*cur_path;
 	char	*temp;
 
-	if (args[1] == 0)
+	if (!args[1])
 	{
 		temp = handle_empty_cd(env);
 		chdir(temp);
