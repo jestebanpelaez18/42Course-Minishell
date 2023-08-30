@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:40 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/30 15:47:46 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/30 15:49:42 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	update_path(char *key, char *path, t_data *data)
 	match_key = get_key(key);
 	if (match_key)
 	{
-		pos = match_env_key(match_key, data->env, 0, ft_keylen(match_key));
+		pos = match_env_key(match_key, data, 0, ft_keylen(match_key));
 		new = combine_str(path, match_key);
 		free(data->env[pos]);
 		data->env[pos] = new;
