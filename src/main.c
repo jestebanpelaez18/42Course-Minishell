@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/29 19:16:45 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:09:56 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	main(int argc, char **argv, char **env)
 			executor(&data);
 			reset(&data);
 		}
-		// system("leaks minishell");
 		init_data(&data);
 	}
 	return (0);

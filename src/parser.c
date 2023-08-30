@@ -6,29 +6,11 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:07:32 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/28 15:13:22 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:09:44 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// void	printcmd(t_cmd *node)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (node)
-// 	{
-// 		while (node->commands[i] != NULL)
-// 		{
-// 			printf("%s-> ", node->commands[i]);
-// 			i++;
-// 		}
-// 		printf("NULL \n\n");
-// 		i = 0;
-// 		node = node->next;
-// 	}
-// }
 
 t_cmd	*initiate_cmd(t_token *node, t_redirec *redirec)
 {

@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:22:27 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/29 18:07:05 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:09:10 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,32 +70,3 @@ int	check_token_type(char c)
 		return (1);
 	return (0);
 }
-
-/*we have to delete this at the end*/
-
-// void	printList(t_token *node)//
-// {
-// 	t_token *temp;
-// 	t_token *temp2;
-
-// 	temp = node;
-// 	temp2 = node;
-// 	while (node)
-// 	{
-// 		printf("%s -> ", node->tokens);
-// 		node = node->next;
-// 	}
-// 	printf("NULL \n\n");
-// 	while (temp)
-// 	{
-// 		printf("%d -> ", temp->type);
-// 		temp = temp->next;
-// 	}
-// 	printf("NULL \n");
-// 	while (temp2)
-// 	{
-// 		printf("%d -> ", temp2->index);
-// 		temp2 = temp2->next;
-// 	}
-// 	printf("NULL \n");
-// }

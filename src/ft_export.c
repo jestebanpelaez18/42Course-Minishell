@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 13:40:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/29 16:56:22 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:10:20 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	print_export_env(char **env)
 		i++;
 	}
 }
-/**/
 
 char	**modify_env_var(char **env, char *arg, int len)
 {
