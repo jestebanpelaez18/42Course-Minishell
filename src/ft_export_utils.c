@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:23:16 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/30 15:47:20 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:52:54 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static	void	envdup_plusone(t_data *data)
 	}
 	env_copy[len] = NULL;
 	env_copy[len + 1] = NULL;
-	free(data->env);
+	free_argt(data->env);
 	data->env = NULL;
 	data->env = env_copy;
 }

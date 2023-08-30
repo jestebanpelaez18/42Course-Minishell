@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:44:28 by nvan-den          #+#    #+#             */
-/*   Updated: 2023/08/30 15:45:57 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:17:57 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int						ft_cd(char **args, t_data *data);
 char					**go_home(char **env);
 void					update_path(char *key, char *path, t_data *data);
 int						ft_export(char **arg, t_data *data);
-void					ft_env(char **env);
+void					ft_env(char **env, t_data *data);
 char					**handle_args(char *arg, t_data *data);
 char					**modify_env_var(t_data *data, char *arg, int len);
 int						content_check(char *str);

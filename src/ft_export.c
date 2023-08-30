@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 13:40:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/30 15:45:49 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:53:05 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static void	print_export_env(char **env)
 		ft_putstr_fd("\"", 1);
 		ft_putchar_fd('\n', 1);
 		i++;
+		free(key);
+		free(str);
 	}
 }
 
@@ -51,11 +53,15 @@ char	**modify_env_var(t_data *data, char *arg, int len)
 	const int	num = content_check(arg);
 	const char	*key = get_key(arg);
 	const char	*str = get_string(arg);
+	char		*new;
 
 	if (num == 1)
 		data->env[pos] = ft_strdup(arg);
 	else if (num == 2)
-		data->env[pos] = combine_str(str, key);
+	{
+		new = combine_str(str, key);
+		data->env[pos] = new;
+	}
 	free((char *)key);
 	free((char *)str);
 	return (data->env);

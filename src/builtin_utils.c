@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/30 15:23:31 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:17:19 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	run_cmd(char **cmd, int index, t_data *data)
 	else if (index == 1)
 		exit_s = ft_pwd();
 	else if (index == 2)
-		ft_env(data->env);
+		ft_env(data->env, data);
 	else if (index == 3)
 		exit_s = ft_export(cmd, data);
 	else if (index == 4)
