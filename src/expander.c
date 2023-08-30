@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:46 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/30 13:14:52 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:47:10 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ char	*replace_dollar(char *str, t_data *data)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '$' && str[i + 1] == '?')
+		if (str[i] == '$' && str[i + 1] == '"')
+			i += handle_single_dol(&temp);
+		else if (str[i] == '$' && str[i + 1] == '?')
 			i += get_exit_status(&temp);
 		else if (str[i] == '$' && (str[i + 1] != ' ' && (str[i + 2] != '"'
 					|| str[i + 2] != '\0')) && str[i + 1] != '\0')
@@ -95,7 +97,7 @@ void	expand_dollar(t_token *current, t_data *data)
 	else
 	{
 		if (current->tokens[0] != '\'' && (current->tokens[j - 1] != '\''
-				&& current->tokens[j + 1] != '\0'))
+			&& current->tokens[j + 1] != '\0'))
 		{
 			str = replace_dollar(current->tokens, data);
 			current->tokens = str;

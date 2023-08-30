@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_single_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/30 12:37:21 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:38:35 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	get_path(t_cmd *cmds, t_data *data)
 	exit_s = 0;
 	// cmds->commands = separete_args(cmds->commands);
 	path = executable_path(cmds->commands, data);
-	if (path)
+	if (path || cmds->commands[0])
 	{
 		if (!do_execution(cmds, path, data))
 		{

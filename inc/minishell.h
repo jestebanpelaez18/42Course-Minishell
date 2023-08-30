@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:44:28 by nvan-den          #+#    #+#             */
-/*   Updated: 2023/08/30 12:05:40 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:31:58 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,7 @@ char					*replace_dollar(char *str, t_data *data);
 int						expand_env(char **temp, int i, t_data *data, char *str);
 int						get_exit_status(char **str);
 int						export_quotes(char *current, char *next);
+int						handle_single_dol(char **str);
 
 /*setup redirections*/
 
