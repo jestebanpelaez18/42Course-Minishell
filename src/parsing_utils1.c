@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:46:51 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/25 17:40:27 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 11:46:27 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	set_number_of_pipes(t_data *data, t_token *tokens)
 	t_token	*node;
 
 	node = tokens;
-	while (node->next != NULL)
+	while (node && node->next != NULL)
 	{
 		if (node->type == PIPE)
 			data->pipex++;

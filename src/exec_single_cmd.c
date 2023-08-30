@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/30 12:17:33 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:37:21 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	get_path(t_cmd *cmds, t_data *data)
 	char	*path;
 	int		exit_s;
 
+	if (!cmds->commands[0])
+		return (0);
 	exit_s = 0;
 	// cmds->commands = separete_args(cmds->commands);
 	path = executable_path(cmds->commands, data);

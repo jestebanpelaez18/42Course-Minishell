@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:43:17 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/29 14:47:49 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:18:12 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 
 /*Check if the input is a white space*/
 static int	white_space(char *input)
@@ -27,6 +28,7 @@ static int	white_space(char *input)
 			return (1);
 		i++;
 	}
+	free(input);
 	return (0);
 }
 
@@ -102,19 +104,18 @@ int	check_line(t_data *data, char *line)
 	if (!white_space(line))
 		return (0);
 	temp_line = ft_strtrim(line, " \t\n");
-	if (!temp_line)
+	if (!temp_line | !temp_line[0])
+	{
+		free(line);
+		free(temp_line);
 		return (0);
+	}
 	if (!correct_input(temp_line) || !close_pipe(temp_line))
 	{
 		free(data->line_read);
 		return (0);
 	}
-	if (!closed_quotes(temp_line))
-	{
-		free(data->line_read);
-		return (0);
-	}
-	if (!syntax_redirection(temp_line))
+	if (!closed_quotes(temp_line) || !syntax_redirection(temp_line))
 	{
 		free(data->line_read);
 		return (0);

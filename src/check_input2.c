@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:20:07 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/29 14:48:30 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:05:17 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,10 @@ int	syntax_redirection(char *line)
 		return (0);
 	}
 	return (1);
+}
+
+void	free_line_input(char *line, char *temp_l)
+{
+	free(line);
+	free(temp_l);
 }

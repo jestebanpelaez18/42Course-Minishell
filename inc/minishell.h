@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:44:28 by nvan-den          #+#    #+#             */
-/*   Updated: 2023/08/29 19:13:00 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:05:40 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void					reset_cmds(t_cmd **struc_cmd);
 void					reset_token(t_token **tokens);
 void					reset_tools(t_data *data);
 void					reset_redirect(t_redirec **tokens);
+void					free_line_input(char *line, char *temp_l);
 
 /*Check input*/
 int						check_line(t_data *data, char *line);
