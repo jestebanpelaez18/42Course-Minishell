@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 13:40:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/30 15:44:07 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/30 15:45:49 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static void	print_export_env(char **env)
 		i++;
 	}
 }
-/**/
 
 char	**modify_env_var(t_data *data, char *arg, int len)
 {

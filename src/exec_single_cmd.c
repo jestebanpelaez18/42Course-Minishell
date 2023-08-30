@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/29 19:18:41 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:38:35 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,16 @@ int	get_path(t_cmd *cmds, t_data *data)
 	char	*path;
 	int		exit_s;
 
+	if (!cmds->commands[0])
+		return (0);
 	exit_s = 0;
 	// cmds->commands = separete_args(cmds->commands);
 	path = executable_path(cmds->commands, data);
-	if (path)
+	if (path || cmds->commands[0])
 	{
 		if (!do_execution(cmds, path, data))
 		{
-			error_msg_command("Command not found: ", cmds->commands[0]);
+			error_msg_command(": command not found", cmds->commands[0]);
 			exit_s = 127;
 		}
 		free(path);

@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:44:28 by nvan-den          #+#    #+#             */
-/*   Updated: 2023/08/30 15:22:45 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/30 15:45:57 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void					reset_cmds(t_cmd **struc_cmd);
 void					reset_token(t_token **tokens);
 void					reset_tools(t_data *data);
 void					reset_redirect(t_redirec **tokens);
+void					free_line_input(char *line, char *temp_l);
 
 /*Check input*/
 int						check_line(t_data *data, char *line);
@@ -202,6 +203,7 @@ char					*replace_dollar(char *str, t_data *data);
 int						expand_env(char **temp, int i, t_data *data, char *str);
 int						get_exit_status(char **str);
 int						export_quotes(char *current, char *next);
+int						handle_single_dol(char **str);
 
 /*setup redirections*/
 

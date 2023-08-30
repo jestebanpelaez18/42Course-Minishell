@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:40:48 by nvan-den          #+#    #+#             */
-/*   Updated: 2023/08/29 14:43:48 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:31:28 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	n_function(char **argv)
 		return ;
 	}
 	i++;
-	while (argv[i] && (ft_strncmp(argv[i], "-n", ft_strlen(argv[i]))) == 0)
+	while (argv[i] && (ft_strncmp(argv[i], "-n", ft_strlen(argv[i]) + 1)) == 0)
 	{
 		n_flag = 1;
 		i++;

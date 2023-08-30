@@ -6,30 +6,11 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:43:55 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/29 19:17:26 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:09:50 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// void	printredic(t_redirec *node)
-// {
-// 	t_redirec	*temp;
-
-// 	temp = node;
-// 	while (node)
-// 	{
-// 		printf("%s -> ", node->token);
-// 		node = node->next;
-// 	}
-// 	printf("NULL \n\n");
-// 	while (temp)
-// 	{
-// 		printf("%d -> ", temp->type);
-// 		temp = temp->next;
-// 	}
-// 	printf("NULL \n");
-// }
 
 int	create_redirection(char *sub_line, t_redirec **tokens, int operator)
 {

@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:47:41 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/29 16:50:10 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:59:12 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,17 @@ int	export_quotes(char *current, char *next)
 			return (0);
 	}
 	return (1);
+}
+
+int	handle_single_dol(char **str)
+{
+	int		step;
+	char	*temp;
+
+	step = 0;
+	temp = ft_strjoin(*str, "$");
+	step = ft_strlen("$");
+	free(*str);
+	*str = temp;
+	return (step);
 }

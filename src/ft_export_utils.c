@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:23:16 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/30 15:36:45 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/30 15:47:20 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,28 +57,27 @@ char	*get_string(char *arg)
 {
 	char	*str;
 	int		start;
-	int		end;
 	int		len;
 	int		i;
 
 	start = 0;
-	end = 0;
 	i = 0;
 	if (!arg)
 		return (NULL);
 	while (arg[start] && arg[start] != '=')
 		start++;
 	start++;
-	while (arg[end])
-		end++;
-	len = end - start;
+	len = (int)ft_strlen(arg) - start;
 	str = malloc(sizeof(char) * len + 1);
-	while (start < end)
+	if (!str)
+		return (NULL);
+	while (start < (int)ft_strlen(arg))
 	{
 		str[i] = arg[start];
 		i++;
 		start++;
 	}
+	str[i] = '\0';
 	return (str);
 }
 

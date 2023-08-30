@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_lst_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:02:33 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/12 17:50:41 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:10:10 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,3 @@ void	ft_lstadd_back(t_token **lst, t_token *new)
 	bottom->next = new;
 	new->prev = bottom;
 }
-
-// t_cmd *ft_newcmd()

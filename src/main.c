@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:41:12 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/30 13:45:57 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/30 15:48:06 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	main(int argc, char **argv, char **env)
 			executor(&data);
 			reset(&data);
 		}
-		// system("leaks minishell");
 		init_data(&data);
 	}
 	return (0);
