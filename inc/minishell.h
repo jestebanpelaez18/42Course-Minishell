@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:44:28 by nvan-den          #+#    #+#             */
-/*   Updated: 2023/08/30 14:31:58 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:45:57 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,16 @@ void					error_msg_export(char *msg, char *input);
 int						is_builtin(char *str);
 char					**ft_unset(char *cmd, char**env);
 int						ft_pwd(void);
-int						ft_cd(char **args, char **env);
+int						ft_cd(char **args, t_data *data);
 char					**go_home(char **env);
-void					update_path(char *key, char *path, char **env);
-int						ft_export(char **arg, char **env);
+void					update_path(char *key, char *path, t_data *data);
+int						ft_export(char **arg, t_data *data);
 void					ft_env(char **env);
-char					**handle_args(char *arg, char **env);
-char					**modify_env_var(char **env, char *arg, int len);
+char					**handle_args(char *arg, t_data *data);
+char					**modify_env_var(t_data *data, char *arg, int len);
 int						content_check(char *str);
 int						is_first_alpha(char *arg);
-int						match_env_key(char *arg, char **env, \
+int						match_env_key(char *arg, t_data *data, \
 										int index, int len);
 char					*get_string(char *arg);
 char					*get_key(char *arg);
