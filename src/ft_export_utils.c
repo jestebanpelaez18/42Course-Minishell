@@ -3,21 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:23:16 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/29 19:17:44 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 11:30:48 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	print_export_env(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		ft_putstr_fd("declare -x ", 1);
+		ft_putstr_fd(env[i], 1);
+		ft_putchar_fd('\n', 1);
+		i++;
+	}
+}
+
+char	**envdupyo(char **env) //Create a func that frees and reallocates env
+{
+	char	**env_copy;
+	int		len;
+	int		i;
+
+	len = 0;
+	while (env[len] != NULL)
+		len++;
+	env_copy = malloc(sizeof(char *) * (len + 2));
+	if (!env_copy)
+		return (NULL);
+	i = 0;
+	while (env[i] != NULL)
+	{
+		env_copy[i] = ft_strdup(env[i]);
+		i++;
+	}
+	env_copy[i] = NULL;
+	env_copy[i + 1] = NULL;
+	return (env_copy);
+}
 
 /*Matches the key in the environment, and returns the position.
 If it does not exist, it creates it and locates it.*/
 int	match_env_key(char *arg, char **env, int index, int len)
 {
 	int	i;
+	char **dupstuff;
 
+	dupstuff = NULL;
 	if (!arg || !*env)
 		return (-1);
 	i = index;
@@ -25,10 +64,16 @@ int	match_env_key(char *arg, char **env, int index, int len)
 		i++;
 	if (env[i] == '\0')
 	{
-		env[i] = arg;
-		env[i + 1] = NULL;
-		match_env_key(arg, env, 0, ft_keylen(arg));
+		//Needs to fix the segfault
+		dupstuff = envdupyo(env);
+		dupstuff[i] = ft_strdup(arg);
+		dupstuff[i+1] = NULL;
+		// env[i] = ft_strdup(arg);
+		// env[i + 1] = NULL;
+		
+		// match_env_key(arg, env, 0, ft_keylen(arg));
 	}
+		print_export_env(dupstuff);	
 	return (i);
 }
 
