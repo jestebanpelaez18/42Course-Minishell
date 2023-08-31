@@ -56,4 +56,4 @@ minishell
 .DS_Store
 .vscode/
 obj
-.memory_loop.sh
+memory_loop.sh
