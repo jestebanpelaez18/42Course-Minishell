@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/31 13:33:29 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/31 15:02:55 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	get_path(t_cmd *cmds, t_data *data)
 	char	*path;
 	int		exit_s;
 
-	if (!cmds->commands[0])
+	if (!*cmds->commands[0])
 		return (0);
 	exit_s = 0;
 	// cmds->commands = separete_args(cmds->commands);
@@ -43,7 +43,11 @@ int	get_path(t_cmd *cmds, t_data *data)
 	}
 	else
 	{
+<<<<<<< HEAD
 		printf("Two\n");
+=======
+		printf("hi");
+>>>>>>> 67202e2dd7fae540dde0b55c65d2a0b194d630a5
 		error_msg_command(": command not found", cmds->commands[0]);
 		exit_s = 127;
 	}
