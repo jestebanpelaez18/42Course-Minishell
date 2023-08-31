@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:46 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/31 16:24:57 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:05:06 by junheeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	expand_dollar(t_token *current, t_data *data)
 	{
 		str = replace_dollar(current->tokens, data);
 		str = rm_double_quotes(str);
-		free(current->tokens);
+		//free(current->tokens);
 		current->tokens = str;
 	}
 	else
@@ -103,6 +103,8 @@ void	expand_dollar(t_token *current, t_data *data)
 		if (current->tokens[0] != '\'' && (current->tokens[j - 1] != '\''
 				&& current->tokens[j + 1] != '\0'))
 		{
+			str = rm_single_quotes(current->tokens);
+			str = rm_double_quotes(str);
 			str = replace_dollar(current->tokens, data);
 			current->tokens = str;
 		}
