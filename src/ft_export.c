@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 13:40:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/31 12:13:27 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:57:14 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ char	**modify_env_var(t_data *data, char *arg, int len)
 		data->env[pos] = ft_strdup(arg);
 	else if (num == 2)
 	{
-		printf("I am here\n");
 		new = combine_str(str, key);
 		data->env[pos] = new;
 	}
