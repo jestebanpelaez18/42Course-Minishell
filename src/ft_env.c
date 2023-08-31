@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 18:39:42 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/30 17:27:39 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:15:34 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_env(char **env, t_data *data)
+void	ft_env(char **env)
 {
 	int		i;
 
-	(void)data;
 	i = 0;
 	while (env[i])
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 13:40:52 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/31 12:13:27 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:00:44 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,23 @@ char	**modify_env_var(t_data *data, char *arg, int len)
 	char		*new;
 
 	if (num == 1)
-		data->env[pos] = ft_strdup(arg);
+	{
+		new = ft_strdup(arg);
+		free(data->env[pos]);
+		data->env[pos] = NULL;
+		data->env[pos] = new;
+	}
 	else if (num == 2)
 	{
-		printf("I am here\n");
 		new = combine_str(str, key);
+		free(data->env[pos]);
+		data->env[pos] = NULL;
 		data->env[pos] = new;
 	}
 	free((char *)key);
 	free((char *)str);
+	key = NULL;
+	str = NULL;
 	return (data->env);
 }
 

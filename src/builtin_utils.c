@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/30 17:17:19 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:18:50 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,6 @@ int	cmd_cmp(const char *str1, const char *str2)
 	return (0);
 }
 
-/*Compares if the given command is from a list of builtins or not.
-Returns -1 if the str is empty, 0 if no match and 1 if there is a match.
-echo with option -n
-◦ cd with only a relative or absolute path
-◦ pwd with no options
-◦ export with no options
-◦ unset with no options
-◦ env with no options or arguments
-◦ exit with no options*/
 int	is_builtin(char *str)
 {
 	int				i;
@@ -77,7 +68,7 @@ int	run_cmd(char **cmd, int index, t_data *data)
 	else if (index == 1)
 		exit_s = ft_pwd();
 	else if (index == 2)
-		ft_env(data->env, data);
+		ft_env(data->env);
 	else if (index == 3)
 		exit_s = ft_export(cmd, data);
 	else if (index == 4)
