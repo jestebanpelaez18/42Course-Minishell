@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/31 14:27:07 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:35:41 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	get_path(t_cmd *cmds, t_data *data)
 	{
 		if (!do_execution(cmds, path, data))
 		{
-			printf("command[0] = -%s-\n", cmds->commands[0]);
 			error_msg_command(": command not found", cmds->commands[0]);
 			exit_s = 127;
 		}
