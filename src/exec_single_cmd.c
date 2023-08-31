@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_single_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:17:58 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/31 15:02:55 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/31 15:05:34 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	get_path(t_cmd *cmds, t_data *data)
 	{
 		if (!do_execution(cmds, path, data))
 		{
-			printf("One\n");
 			error_msg_command(": command not found", cmds->commands[0]);
 			exit_s = 127;
 		}
@@ -43,11 +42,6 @@ int	get_path(t_cmd *cmds, t_data *data)
 	}
 	else
 	{
-<<<<<<< HEAD
-		printf("Two\n");
-=======
-		printf("hi");
->>>>>>> 67202e2dd7fae540dde0b55c65d2a0b194d630a5
 		error_msg_command(": command not found", cmds->commands[0]);
 		exit_s = 127;
 	}
