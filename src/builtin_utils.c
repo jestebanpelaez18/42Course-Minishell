@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/29 17:10:39 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:17:19 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ int	run_cmd(char **cmd, int index, t_data *data)
 	else if (index == 1)
 		exit_s = ft_pwd();
 	else if (index == 2)
-		ft_env(data->env);
+		ft_env(data->env, data);
 	else if (index == 3)
-		exit_s = ft_export(cmd, data->env);
+		exit_s = ft_export(cmd, data);
 	else if (index == 4)
 	{
 		while (cmd[i++])
@@ -88,7 +88,7 @@ int	run_cmd(char **cmd, int index, t_data *data)
 	else if (index == 5)
 		exit_s = ft_exit(data, cmd);
 	else if (index == 6)
-		exit_s = ft_cd(cmd, data->env);
+		exit_s = ft_cd(cmd, data);
 	return (exit_s);
 }
 

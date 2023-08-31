@@ -6,16 +6,12 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:28:10 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/29 16:56:12 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:10:42 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*	return 0 -> No Equal, No Value  ex) export USER
-	return 1 -> Have Equal, No value	ex) export USER=
-	return 2 -> Have Equal, with Value ex) export USER=JUN
-*/
 int	content_check(char *str)
 {
 	int	i;

@@ -6,29 +6,50 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:23:16 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/29 19:17:44 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:52:54 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static	void	envdup_plusone(t_data *data)
+{
+	char	**env_copy;
+	int		len;
+	int		i;
+
+	len = 0;
+	while (data->env[len] != NULL)
+		len++;
+	env_copy = malloc(sizeof(char *) * (len + 2));
+	if (!env_copy)
+		return ;
+	i = 0;
+	while (data->env[i] != NULL)
+	{
+		env_copy[i] = ft_strdup(data->env[i]);
+		i++;
+	}
+	env_copy[len] = NULL;
+	env_copy[len + 1] = NULL;
+	free_argt(data->env);
+	data->env = NULL;
+	data->env = env_copy;
+}
+
 /*Matches the key in the environment, and returns the position.
 If it does not exist, it creates it and locates it.*/
-int	match_env_key(char *arg, char **env, int index, int len)
+int	match_env_key(char *arg, t_data *data, int index, int len)
 {
-	int	i;
+	int		i;
 
-	if (!arg || !*env)
+	if (!arg || !data->env)
 		return (-1);
 	i = index;
-	while ((env[i]) && ft_strncmp(arg, env[i], len) != 0)
+	while ((data->env[i]) && ft_strncmp(arg, data->env[i], len) != 0)
 		i++;
-	if (env[i] == '\0')
-	{
-		env[i] = arg;
-		env[i + 1] = NULL;
-		match_env_key(arg, env, 0, ft_keylen(arg));
-	}
+	if (data->env[i] == '\0')
+		envdup_plusone(data);
 	return (i);
 }
 
@@ -36,28 +57,27 @@ char	*get_string(char *arg)
 {
 	char	*str;
 	int		start;
-	int		end;
 	int		len;
 	int		i;
 
 	start = 0;
-	end = 0;
 	i = 0;
 	if (!arg)
 		return (NULL);
 	while (arg[start] && arg[start] != '=')
 		start++;
 	start++;
-	while (arg[end])
-		end++;
-	len = end - start;
+	len = (int)ft_strlen(arg) - start;
 	str = malloc(sizeof(char) * len + 1);
-	while (start < end)
+	if (!str)
+		return (NULL);
+	while (start < (int)ft_strlen(arg))
 	{
 		str[i] = arg[start];
 		i++;
 		start++;
 	}
+	str[i] = '\0';
 	return (str);
 }
 
