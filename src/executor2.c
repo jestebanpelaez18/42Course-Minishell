@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 16:19:32 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/25 16:59:26 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:31:28 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	input_redirection(t_redirec *input)
 	{
 		fd = open(input->hd_file_name, O_RDONLY);
 		if (fd == -1)
-			error_msg_redic("No such file or directoty: ", input->token, 1);
+			error_msg_redic("No such file or directory: ", input->token, 1);
 	}
 	else
 	{
 		fd = open(input->token, O_RDONLY);
 		if (fd == -1)
-			error_msg_redic("No such file or directoty: ", input->token, 1);
+			error_msg_redic("No such file or directory: ", input->token, 1);
 	}
 	if (fd > 0 && dup2(fd, STDIN_FILENO) == -1)
 		error_msg("Pipe Error");
