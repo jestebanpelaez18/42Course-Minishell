@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:46 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/31 15:29:15 by junheeki         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:24:57 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ char	*replace_dollar(char *str, t_data *data)
 			i++;
 		}
 	}
+	free(str);
 	return (temp);
 }
 
