@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:46 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/09/01 11:07:04 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/09/01 11:55:57 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*replace_dollar(char *str, t_data *data)
 	return (temp);
 }
 
-void	expand_dollar(t_token *current, t_data *data , int j)
+void	expand_dollar(t_token *current, t_data *data, int j)
 {
 	char	*str;
 
@@ -116,7 +116,7 @@ void	expand_dollar(t_token *current, t_data *data , int j)
 void	expander(t_data *data, t_token **token)
 {
 	t_token	*tok;
-	int 	j;
+	int		j;
 
 	tok = *token;
 	j = 0;
