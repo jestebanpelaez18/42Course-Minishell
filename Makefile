@@ -9,7 +9,7 @@ OBJ_DIR = obj
 
 INCLUDES = -Ilibft -Iinc
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror 
 
 O_FLAGS = -lreadline -L${HOME}/.brew/opt/readline/lib
 C_FLAGS = -I${HOME}/.brew/opt/readline/include

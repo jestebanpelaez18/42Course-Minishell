@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/09/01 12:28:02 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/09/01 12:45:58 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,24 +87,19 @@ int	run_builtin(t_data *data, char **cmds)
 {
 	static char		*arr[7] = {"echo", "pwd", "env", "export", \
 								"unset", "exit", "cd"};
-	int				i;
 	int				j;
 	int				e_s;
 
-	i = 0;
-	while (cmds[i])
+	j = 0;
+	e_s = 0;
+	while (j < 7)
 	{
-		j = 0;
-		while (j < 7)
+		if (cmd_cmp(cmds[0], arr[j]))
 		{
-			if (cmd_cmp(cmds[i], arr[j]))
-			{
-				e_s = run_cmd(cmds, j, data);
-				break ;
-			}
-			j++;
+			e_s = run_cmd(cmds, j, data);
+			break ;
 		}
-		i++;
+		j++;
 	}
 	return (e_s);
 }
