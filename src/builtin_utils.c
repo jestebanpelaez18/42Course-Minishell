@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:58:20 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/31 13:18:50 by rrask            ###   ########.fr       */
+/*   Updated: 2023/09/01 12:28:02 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,10 @@ int	run_builtin(t_data *data, char **cmds)
 		while (j < 7)
 		{
 			if (cmd_cmp(cmds[i], arr[j]))
+			{
 				e_s = run_cmd(cmds, j, data);
+				break ;
+			}
 			j++;
 		}
 		i++;

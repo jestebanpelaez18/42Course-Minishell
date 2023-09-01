@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 19:19:31 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/29 14:47:16 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/09/01 12:29:10 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ int	env_builtin(t_data *data, char **cmds)
 		while (j < 4)
 		{
 			if (cmd_cmp(cmds[i], arr[j]))
+			{
 				e_s = run_cmd(cmds, j + 3, data);
+				break ;
+			}
 			j++;
 		}
 		i++;

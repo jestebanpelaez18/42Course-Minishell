@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:40 by rrask             #+#    #+#             */
-/*   Updated: 2023/08/30 17:12:32 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/09/01 12:31:54 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	ft_cd(char **args, t_data *data)
 		return (1);
 	}
 	cur_path = getcwd(cwd, PATH_MAX);
-	if (chdir(args[1]) == -1)
+	if (chdir(args[1]) == -1 && ft_strncmp(args[1], "cd", ft_strlen(args[1])))
 	{
 		perror("cd");
 		return (1);
