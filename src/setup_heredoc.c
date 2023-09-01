@@ -6,7 +6,7 @@
 /*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:17:38 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/25 17:33:48 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:58:19 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ char	*expand_heredoc(char *line, t_data *data)
 	char	*str;
 
 	if (is_dollar(line))
-	{
 		str = replace_dollar(line, data);
-		free(line);
-	}
 	else
 	{
 		str = ft_strdup(line);
