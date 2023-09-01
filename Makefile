@@ -9,21 +9,10 @@ OBJ_DIR = obj
 
 INCLUDES = -Ilibft -Iinc
 
-FLAGS = -Wall -Wextra -Werror -g 
-#-fsanitize=address,undefined
+FLAGS = -Wall -Wextra -Werror
 
-# MAC_OS
 O_FLAGS = -lreadline -L${HOME}/.brew/opt/readline/lib
 C_FLAGS = -I${HOME}/.brew/opt/readline/include
-
-# MAC_OS_HOME
-# O_FLAGS = -lreadline -L/opt/homebrew/opt/readline/lib
-# C_FLAGS = -I/opt/homebrew/opt/readline/include
-
-# LINUX
-# Uncomment these lines if you are building for Linux instead of macOS
-#O_FLAGS = -lreadline
-#C_FLAGS =
 
 SRC = main.c error_exit.c env.c \
 signals.c linked_lst_utils.c parser.c \
@@ -36,8 +25,6 @@ setup_heredoc.c signals2.c echo.c builtin_utils.c ft_pwd.c ft_export.c ft_export
 ft_export_utils_added.c ft_unset.c builtin_utils3.c ft_env.c ft_exit.c builtin_utils2.c ft_cd.c\
 
 DEP = $(OBJ:.o=.d)
-
-##
 
 all: $(NAME)
 
