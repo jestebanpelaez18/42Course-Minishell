@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvan-den <nvan-den@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 15:43:04 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/30 14:50:10 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/09/01 11:41:44 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	check_argument(t_data *data, char *str)
 
 int	ft_exit(t_data *data, char **argv)
 {
-	ft_putendl_fd("exit", 2);
+	ft_putendl_fd("exit", 1);
 	if (argv[1] && argv[2])
 	{
 		ft_putendl_fd("minishell: exit: too many arguments", 2);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junheeki <junheeki@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jpelaez- <jpelaez-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:16:46 by jpelaez-          #+#    #+#             */
-/*   Updated: 2023/08/31 19:05:06 by junheeki         ###   ########.fr       */
+/*   Updated: 2023/09/01 11:07:04 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,17 +85,14 @@ char	*replace_dollar(char *str, t_data *data)
 	return (temp);
 }
 
-void	expand_dollar(t_token *current, t_data *data)
+void	expand_dollar(t_token *current, t_data *data , int j)
 {
 	char	*str;
-	int		j;
 
-	j = dolar_index(current->tokens);
 	if (no_single_quotes(current->tokens))
 	{
 		str = replace_dollar(current->tokens, data);
 		str = rm_double_quotes(str);
-		//free(current->tokens);
 		current->tokens = str;
 	}
 	else
@@ -119,12 +116,17 @@ void	expand_dollar(t_token *current, t_data *data)
 void	expander(t_data *data, t_token **token)
 {
 	t_token	*tok;
+	int 	j;
 
 	tok = *token;
+	j = 0;
 	while (tok)
 	{
 		if (tok && tok->type == WORD && is_dollar(tok->tokens))
-			expand_dollar(tok, data);
+		{
+			j = dolar_index(tok->tokens);
+			expand_dollar(tok, data, j);
+		}
 		else if (tok && tok->type == WORD)
 			remove_quotes(tok);
 		tok = tok->next;
