@@ -7,7 +7,7 @@ Minishell is a lightweight Unix-like shell meticulously crafted in C, offering u
 
 This project adheres to the stringent requirements and limitations of the 42 norm, which entails a restricted set of allowed library functions and the absence of constructs like 'for' loops. Consequently, we constructed most components from scratch, embracing a low-level approach. Our guiding reference throughout this endeavor was [Bash](https://www.gnu.org/software/bash/).
 
-Minishell was a collaborative effort, with contributions from [Rasmus](https://github.com/RushMaverick), [Juan](https://github.com/jestebanpelaez18), [Jun](https://github.com/composerjunhee), and myself. We collectively tackled the project, ensured a comprehensive understanding of each facet, and conducted knowledge-sharing sessions to enhance our grasp of the intricate workings.
+Minishell was a collaborative effort, with contributions from  [Jun](https://github.com/composerjunhee), and myself. We collectively tackled the project, ensured a comprehensive understanding of each facet, and conducted knowledge-sharing sessions to enhance our grasp of the intricate workings.
 
 **My primary focus areas:**
 - Leading architectural design
@@ -61,6 +61,6 @@ You are now ready to explore Minishell's capabilities. Experiment with basic she
 
 # Contact
 
-If you have any questions, feedback, or inquiries, feel free to reach out to me at nicktvdd@gmail.com.
+If you have any questions, feedback, or inquiries, feel free to reach out to me at juanes.pelaez18@gmail.com.
 
 Happy coding!
